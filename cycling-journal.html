@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peloton Race Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:           #ffffff;
+    --bg2:          #f7f6f3;
+    --ink:          #1a1917;
+    --ink2:         #5a5854;
+    --ink3:         #9a9690;
+    --rule:         rgba(26,25,23,0.09);
+    --rule2:        rgba(26,25,23,0.17);
+    --rule3:        rgba(26,25,23,0.27);
+    --cat-grandtour:#185FA5;
+    --cat-stage:    #0F6E56;
+    --cat-classic:  #993C1D;
+    --r: 6px; --rlg: 10px;
+    --hdr-h: 42px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Serif 4', Georgia, serif; background: var(--bg); color: var(--ink); min-height: 100vh; }
+
+  /* HEADER */
+  .hd { padding: 0.85rem 2rem; border-bottom: 0.5px solid var(--rule); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .hd-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .hd-right { display: flex; align-items: center; gap: 7px; }
+  .btn { font-family: 'Source Serif 4', serif; font-size: 12px; background: none; border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 4px 12px; cursor: pointer; color: var(--ink2); transition: all .12s; }
+  .btn:hover { border-color: var(--rule3); color: var(--ink); }
+
+  /* NAV */
+  .nav { padding: 0 2rem; height: 38px; border-bottom: 0.5px solid var(--rule); display: flex; align-items: center; gap: 10px; }
+  .nav-arr { font-size: 16px; background: none; border: none; cursor: pointer; color: var(--ink3); padding: 0 2px; transition: color .12s; line-height: 1; }
+  .nav-arr:hover { color: var(--ink); }
+  .nav-arr:disabled { opacity: .25; cursor: default; }
+  .nav-lbl { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--ink2); letter-spacing: -0.2px; min-width: 7ch; }
+  .nav-legend { display: flex; gap: 14px; align-items: center; margin-left: 4px; }
+  .leg-i { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--ink3); }
+  .leg-d { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .filter-bar { display: flex; gap: 5px; margin-left: auto; }
+  .filter-btn { font-family: 'Source Serif 4', serif; font-size: 11px; background: none; border: 0.5px solid var(--rule2); border-radius: 20px; padding: 3px 10px; cursor: pointer; color: var(--ink3); transition: all .12s; white-space: nowrap; }
+  .filter-btn:hover { border-color: var(--rule3); color: var(--ink); }
+  .filter-btn.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  /* =====================
+     TIMELINE LAYOUT
+     Outer grid: spine col + 3 year cols.
+     Rows are defined by JS via grid-template-rows on #tl,
+     one row per active month + one for the year headers.
+     The spine and each ycol use display:contents so their
+     children participate directly in the outer grid rows.
+  ===================== */
+  #tl {
+    display: grid;
+    grid-template-columns: 42px repeat(3, 1fr);
+    padding: 0 2rem 2.5rem;
+    align-items: stretch;
+  }
+
+  /* Spine label cells */
+  .spine-hdr { /* empty top-left cell */ }
+  .spine-cell {
+    display: flex; align-items: flex-start; padding-top: 10px;
+    border-top: 0.5px solid var(--rule);
+    font-size: 10px; letter-spacing: .4px; text-transform: uppercase; color: var(--ink3);
+    padding-right: 5px;
+  }
+
+  /* Year column header */
+  .ycol-hdr {
+    height: var(--hdr-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px;
+    border-left: 0.5px solid var(--rule);
+    border-bottom: 0.5px solid var(--rule2);
+    position: sticky; top: 0; background: var(--bg); z-index: 10;
+    box-shadow: 0 1px 0 var(--rule);
+  }
+  .ycol-hdr:last-of-type { border-right: 0.5px solid var(--rule); }
+  .ycol-hdr-num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .ycol-add { font-size: 18px; background: none; border: none; cursor: pointer; color: var(--ink3); padding: 2px 4px; line-height: 1; transition: color .12s; }
+  .ycol-add:hover { color: var(--ink); }
+
+  /* Month cell inside a year column */
+  .mrow {
+    border-top: 0.5px solid var(--rule);
+    border-left: 0.5px solid var(--rule);
+    padding: 10px 10px 12px 10px;
+    min-height: 54px;
+  }
+  .mrow-last { border-right: 0.5px solid var(--rule); }
+  .mrow-empty { background: var(--bg); }
+
+  /* Race entry */
+  .entry { display: flex; align-items: flex-start; gap: 7px; padding: 5px 6px 5px 0; cursor: pointer; border-radius: var(--r); transition: background .12s; }
+  .entry:hover { background: var(--bg2); }
+  .entry + .entry { margin-top: 7px; border-top: 0.5px solid var(--rule); padding-top: 9px; }
+  .e-bar { width: 4px; flex-shrink: 0; align-self: stretch; border-radius: 2px; min-height: 18px; margin-top: 2px; }
+
+  /* 3:2 thumbnail */
+  .e-thumb { width: 58px; height: 38px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: var(--bg2); }
+  .e-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .e-thumb-ph { width: 0; flex-shrink: 0; } /* collapsed — no wasted space when no image */
+
+  .e-body { flex: 1; min-width: 0; }
+  .e-name { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; line-height: 1.25; color: var(--ink); margin-bottom: 3px; }
+  .e-win  { font-size: 12px; line-height: 1.35; margin-bottom: 1px; }
+  .e-win strong { color: var(--ink); font-weight: 600; }
+  .e-win .e-2nd  { color: var(--ink2); }
+  .e-win .e-3rd  { color: var(--ink3); font-size: 11px; }
+  .e-how { font-size: 11px; color: var(--ink3); font-style: italic; line-height: 1.4; margin-top: 3px; }
+
+  /* phantom year column (no year assigned) */
+  .mrow-phantom { border-left: 0.5px solid var(--rule); background: var(--bg2); opacity: .18; }
+  .mrow-phantom-last { border-right: 0.5px solid var(--rule); }
+
+  /* empty year watermark */
+  .year-empty-note {
+    border-top: 0.5px solid var(--rule);
+    border-left: 0.5px solid var(--rule);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem 0;
+  }
+  .year-empty-note span { font-size: 10px; color: var(--ink3); font-style: italic; writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: .5px; }
+
+  /* FOOTER */
+  .footer-bar { padding: 0.5rem 2rem; border-top: 0.5px solid var(--rule); display: flex; align-items: center; }
+
+  /* MODALS */
+  .overlay { position: fixed; inset: 0; background: rgba(20,18,15,.5); z-index: 300; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+  .modal { background: var(--bg); border-radius: var(--rlg); border: 0.5px solid var(--rule2); padding: 1.75rem 2rem; width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto; box-shadow: 0 8px 40px rgba(0,0,0,.14); }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; margin-bottom: 1.2rem; }
+  .field { margin-bottom: .85rem; }
+  .field label { display: block; font-size: 10px; color: var(--ink3); letter-spacing: .7px; text-transform: uppercase; margin-bottom: 4px; }
+  .field input, .field textarea, .field select { width: 100%; font-family: 'Source Serif 4', serif; font-size: 14px; background: var(--bg); color: var(--ink); border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 8px 10px; outline: none; transition: border-color .12s; -webkit-appearance: none; appearance: none; }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--rule3); }
+  .field textarea { resize: vertical; min-height: 68px; line-height: 1.5; }
+  .modal-acts { display: flex; gap: 8px; margin-top: 1.4rem; justify-content: flex-end; align-items: center; }
+  .mb { font-family: 'Source Serif 4', serif; font-size: 13px; border-radius: var(--r); cursor: pointer; padding: 7px 18px; transition: opacity .12s; }
+  .mb-pri { background: var(--ink); color: var(--bg); border: none; }
+  .mb-pri:hover { opacity: .82; }
+  .mb-sec { background: none; color: var(--ink2); border: 0.5px solid var(--rule2); }
+  .mb-sec:hover { border-color: var(--rule3); }
+  .mb-del { background: none; color: #A32D2D; border: 0.5px solid #F09595; margin-right: auto; }
+
+  /* Image upload */
+  .img-upload-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 4px; }
+  .img-slot { position: relative; aspect-ratio: 3/2; border: 0.5px dashed var(--rule2); border-radius: var(--r); overflow: hidden; cursor: pointer; background: var(--bg2); display: flex; align-items: center; justify-content: center; transition: border-color .12s; }
+  .img-slot:hover { border-color: var(--rule3); }
+  .img-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .img-slot-label { font-size: 10px; color: var(--ink3); text-align: center; line-height: 1.4; pointer-events: none; padding: 4px; }
+  .img-slot-del { position: absolute; top: 4px; right: 4px; width: 18px; height: 18px; border-radius: 50%; background: rgba(20,18,15,.6); color: #fff; border: none; cursor: pointer; font-size: 11px; line-height: 18px; text-align: center; display: none; padding: 0; }
+  .img-slot:hover .img-slot-del { display: block; }
+  .img-slot input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .img-cap-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 5px; }
+  .img-cap-row input { font-size: 11px; padding: 5px 7px; }
+
+  /* Detail modal */
+  .det-modal { max-width: 600px; }
+  .det-imgs { display: grid; gap: 4px; margin-bottom: 1.2rem; }
+  .det-imgs.one   { grid-template-columns: 1fr; }
+  .det-imgs.two   { grid-template-columns: 1fr 1fr; }
+  .det-imgs.three { grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; }
+  .det-img-wrap { overflow: hidden; border-radius: var(--r); background: var(--bg2); }
+  .det-imgs.three .det-img-wrap:first-child { grid-row: 1 / 3; }
+  .det-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
+  .det-imgs.one   .det-img-wrap { aspect-ratio: 16/9; }
+  .det-imgs.two   .det-img-wrap { aspect-ratio: 3/2; }
+  .det-imgs.three .det-img-wrap:first-child { aspect-ratio: 3/2; }
+  .det-imgs.three .det-img-wrap:not(:first-child) { aspect-ratio: 3/2; }
+  .det-img-cap { font-size: 10px; color: var(--ink3); font-style: italic; margin-top: 3px; text-align: center; }
+  .d-bar  { width: 30px; height: 3px; border-radius: 2px; margin-bottom: 10px; }
+  .d-cat  { font-size: 10px; letter-spacing: .9px; text-transform: uppercase; color: var(--ink3); margin-bottom: 4px; }
+  .d-name { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; line-height: 1.1; margin-bottom: 5px; }
+  .d-date { font-size: 13px; color: var(--ink2); }
+  .d-sec  { border-top: 0.5px solid var(--rule); padding-top: .9rem; margin-top: .9rem; }
+  .d-lbl  { font-size: 10px; letter-spacing: .9px; text-transform: uppercase; color: var(--ink3); margin-bottom: 8px; }
+  .pod-row { display: flex; gap: 20px; }
+  .pod-p .pp { font-size: 10px; color: var(--ink3); margin-bottom: 2px; letter-spacing: .3px; }
+  .pod-p .pr { font-size: 15px; font-weight: 500; }
+  .pod-p:first-child .pr { font-size: 16px; font-weight: 600; }
+  .hwon { font-size: 14px; color: var(--ink2); line-height: 1.7; font-style: italic; }
+  .mlist { list-style: none; }
+  .mlist li { font-size: 13px; color: var(--ink2); padding: 4px 0 4px 12px; border-left: 2px solid var(--rule2); margin-bottom: 5px; font-style: italic; line-height: 1.45; }
+
+  /* Lightbox */
+  .lbox { position: fixed; inset: 0; background: rgba(10,9,8,.92); z-index: 500; display: flex; align-items: center; justify-content: center; cursor: zoom-out; }
+  .lbox img { max-width: 92vw; max-height: 88vh; object-fit: contain; border-radius: var(--r); display: block; }
+
+  /* Settings modal */
+  .set-modal  { max-width: 900px; }
+  .set-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .set-panel h3 { font-family: 'Playfair Display', serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--ink2); margin-bottom: 10px; }
+  .set-list   { border: 0.5px solid var(--rule2); border-radius: var(--r); min-height: 48px; max-height: 260px; overflow-y: auto; }
+  .set-item   { display: flex; align-items: center; gap: 8px; padding: 7px 10px; }
+  .set-item + .set-item { border-top: 0.5px solid var(--rule); }
+  .set-swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+  .set-name   { flex: 1; font-size: 13px; }
+  .set-fav-btn  { background: none; border: none; cursor: pointer; font-size: 14px; line-height: 1; padding: 0 3px; color: var(--ink3); transition: color .12s; }
+  .set-fav-btn.is-fav  { color: #c8920a; }
+  .set-fav-btn:hover   { color: #c8920a; }
+  .set-divider  { height: 0; border-top: 1px dashed var(--rule2); margin: 2px 10px; }
+  .set-edit-btn { background: none; border: none; color: var(--ink3); cursor: pointer; font-size: 11px; letter-spacing: .03em; padding: 2px 5px; border-radius: 3px; transition: color .12s; }
+  .set-edit-btn:hover { color: var(--ink); }
+  .set-del    { background: none; border: none; color: var(--ink3); cursor: pointer; font-size: 16px; line-height: 1; padding: 0 2px; }
+  .set-del:hover { color: var(--ink); }
+  .set-item-edit { gap: 6px; background: var(--bg2); }
+  .set-item-edit input[type=text]  { flex: 1; font-family: 'Source Serif 4', serif; font-size: 13px; background: var(--bg); color: var(--ink); border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 5px 8px; outline: none; transition: border-color .12s; -webkit-appearance: none; appearance: none; }
+  .set-item-edit input[type=text]:focus { border-color: var(--rule3); }
+  .set-item-edit .set-save-btn { font-size: 11px; padding: 4px 12px; }
+  .set-add    { display: flex; gap: 6px; margin-top: 10px; align-items: center; }
+  .set-add input[type=text]  { flex: 1; font-family: 'Source Serif 4', serif; font-size: 13px; background: var(--bg); color: var(--ink); border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 6px 10px; outline: none; transition: border-color .12s; -webkit-appearance: none; appearance: none; }
+  .set-add input[type=text]:focus { border-color: var(--rule3); }
+  .set-add input[type=color], .set-item-edit input[type=color] { width: 34px; height: 32px; border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 2px; cursor: pointer; background: none; flex-shrink: 0; }
+  .set-empty  { padding: 14px 10px; font-size: 12px; color: var(--ink3); text-align: center; font-style: italic; }
+
+  /* RESPONSIVE — medium (2 cols) */
+  @media (max-width: 860px) {
+    .hd  { padding: 12px 20px; }
+    .nav { padding: 0 20px; }
+    #tl  { padding: 0 20px 32px; }
+    .footer-bar { padding: 8px 20px; }
+  }
+
+  /* RESPONSIVE — small (1 col) */
+  @media (max-width: 580px) {
+    .hd  { padding: 10px 14px; gap: 8px; }
+    .hd-title { font-size: 19px; }
+    .btn { font-size: 11px; padding: 4px 10px; }
+    .nav { padding: 0 14px; gap: 7px; height: 36px; }
+    .nav-lbl { font-size: 15px; }
+    .nav-legend { display: none; }
+    .filter-btn { font-size: 10px; padding: 3px 8px; }
+    #tl  { padding: 0 14px 28px; }
+    .spine-cell { font-size: 9px; }
+    .ycol-hdr { padding: 0 8px; }
+    .ycol-hdr-num { font-size: 19px; }
+    .mrow { padding: 8px 8px 10px 8px; }
+    .footer-bar { padding: 8px 14px; }
+    .det-modal { max-width: 100%; }
+  }
+
+
+</style>
+<style id="cj-dyn"></style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-title">Peloton Race Archive</div>
+  <div class="hd-right">
+    <button class="btn edit-only" onclick="openAddModal()">+ Add race</button>
+    <button class="btn edit-only" onclick="addYear()">+ Year</button>
+    <button class="btn edit-only" onclick="backupData()">&#8595; Backup</button>
+    <label class="btn edit-only" style="cursor:pointer;">&#8593; Restore<input type="file" accept=".json" onchange="restoreData(this)" style="display:none"></label>
+    <button class="btn edit-only" onclick="openSettings()">Settings</button>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-arr" id="prevBtn" onclick="prevPage()">&#8592;</button>
+  <span class="nav-lbl" id="navLbl"></span>
+  <button class="nav-arr" id="nextBtn" onclick="nextPage()">&#8594;</button>
+  <div class="nav-legend">
+    <div class="leg-i"><div class="leg-d" style="background:var(--cat-grandtour)"></div>Grand Tour</div>
+    <div class="leg-i"><div class="leg-d" style="background:var(--cat-stage)"></div>Stage race</div>
+    <div class="leg-i"><div class="leg-d" style="background:var(--cat-classic)"></div>Classic</div>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn" id="filterRiders" onclick="setFilter('riders')">&#9733; Fav riders</button>
+    <button class="filter-btn" id="filterRaces"  onclick="setFilter('races')">&#9733; Fav races</button>
+  </div>
+</div>
+
+<div id="tl"></div>
+
+<div class="footer-bar">
+  <span class="view-disclaimer" style="display:none;font-size:11px;color:var(--ink3);font-style:italic;">Personal race archive. It's a vibe coded, curated memory aid, not a complete database. Results are manually recorded and not updated automatically.</span>
+</div>
+<div id="mc"></div>
+
+<script>
+const MONTHS_LONG  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const CAT_COLOR    = { grandtour:'#185FA5', stage:'#0F6E56', classic:'#993C1D' };
+const CAT_LABEL    = { grandtour:'Grand Tour', stage:'Stage race',    classic:'Classic'  };
+const PAGE_SIZE    = 3; // max columns
+function getColCount(){ return window.innerWidth < 580 ? 1 : window.innerWidth < 860 ? 2 : PAGE_SIZE; }
+const IMG_KEY      = id => 'cj_img_' + id;
+const EMPTY_IMGS   = () => [null, null, null];
+
+let races = [], years = [], page = 0, pendingImgs = {};
+let riders = [], raceTypes = [];
+let activeFilter = null; // 'riders' | 'races' | null
+let viewMode = true;
+
+/* ---- small utilities ---- */
+const $ = id => document.getElementById(id);
+function parseJSON(raw, fallback){ try { return raw ? JSON.parse(raw) : fallback; } catch(e){ return fallback; } }
+function parseDateNoon(d){ return new Date(d + 'T12:00:00'); }
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function clampPage(targetIdx){ return Math.max(0, Math.min(Math.max(0, years.length - getColCount()), targetIdx)); }
+
+/* ---- settings persistence ---- */
+function loadSettings(){
+  riders    = parseJSON(localStorage.getItem('cj_riders'),     []);
+  raceTypes = parseJSON(localStorage.getItem('cj_race_types'), []);
+  updateDynCSS();
+}
+function saveSettings(){
+  localStorage.setItem('cj_riders',     JSON.stringify(riders));
+  localStorage.setItem('cj_race_types', JSON.stringify(raceTypes));
+}
+function updateDynCSS(){
+  $('cj-dyn').textContent = [
+    ...riders.map(r    => `.rid-${r.id} { color:${r.color}; font-weight:600; }`),
+    ...raceTypes.map(r => `.rtp-${r.id} { color:${r.color}; }`)
+  ].join('\n');
+}
+const riderCls    = name => { const r = riders.find(r => r.name === name);    return r ? `rid-${r.id}` : ''; };
+const raceTypeCls = name => { const r = raceTypes.find(r => r.name === name); return r ? `rtp-${r.id}` : ''; };
+
+/* ---- persistence ---- */
+async function load(){
+  try {
+    const res = await fetch('./data.json');
+    if(!res.ok) throw new Error('not found');
+    const payload = await res.json();
+    if(!payload.races || !Array.isArray(payload.races)) throw new Error('invalid');
+    viewMode  = true;
+    races     = payload.races     || [];
+    years     = payload.years     || [];
+    riders    = payload.riders    || [];
+    raceTypes = payload.raceTypes || [];
+    races.forEach(r => { if(r.category === 'monument') r.category = 'classic'; });
+    years.sort((a,b) => a - b);
+    page = Math.max(0, years.length - getColCount());
+    updateDynCSS();
+    // store images into memory for detail view
+    if(payload.images) {
+      Object.entries(payload.images).forEach(([id, imgs]) => { pendingImgs['__view__' + id] = imgs; });
+    }
+    render();
+    applyViewMode();
+    return;
+  } catch(e) { /* no data.json — fall through to localStorage */ }
+  viewMode = false;
+  loadSettings();
+  races = parseJSON(localStorage.getItem('cj_races'), []);
+  races.forEach(r => { if(r.category === 'monument') r.category = 'classic'; });
+  years = parseJSON(localStorage.getItem('cj_years'), []);
+  years.sort((a,b) => a - b);
+  page = Math.max(0, years.length - getColCount());
+  render();
+}
+
+function applyViewMode(){
+  document.querySelectorAll('.edit-only').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.view-disclaimer').forEach(el => el.style.display = '');
+}
+function save(){
+  localStorage.setItem('cj_races', JSON.stringify(races));
+  localStorage.setItem('cj_years', JSON.stringify(years));
+}
+function saveImgs(id, imgs){
+  try { localStorage.setItem(IMG_KEY(id), JSON.stringify(imgs)); }
+  catch(e){ alert('Storage full — try smaller images.'); }
+}
+function loadImgs(id){ return viewMode ? (pendingImgs['__view__' + id] || EMPTY_IMGS()) : parseJSON(localStorage.getItem(IMG_KEY(id)), EMPTY_IMGS()); }
+function deleteImgs(id){ try { localStorage.removeItem(IMG_KEY(id)); } catch(e){} }
+
+/* ---- filter ---- */
+function setFilter(type){
+  activeFilter = activeFilter === type ? null : type;
+  render();
+}
+function updateFilterBtns(){
+  $('filterRiders').classList.toggle('active', activeFilter === 'riders');
+  $('filterRaces').classList.toggle('active',  activeFilter === 'races');
+}
+
+/* ---- navigation ---- */
+function prevPage(){ if(page > 0){ page = Math.max(0, page - getColCount()); render(); } }
+function nextPage(){ if(page + getColCount() < years.length){ page = clampPage(page + getColCount()); render(); } }
+function addYear(){
+  const y = parseInt(prompt('Enter year (e.g. 2022):'));
+  if(!(y && y > 1900 && y < 2200)) return;
+  if(!years.includes(y)){ years.push(y); years.sort((a,b) => a - b); }
+  page = clampPage(years.indexOf(y));
+  save(); render();
+}
+
+/* ---- main render ---- */
+function render(){
+  // visible years (up to colCount), padded with nulls for phantom columns
+  const colCount = getColCount();
+  $('tl').style.gridTemplateColumns = '42px repeat(' + colCount + ', 1fr)';
+  const visible = years.slice(page, page + colCount);
+  while(visible.length < colCount) visible.push(null);
+
+  // Build fav sets once for filter checks
+  const favRiderNames   = new Set(riders.filter(r => r.fav).map(r => r.name));
+  const favRaceNames    = new Set(raceTypes.filter(r => r.fav).map(r => r.name));
+  const matchesFilter   = r => {
+    if(!activeFilter) return true;
+    if(activeFilter === 'riders') return favRiderNames.has(r.winner) || favRiderNames.has(r.second) || favRiderNames.has(r.third);
+    if(activeFilter === 'races')  return favRaceNames.has(r.name);
+    return true;
+  };
+
+  // For each visible year, bucket races by month (0-11)
+  const racesByYearMonth = visible.map(year => {
+    const buckets = Array.from({length: 12}, () => []);
+    if(!year) return buckets;
+    races.filter(r => r.year === year && r.date && matchesFilter(r)).forEach(r => {
+      buckets[parseDateNoon(r.date).getMonth()].push(r);
+    });
+    buckets.forEach(list => list.sort((a,b) => new Date(a.date) - new Date(b.date)));
+    return buckets;
+  });
+
+  // Which months have at least one race across any visible year?
+  const activeMonths = [];
+  for(let m = 0; m < 12; m++){
+    if(racesByYearMonth.some(buckets => buckets[m].length > 0)) activeMonths.push(m);
+  }
+
+  // Row 1: top-left spacer + year headers
+  let html = `<div class="spine-hdr"></div>`;
+  visible.forEach(year => { html += yearHeaderHtml(year); });
+
+  // One grid row per active month
+  activeMonths.forEach(month => {
+    html += `<div class="spine-cell">${MONTHS_SHORT[month]}</div>`;
+    visible.forEach((year, colIdx) => {
+      html += monthCellHtml(year, racesByYearMonth[colIdx][month], colIdx === colCount - 1);
+    });
+  });
+
+  if(activeMonths.length === 0){
+    html += `<div style="grid-column:1/-1;padding:3rem 2rem;text-align:center;font-size:13px;color:var(--ink3);font-style:italic;">${viewMode ? 'No races found.' : 'No races yet — click + Add race to begin your journal.'}</div>`;
+  }
+
+  $('tl').innerHTML = html;
+
+  // Nav state
+  $('prevBtn').disabled = page <= 0;
+  $('nextBtn').disabled = page + colCount >= years.length;
+  const shown = visible.filter(Boolean);
+  $('navLbl').textContent = shown.length ? shown[0] + (shown.length > 1 ? ' – ' + shown[shown.length - 1] : '') : '';
+  updateFilterBtns();
+}
+
+function yearHeaderHtml(year){
+  if(!year){
+    return `<div class="ycol-hdr" style="border-left:0.5px solid var(--rule);opacity:.2;"></div>`;
+  }
+  return `<div class="ycol-hdr">
+    <span class="ycol-hdr-num">${year}</span>
+    <button class="ycol-add edit-only" onclick="openAddModal(null,${year})" title="Add race to ${year}">+</button>
+  </div>`;
+}
+
+function monthCellHtml(year, entries, isLast){
+  if(!year){
+    return `<div class="mrow mrow-empty${isLast ? ' mrow-last' : ''} mrow-phantom${isLast ? ' mrow-phantom-last' : ''}"></div>`;
+  }
+  const cls = `mrow${isLast ? ' mrow-last' : ''}${entries.length === 0 ? ' mrow-empty' : ''}`;
+  if(entries.length === 0) return `<div class="${cls}"></div>`;
+  return `<div class="${cls}">${entries.map(entryHtml).join('')}</div>`;
+}
+
+function entryHtml(race){
+  const color     = CAT_COLOR[race.category] || '#888';
+  const firstImg  = loadImgs(race.id).find(i => i && i.data);
+  const thumb     = firstImg
+    ? `<div class="e-thumb"><img src="${firstImg.data}" alt=""></div>`
+    : `<div class="e-thumb-ph"></div>`;
+  const snippet   = race.howwon || (race.moments ? race.moments.split('\n')[0] : '');
+  const snippetHtml = snippet ? `<div class="e-how">${esc(snippet)}</div>` : '';
+  const riderSpan = name => `<span class="${riderCls(name)}">${esc(name)}</span>`;
+  const podiumHtml  = race.winner
+    ? `<div class="e-win"><strong>${riderSpan(race.winner)}</strong>${race.second ? ` · <span class="e-2nd">${riderSpan(race.second)}</span>` : ''}${race.third ? ` · <span class="e-3rd">${riderSpan(race.third)}</span>` : ''}</div>`
+    : '';
+  return `<div class="entry" onclick="openDetail('${race.id}')">
+    <div class="e-bar" style="background:${color}"></div>
+    ${thumb}
+    <div class="e-body">
+      <div class="e-name ${raceTypeCls(race.name)}">${esc(race.name)}</div>
+      ${podiumHtml}
+      ${snippetHtml}
+    </div>
+  </div>`;
+}
+
+/* ---- image slot helpers ---- */
+const SLOT_LABELS = ['Finish / key moment', 'Route map', 'Extra moment'];
+
+function imgSlotHtml(i){
+  const p = pendingImgs[i];
+  if(p && p.data){
+    return `<div class="img-slot" id="slot${i}"><img src="${p.data}" alt=""><button class="img-slot-del" onclick="clearSlot(${i},event)">&#x2715;</button></div>`;
+  }
+  return `<div class="img-slot" id="slot${i}"><div class="img-slot-label">${SLOT_LABELS[i]}</div><input type="file" accept="image/*" onchange="handleImg(${i},this)"></div>`;
+}
+
+function handleImg(i, input){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 1200;
+      let w = img.width, h = img.height;
+      if(w > MAX){ h = Math.round(h * MAX / w); w = MAX; }
+      if(h > MAX){ w = Math.round(w * MAX / h); h = MAX; }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      pendingImgs[i] = { data: canvas.toDataURL('image/jpeg', 0.82), cap: '' };
+      $('slot' + i).outerHTML = imgSlotHtml(i);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearSlot(i, e){
+  e.stopPropagation();
+  pendingImgs[i] = null;
+  $('slot' + i).outerHTML = imgSlotHtml(i);
+}
+
+/* ---- add / edit modal ---- */
+function openAddModal(prefillId, prefillYear){
+  const race = prefillId ? races.find(r => r.id === prefillId) : null;
+  const existing = race ? loadImgs(race.id) : EMPTY_IMGS();
+  pendingImgs = { 0: existing[0] ? {...existing[0]} : null,
+                  1: existing[1] ? {...existing[1]} : null,
+                  2: existing[2] ? {...existing[2]} : null };
+
+  const today   = new Date().toISOString().split('T')[0];
+  const defDate = race ? race.date : (prefillYear ? prefillYear + '-04-01' : today);
+  const val     = (field, fallback = '') => race ? esc(race[field] || '') : fallback;
+  const selected = cat => race && race.category === cat ? 'selected' : '';
+
+  const raceNameOpts = () => {
+    const cur = race ? race.name : '';
+    let opts = raceTypes.length === 0
+      ? `<option value="" disabled selected>— add races in Settings first —</option>`
+      : `<option value="" disabled ${!cur ? 'selected' : ''}>— select a race —</option>`;
+    if(cur && !raceTypes.find(r => r.name === cur))
+      opts += `<option value="${esc(cur)}" selected>${esc(cur)}</option>`;
+    opts += raceTypes.map(r => `<option value="${esc(r.name)}" ${cur === r.name ? 'selected' : ''}>${esc(r.name)}</option>`).join('');
+    return opts;
+  };
+  const riderOpts = (cur = '') =>
+    `<option value="">${riders.length ? '—' : '— add riders in Settings first —'}</option>` +
+    riders.map(r => `<option value="${esc(r.name)}" ${cur === r.name ? 'selected' : ''}>${esc(r.name)}</option>`).join('');
+
+  $('mc').innerHTML = `
+    <div class="overlay" id="ov" onclick="closeIfOverlay(event)">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-title">${race ? 'Edit race' : 'Add race'}</div>
+        <div class="field"><label>Race name</label><select id="fn">${raceNameOpts()}</select></div>
+        <div class="field"><label>Date</label><input type="date" id="fd" value="${defDate}"></div>
+        <div class="field"><label>Category</label>
+          <select id="fc">
+            <option value="grandtour" ${selected('grandtour')}>Grand Tour</option>
+            <option value="stage"     ${selected('stage')}>Stage race</option>
+            <option value="classic"   ${selected('classic')}>Classic</option>
+          </select>
+        </div>
+        <div class="field"><label>Winner</label><select id="fw">${riderOpts(val('winner'))}</select></div>
+        <div class="field"><label>2nd place</label><select id="f2">${riderOpts(val('second'))}</select></div>
+        <div class="field"><label>3rd place</label><select id="f3">${riderOpts(val('third'))}</select></div>
+        <div class="field"><label>How it was won</label><textarea id="fh" placeholder="Describe the decisive moment...">${val('howwon')}</textarea></div>
+        <div class="field"><label>Key moments (one per line)</label><textarea id="fm" placeholder="Stage 17 solo attack&#10;Crash on the descent...">${val('moments')}</textarea></div>
+        <div class="field"><label>Personal note</label><input id="fp" value="${val('note')}" placeholder="Watched with..."></div>
+        <div class="field">
+          <label>Images (up to 3 &mdash; 3:2 crop)</label>
+          <div class="img-upload-row" id="imgRow">${[0,1,2].map(imgSlotHtml).join('')}</div>
+          <div class="img-cap-row" id="capRow">${[0,1,2].map(i => `<input id="cap${i}" type="text" placeholder="Caption ${i+1}" value="${pendingImgs[i] ? esc(pendingImgs[i].cap || '') : ''}">`).join('')}</div>
+        </div>
+        <div class="modal-acts">
+          ${race ? `<button class="mb mb-del" onclick="delRace('${race.id}')">Delete</button>` : ''}
+          <button class="mb mb-sec" onclick="closeModal()">Cancel</button>
+          <button class="mb mb-pri" onclick="saveRace('${race ? race.id : ''}')">Save</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function saveRace(id){
+  const name = $('fn').value.trim();
+  if(!name){ alert('Please enter a race name.'); return; }
+
+  const dateVal = $('fd').value;
+  const year    = dateVal ? parseDateNoon(dateVal).getFullYear() : new Date().getFullYear();
+  const raceId  = id || uid();
+
+  const obj = {
+    id: raceId, name, year, date: dateVal,
+    category: $('fc').value,
+    winner:  $('fw').value.trim(),
+    second:  $('f2').value.trim(),
+    third:   $('f3').value.trim(),
+    howwon:  $('fh').value.trim(),
+    moments: $('fm').value.trim(),
+    note:    $('fp').value.trim()
+  };
+
+  const imgs = [0,1,2].map(i => {
+    if(!pendingImgs[i]) return null;
+    const cap = ($('cap' + i) || {}).value || '';
+    return { data: pendingImgs[i].data, cap: cap.trim() };
+  });
+
+  if(!years.includes(year)){ years.push(year); years.sort((a,b) => a - b); }
+
+  if(id){
+    const idx = races.findIndex(r => r.id === id);
+    if(idx >= 0) races[idx] = obj; else races.push(obj);
+  } else {
+    races.push(obj);
+  }
+
+  // Ensure the saved year is on the current page
+  const yi = years.indexOf(year);
+  if(yi < page || yi >= page + getColCount()) page = clampPage(yi);
+
+  save();
+  saveImgs(raceId, imgs);
+  pendingImgs = {};
+  closeModal();
+  render();
+}
+
+function delRace(id){
+  if(!confirm('Remove this race?')) return;
+  races = races.filter(r => r.id !== id);
+  deleteImgs(id);
+  save();
+  closeModal();
+  render();
+}
+
+/* ---- detail modal ---- */
+function openDetail(id){
+  const race = races.find(r => r.id === id); if(!race) return;
+  const color     = CAT_COLOR[race.category] || '#888';
+  const dateStr   = race.date ? parseDateNoon(race.date).toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'}) : '';
+  const moments   = race.moments ? race.moments.split('\n').filter(Boolean) : [];
+  const momentsHtml = moments.map(m => `<li>${esc(m)}</li>`).join('');
+  const imgs      = loadImgs(id).filter(i => i && i.data);
+  const layoutCls = ['', 'one', 'two', 'three'][imgs.length] || 'three';
+  const imgsHtml  = imgs.length === 0 ? '' : `<div class="det-imgs ${layoutCls}">${
+    imgs.map((img, ix) =>
+      `<div class="det-img-wrap"><img src="${img.data}" alt="${esc(img.cap || '')}" onclick="openLightbox('${id}',${ix})">${img.cap ? `<div class="det-img-cap">${esc(img.cap)}</div>` : ''}</div>`
+    ).join('')
+  }</div>`;
+
+  const section = (label, bodyHtml) => `<div class="d-sec"><div class="d-lbl">${label}</div>${bodyHtml}</div>`;
+  const podiumItem = (rank, name) => name ? `<div class="pod-p"><div class="pp">${rank}</div><div class="pr"><span class="${riderCls(name)}">${esc(name)}</span></div></div>` : '';
+  const podiumHtml = (race.winner || race.second || race.third)
+    ? section('Podium', `<div class="pod-row">${podiumItem('1st', race.winner)}${podiumItem('2nd', race.second)}${podiumItem('3rd', race.third)}</div>`)
+    : '';
+
+  $('mc').innerHTML = `
+    <div class="overlay" id="ov" onclick="closeIfOverlay(event)">
+      <div class="modal det-modal" onclick="event.stopPropagation()">
+        ${imgsHtml}
+        <div class="d-bar" style="background:${color}"></div>
+        <div class="d-cat">${esc(CAT_LABEL[race.category] || '')}</div>
+        <div class="d-name ${raceTypeCls(race.name)}">${esc(race.name)}</div>
+        <div class="d-date">${dateStr}</div>
+        ${podiumHtml}
+        ${race.howwon ? section('How it was won',  `<div class="hwon">${esc(race.howwon)}</div>`) : ''}
+        ${momentsHtml ? section('Key moments',     `<ul class="mlist">${momentsHtml}</ul>`) : ''}
+        ${race.note   ? section('Personal note',   `<div class="hwon">${esc(race.note)}</div>`) : ''}
+        <div class="modal-acts">
+          <button class="mb mb-sec" onclick="closeModal()">Close</button>
+          ${viewMode ? '' : `<button class="mb mb-pri" onclick="closeModal();openAddModal('${race.id}')">Edit</button>`}
+        </div>
+      </div>
+    </div>`;
+}
+
+function openLightbox(raceId, imgIdx){
+  const imgs = loadImgs(raceId).filter(i => i && i.data);
+  if(!imgs[imgIdx]) return;
+  const lb = document.createElement('div');
+  lb.className = 'lbox';
+  lb.onclick = () => lb.remove();
+  lb.innerHTML = `<img src="${imgs[imgIdx].data}" alt="${esc(imgs[imgIdx].cap || '')}">`;
+  document.body.appendChild(lb);
+}
+
+/* ---- backup / restore ---- */
+function backupData(){
+  const images = {};
+  races.forEach(r => {
+    const imgs = loadImgs(r.id);
+    if(imgs.some(i => i && i.data)) images[r.id] = imgs;
+  });
+  const payload = { version: 2, exportedAt: new Date().toISOString(), races, years, images, riders, raceTypes };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'cycling-journal-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function restoreData(input){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const payload = JSON.parse(e.target.result);
+      if(!payload.races || !Array.isArray(payload.races)) throw new Error('Invalid backup file.');
+      const stamp = payload.exportedAt ? payload.exportedAt.slice(0, 10) : 'unknown date';
+      if(!confirm(`This will replace all current data with the backup from ${stamp}.\n\nContinue?`)) return;
+      races     = payload.races     || [];
+      years     = payload.years     || [];
+      riders    = payload.riders    || [];
+      raceTypes = payload.raceTypes || [];
+      Object.entries(payload.images || {}).forEach(([id, data]) => saveImgs(id, data));
+      years.sort((a,b) => a - b);
+      page = Math.max(0, years.length - getColCount());
+      save(); saveSettings(); updateDynCSS(); render();
+      alert('Backup restored successfully.');
+    } catch(err){
+      alert('Could not read backup file: ' + err.message);
+    }
+    input.value = ''; // reset so same file can be re-selected
+  };
+  reader.readAsText(file);
+}
+
+/* ---- settings modal ---- */
+const settingsSort = list => [...list].sort((a, b) => (b.fav ? 1 : 0) - (a.fav ? 1 : 0) || a.name.localeCompare(b.name));
+
+function setItemHtml(r, type){
+  const delFn = type === 'rider' ? 'delRider' : 'delRaceType';
+  return `<div class="set-item" id="si-${r.id}">
+    <button class="set-fav-btn${r.fav ? ' is-fav' : ''}" onclick="toggleFav('${type}','${r.id}')" title="${r.fav ? 'Unfavourite' : 'Favourite'}">${r.fav ? '&#9733;' : '&#9734;'}</button>
+    <div class="set-swatch" style="background:${r.color}"></div>
+    <span class="set-name">${esc(r.name)}</span>
+    <button class="set-edit-btn" onclick="editSetting('${type}','${r.id}')">Edit</button>
+    <button class="set-del" onclick="${delFn}('${r.id}')">&#x2715;</button>
+  </div>`;
+}
+
+function settingsListHtml(list, type){
+  if(!list.length) return `<div class="set-empty">No ${type === 'rider' ? 'riders' : 'races'} yet</div>`;
+  const sorted = settingsSort(list);
+  const favCount = sorted.filter(r => r.fav).length;
+  return sorted.map((r, i) =>
+    (i === favCount && favCount > 0 && favCount < sorted.length ? `<div class="set-divider"></div>` : '') +
+    setItemHtml(r, type)
+  ).join('');
+}
+
+function settingsModalHtml(){
+  const riderListHtml    = settingsListHtml(riders,    'rider');
+  const raceTypeListHtml = settingsListHtml(raceTypes, 'race');
+  return `
+    <div class="overlay" id="ov" onclick="closeIfOverlay(event)">
+      <div class="modal set-modal" onclick="event.stopPropagation()">
+        <div class="modal-title">Settings</div>
+        <div class="set-panels">
+          <div class="set-panel">
+            <h3>Riders</h3>
+            <div class="set-list">${riderListHtml}</div>
+            <div class="set-add">
+              <input type="text" id="snr" placeholder="Rider name">
+              <input type="color" id="scr" value="#323232">
+              <button class="mb mb-pri" onclick="addRider()">Add</button>
+            </div>
+          </div>
+          <div class="set-panel">
+            <h3>Races</h3>
+            <div class="set-list">${raceTypeListHtml}</div>
+            <div class="set-add">
+              <input type="text" id="snrt" placeholder="Race name">
+              <input type="color" id="scrt" value="#323232">
+              <button class="mb mb-pri" onclick="addRaceType()">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-acts">
+          <button class="mb mb-sec" onclick="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>`;
+}
+function openSettings(){ $('mc').innerHTML = settingsModalHtml(); }
+
+function editSetting(type, id){
+  const item = (type === 'rider' ? riders : raceTypes).find(r => r.id === id);
+  if(!item) return;
+  const el = $('si-' + id); if(!el) return;
+  el.outerHTML = `<div class="set-item set-item-edit" id="si-${id}">
+    <input type="color" id="ec-${id}" value="${item.color}">
+    <input type="text"  id="en-${id}" value="${esc(item.name)}">
+    <button class="mb mb-pri set-save-btn" onclick="saveSetting('${type}','${id}')">Save</button>
+    <button class="set-del" onclick="cancelSettingEdit('${type}','${id}')">&#x2715;</button>
+  </div>`;
+  $('en-' + id).focus();
+}
+function cancelSettingEdit(type, id){
+  const item = (type === 'rider' ? riders : raceTypes).find(r => r.id === id);
+  if(!item) return;
+  const el = $('si-' + id); if(!el) return;
+  el.outerHTML = setItemHtml(item, type);
+}
+function saveSetting(type, id){
+  const name = $('en-' + id)?.value.trim(); if(!name) return;
+  const color = $('ec-' + id).value;
+  const item = (type === 'rider' ? riders : raceTypes).find(r => r.id === id);
+  if(item){ item.name = name; item.color = color; }
+  saveSettings(); updateDynCSS();
+  const el = $('si-' + id); if(el) el.outerHTML = setItemHtml(item, type);
+  render();
+}
+
+function toggleFav(type, id){
+  const item = (type === 'rider' ? riders : raceTypes).find(r => r.id === id);
+  if(item){ item.fav = !item.fav; }
+  saveSettings(); openSettings();
+}
+
+function addRider(){
+  const name = $('snr').value.trim(); if(!name) return;
+  riders.push({ id: uid(), name, color: $('scr').value, fav: false });
+  saveSettings(); updateDynCSS(); openSettings();
+}
+function delRider(id){
+  riders = riders.filter(r => r.id !== id);
+  saveSettings(); updateDynCSS(); openSettings();
+}
+function addRaceType(){
+  const name = $('snrt').value.trim(); if(!name) return;
+  raceTypes.push({ id: uid(), name, color: $('scrt').value, fav: false });
+  saveSettings(); updateDynCSS(); openSettings();
+}
+function delRaceType(id){
+  raceTypes = raceTypes.filter(r => r.id !== id);
+  saveSettings(); updateDynCSS(); openSettings();
+}
+
+/* ---- modal close helpers ---- */
+function closeModal(){ $('mc').innerHTML = ''; pendingImgs = {}; }
+function closeIfOverlay(e){ if(e.target.id === 'ov') closeModal(); }
+
+/* ---- responsive resize ---- */
+let _resizeTimer, _lastColCount = getColCount();
+window.addEventListener('resize', () => {
+  clearTimeout(_resizeTimer);
+  _resizeTimer = setTimeout(() => {
+    const cc = getColCount();
+    if(cc !== _lastColCount){ _lastColCount = cc; page = clampPage(page); render(); }
+  }, 120);
+});
+
+load();
+</script>
+</body>
+</html>
