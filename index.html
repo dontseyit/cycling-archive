@@ -63,7 +63,6 @@
   }
 
   /* Spine label cells */
-  .spine-hdr { /* empty top-left cell */ }
   .spine-cell {
     display: flex; align-items: flex-start; padding-top: 10px;
     border-top: 0.5px solid var(--rule);
@@ -148,15 +147,16 @@
   .mb-sec:hover { border-color: var(--rule3); }
   .mb-del { background: none; color: #A32D2D; border: 0.5px solid #F09595; margin-right: auto; }
 
-  /* Image upload */
+  /* Images */
   .img-upload-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 4px; }
-  .img-slot { position: relative; aspect-ratio: 3/2; border: 0.5px dashed var(--rule2); border-radius: var(--r); overflow: hidden; cursor: pointer; background: var(--bg2); display: flex; align-items: center; justify-content: center; transition: border-color .12s; }
-  .img-slot:hover { border-color: var(--rule3); }
-  .img-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .img-slot-label { font-size: 10px; color: var(--ink3); text-align: center; line-height: 1.4; pointer-events: none; padding: 4px; }
-  .img-slot-del { position: absolute; top: 4px; right: 4px; width: 18px; height: 18px; border-radius: 50%; background: rgba(20,18,15,.6); color: #fff; border: none; cursor: pointer; font-size: 11px; line-height: 18px; text-align: center; display: none; padding: 0; }
-  .img-slot:hover .img-slot-del { display: block; }
-  .img-slot input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .img-slot { position: relative; border: 0.5px solid var(--rule2); border-radius: var(--r); overflow: hidden; background: var(--bg2); }
+  .img-slot-preview { aspect-ratio: 3/2; display: flex; align-items: center; justify-content: center; }
+  .img-slot-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .img-slot-label { font-size: 10px; color: var(--ink3); text-align: center; line-height: 1.4; padding: 8px 4px; }
+  .img-slot-input { display: flex; gap: 4px; padding: 4px; border-top: 0.5px solid var(--rule); }
+  .img-slot-input input { flex: 1; font-size: 10px; padding: 3px 5px; min-width: 0; }
+  .img-slot-del { background: none; border: none; color: var(--ink3); cursor: pointer; font-size: 13px; padding: 0 2px; flex-shrink: 0; }
+  .img-slot-del:hover { color: var(--ink); }
   .img-cap-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 5px; }
   .img-cap-row input { font-size: 11px; padding: 5px 7px; }
 
@@ -170,9 +170,8 @@
   .det-imgs.three .det-img-wrap:first-child { grid-row: 1 / 3; }
   .det-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
   .det-imgs.one   .det-img-wrap { aspect-ratio: 16/9; }
-  .det-imgs.two   .det-img-wrap { aspect-ratio: 3/2; }
-  .det-imgs.three .det-img-wrap:first-child { aspect-ratio: 3/2; }
-  .det-imgs.three .det-img-wrap:not(:first-child) { aspect-ratio: 3/2; }
+  .det-imgs.two   .det-img-wrap,
+  .det-imgs.three .det-img-wrap { aspect-ratio: 3/2; }
   .det-img-cap { font-size: 10px; color: var(--ink3); font-style: italic; margin-top: 3px; text-align: center; }
   .d-bar  { width: 30px; height: 3px; border-radius: 2px; margin-bottom: 10px; }
   .d-cat  { font-size: 10px; letter-spacing: .9px; text-transform: uppercase; color: var(--ink3); margin-bottom: 4px; }
@@ -210,12 +209,11 @@
   .set-del    { background: none; border: none; color: var(--ink3); cursor: pointer; font-size: 16px; line-height: 1; padding: 0 2px; }
   .set-del:hover { color: var(--ink); }
   .set-item-edit { gap: 6px; background: var(--bg2); }
-  .set-item-edit input[type=text]  { flex: 1; font-family: 'Source Serif 4', serif; font-size: 13px; background: var(--bg); color: var(--ink); border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 5px 8px; outline: none; transition: border-color .12s; -webkit-appearance: none; appearance: none; }
-  .set-item-edit input[type=text]:focus { border-color: var(--rule3); }
   .set-item-edit .set-save-btn { font-size: 11px; padding: 4px 12px; }
   .set-add    { display: flex; gap: 6px; margin-top: 10px; align-items: center; }
-  .set-add input[type=text]  { flex: 1; font-family: 'Source Serif 4', serif; font-size: 13px; background: var(--bg); color: var(--ink); border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 6px 10px; outline: none; transition: border-color .12s; -webkit-appearance: none; appearance: none; }
-  .set-add input[type=text]:focus { border-color: var(--rule3); }
+  .set-add input[type=text], .set-item-edit input[type=text] { flex: 1; font-family: 'Source Serif 4', serif; font-size: 13px; background: var(--bg); color: var(--ink); border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 6px 10px; outline: none; transition: border-color .12s; -webkit-appearance: none; appearance: none; }
+  .set-item-edit input[type=text] { padding: 5px 8px; }
+  .set-add input[type=text]:focus, .set-item-edit input[type=text]:focus { border-color: var(--rule3); }
   .set-add input[type=color], .set-item-edit input[type=color] { width: 34px; height: 32px; border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 2px; cursor: pointer; background: none; flex-shrink: 0; }
   .set-empty  { padding: 14px 10px; font-size: 12px; color: var(--ink3); text-align: center; font-style: italic; }
 
@@ -256,7 +254,7 @@
   <div class="hd-right">
     <button class="btn edit-only" onclick="openAddModal()">+ Add race</button>
     <button class="btn edit-only" onclick="addYear()">+ Year</button>
-    <button class="btn edit-only" onclick="backupData()">&#8595; Backup</button>
+    <button class="btn edit-only" onclick="backupData()">&#8595; Export</button>
     <label class="btn edit-only" style="cursor:pointer;">&#8593; Restore<input type="file" accept=".json" onchange="restoreData(this)" style="display:none"></label>
     <button class="btn edit-only" onclick="openSettings()">Settings</button>
   </div>
@@ -285,7 +283,6 @@
 <div id="mc"></div>
 
 <script>
-const MONTHS_LONG  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const CAT_COLOR    = { grandtour:'#185FA5', stage:'#0F6E56', classic:'#993C1D' };
 const CAT_LABEL    = { grandtour:'Grand Tour', stage:'Stage race',    classic:'Classic'  };
@@ -297,7 +294,7 @@ const EMPTY_IMGS   = () => [null, null, null];
 let races = [], years = [], page = 0, pendingImgs = {};
 let riders = [], raceTypes = [];
 let activeFilter = null; // 'riders' | 'races' | null
-let viewMode = true;
+let viewMode = false, viewImgs = {};
 
 /* ---- small utilities ---- */
 const $ = id => document.getElementById(id);
@@ -334,6 +331,7 @@ async function load(){
     const payload = await res.json();
     if(!payload.races || !Array.isArray(payload.races)) throw new Error('invalid');
     viewMode  = true;
+    viewImgs  = payload.images || {};
     races     = payload.races     || [];
     years     = payload.years     || [];
     riders    = payload.riders    || [];
@@ -342,10 +340,6 @@ async function load(){
     years.sort((a,b) => a - b);
     page = Math.max(0, years.length - getColCount());
     updateDynCSS();
-    // store images into memory for detail view
-    if(payload.images) {
-      Object.entries(payload.images).forEach(([id, imgs]) => { pendingImgs['__view__' + id] = imgs; });
-    }
     render();
     applyViewMode();
     return;
@@ -372,7 +366,10 @@ function saveImgs(id, imgs){
   try { localStorage.setItem(IMG_KEY(id), JSON.stringify(imgs)); }
   catch(e){ alert('Storage full — try smaller images.'); }
 }
-function loadImgs(id){ return viewMode ? (pendingImgs['__view__' + id] || EMPTY_IMGS()) : parseJSON(localStorage.getItem(IMG_KEY(id)), EMPTY_IMGS()); }
+function loadImgs(id){
+  const stored = viewMode ? (viewImgs[id] || EMPTY_IMGS()) : parseJSON(localStorage.getItem(IMG_KEY(id)), EMPTY_IMGS());
+  return stored.map(i => i && i.file ? { data: `./images/${i.file}`, cap: i.cap || '' } : i);
+}
 function deleteImgs(id){ try { localStorage.removeItem(IMG_KEY(id)); } catch(e){} }
 
 /* ---- filter ---- */
@@ -480,7 +477,7 @@ function entryHtml(race){
   const color     = CAT_COLOR[race.category] || '#888';
   const firstImg  = loadImgs(race.id).find(i => i && i.data);
   const thumb     = firstImg
-    ? `<div class="e-thumb"><img src="${firstImg.data}" alt=""></div>`
+    ? `<div class="e-thumb"><img src="${firstImg.data}" alt="" onerror="this.closest('.e-thumb').replaceWith(Object.assign(document.createElement('div'),{className:'e-thumb-ph'}))"></div>`
     : `<div class="e-thumb-ph"></div>`;
   const snippet   = race.howwon || (race.moments ? race.moments.split('\n')[0] : '');
   const snippetHtml = snippet ? `<div class="e-how">${esc(snippet)}</div>` : '';
@@ -504,46 +501,33 @@ const SLOT_LABELS = ['Finish / key moment', 'Route map', 'Extra moment'];
 
 function imgSlotHtml(i){
   const p = pendingImgs[i];
-  if(p && p.data){
-    return `<div class="img-slot" id="slot${i}"><img src="${p.data}" alt=""><button class="img-slot-del" onclick="clearSlot(${i},event)">&#x2715;</button></div>`;
-  }
-  return `<div class="img-slot" id="slot${i}"><div class="img-slot-label">${SLOT_LABELS[i]}</div><input type="file" accept="image/*" onchange="handleImg(${i},this)"></div>`;
+  const file = p && p.file ? p.file : '';
+  const preview = file
+    ? `<div class="img-slot-preview"><img src="./images/${esc(file)}" alt="" onerror="this.closest('.img-slot-preview').innerHTML='<div class=\\'img-slot-label\\'>Not found</div>'"></div>`
+    : `<div class="img-slot-preview"><div class="img-slot-label">${SLOT_LABELS[i]}</div></div>`;
+  return `<div class="img-slot" id="slot${i}">
+    ${preview}
+    <div class="img-slot-input">
+      <input type="text" placeholder="filename.jpg" value="${esc(file)}" oninput="setSlotFile(${i},this.value)">
+      ${file ? `<button class="img-slot-del" onclick="clearSlot(${i})">&#x2715;</button>` : ''}
+    </div>
+  </div>`;
 }
 
-function handleImg(i, input){
-  const file = input.files[0]; if(!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const img = new Image();
-    img.onload = () => {
-      const MAX = 1200;
-      let w = img.width, h = img.height;
-      if(w > MAX){ h = Math.round(h * MAX / w); w = MAX; }
-      if(h > MAX){ w = Math.round(w * MAX / h); h = MAX; }
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      pendingImgs[i] = { data: canvas.toDataURL('image/jpeg', 0.82), cap: '' };
-      $('slot' + i).outerHTML = imgSlotHtml(i);
-    };
-    img.src = e.target.result;
-  };
-  reader.readAsDataURL(file);
+function rerenderSlot(i){ $('slot' + i).outerHTML = imgSlotHtml(i); }
+function setSlotFile(i, val){
+  val = val.trim();
+  pendingImgs[i] = val ? { file: val, cap: (pendingImgs[i] && pendingImgs[i].cap) || '' } : null;
+  rerenderSlot(i);
 }
-
-function clearSlot(i, e){
-  e.stopPropagation();
-  pendingImgs[i] = null;
-  $('slot' + i).outerHTML = imgSlotHtml(i);
-}
+function clearSlot(i){ pendingImgs[i] = null; rerenderSlot(i); }
 
 /* ---- add / edit modal ---- */
 function openAddModal(prefillId, prefillYear){
   const race = prefillId ? races.find(r => r.id === prefillId) : null;
   const existing = race ? loadImgs(race.id) : EMPTY_IMGS();
-  pendingImgs = { 0: existing[0] ? {...existing[0]} : null,
-                  1: existing[1] ? {...existing[1]} : null,
-                  2: existing[2] ? {...existing[2]} : null };
+  pendingImgs = {};
+  [0,1,2].forEach(i => { pendingImgs[i] = existing[i] ? { ...existing[i] } : null; });
 
   const today   = new Date().toISOString().split('T')[0];
   const defDate = race ? race.date : (prefillYear ? prefillYear + '-04-01' : today);
@@ -617,9 +601,9 @@ function saveRace(id){
   };
 
   const imgs = [0,1,2].map(i => {
-    if(!pendingImgs[i]) return null;
+    if(!pendingImgs[i] || !pendingImgs[i].file) return null;
     const cap = ($('cap' + i) || {}).value || '';
-    return { data: pendingImgs[i].data, cap: cap.trim() };
+    return { file: pendingImgs[i].file, cap: cap.trim() };
   });
 
   if(!years.includes(year)){ years.push(year); years.sort((a,b) => a - b); }
@@ -662,7 +646,7 @@ function openDetail(id){
   const layoutCls = ['', 'one', 'two', 'three'][imgs.length] || 'three';
   const imgsHtml  = imgs.length === 0 ? '' : `<div class="det-imgs ${layoutCls}">${
     imgs.map((img, ix) =>
-      `<div class="det-img-wrap"><img src="${img.data}" alt="${esc(img.cap || '')}" onclick="openLightbox('${id}',${ix})">${img.cap ? `<div class="det-img-cap">${esc(img.cap)}</div>` : ''}</div>`
+      `<div class="det-img-wrap"><img src="${img.data}" alt="${esc(img.cap || '')}" onerror="this.closest('.det-img-wrap').style.display='none'" onclick="openLightbox('${id}',${ix})">${img.cap ? `<div class="det-img-cap">${esc(img.cap)}</div>` : ''}</div>`
     ).join('')
   }</div>`;
 
@@ -698,7 +682,11 @@ function openLightbox(raceId, imgIdx){
   const lb = document.createElement('div');
   lb.className = 'lbox';
   lb.onclick = () => lb.remove();
-  lb.innerHTML = `<img src="${imgs[imgIdx].data}" alt="${esc(imgs[imgIdx].cap || '')}">`;
+  const img = document.createElement('img');
+  img.src = imgs[imgIdx].data;
+  img.alt = imgs[imgIdx].cap || '';
+  img.onerror = () => lb.remove();
+  lb.appendChild(img);
   document.body.appendChild(lb);
 }
 
@@ -706,17 +694,18 @@ function openLightbox(raceId, imgIdx){
 function backupData(){
   const images = {};
   races.forEach(r => {
-    const imgs = loadImgs(r.id);
-    if(imgs.some(i => i && i.data)) images[r.id] = imgs;
+    const imgs = parseJSON(localStorage.getItem(IMG_KEY(r.id)), EMPTY_IMGS());
+    if(imgs.some(i => i && i.file)) images[r.id] = imgs;
   });
   const payload = { version: 2, exportedAt: new Date().toISOString(), races, years, images, riders, raceTypes };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'cycling-journal-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+  a.download = 'data.json';
   a.click();
   URL.revokeObjectURL(a.href);
 }
+
 
 function restoreData(input){
   const file = input.files[0]; if(!file) return;
@@ -746,15 +735,16 @@ function restoreData(input){
 
 /* ---- settings modal ---- */
 const settingsSort = list => [...list].sort((a, b) => (b.fav ? 1 : 0) - (a.fav ? 1 : 0) || a.name.localeCompare(b.name));
+const settingList  = type => type === 'rider' ? riders : raceTypes;
+const findSetting  = (type, id) => settingList(type).find(r => r.id === id);
 
 function setItemHtml(r, type){
-  const delFn = type === 'rider' ? 'delRider' : 'delRaceType';
   return `<div class="set-item" id="si-${r.id}">
     <button class="set-fav-btn${r.fav ? ' is-fav' : ''}" onclick="toggleFav('${type}','${r.id}')" title="${r.fav ? 'Unfavourite' : 'Favourite'}">${r.fav ? '&#9733;' : '&#9734;'}</button>
     <div class="set-swatch" style="background:${r.color}"></div>
     <span class="set-name">${esc(r.name)}</span>
     <button class="set-edit-btn" onclick="editSetting('${type}','${r.id}')">Edit</button>
-    <button class="set-del" onclick="${delFn}('${r.id}')">&#x2715;</button>
+    <button class="set-del" onclick="delSetting('${type}','${r.id}')">&#x2715;</button>
   </div>`;
 }
 
@@ -768,32 +758,25 @@ function settingsListHtml(list, type){
   ).join('');
 }
 
+function settingsPanelHtml(type, title, placeholder){
+  return `<div class="set-panel">
+            <h3>${title}</h3>
+            <div class="set-list">${settingsListHtml(settingList(type), type)}</div>
+            <div class="set-add">
+              <input type="text" id="sn-${type}" placeholder="${placeholder}">
+              <input type="color" id="sc-${type}" value="#323232">
+              <button class="mb mb-pri" onclick="addSetting('${type}')">Add</button>
+            </div>
+          </div>`;
+}
 function settingsModalHtml(){
-  const riderListHtml    = settingsListHtml(riders,    'rider');
-  const raceTypeListHtml = settingsListHtml(raceTypes, 'race');
   return `
     <div class="overlay" id="ov" onclick="closeIfOverlay(event)">
       <div class="modal set-modal" onclick="event.stopPropagation()">
         <div class="modal-title">Settings</div>
         <div class="set-panels">
-          <div class="set-panel">
-            <h3>Riders</h3>
-            <div class="set-list">${riderListHtml}</div>
-            <div class="set-add">
-              <input type="text" id="snr" placeholder="Rider name">
-              <input type="color" id="scr" value="#323232">
-              <button class="mb mb-pri" onclick="addRider()">Add</button>
-            </div>
-          </div>
-          <div class="set-panel">
-            <h3>Races</h3>
-            <div class="set-list">${raceTypeListHtml}</div>
-            <div class="set-add">
-              <input type="text" id="snrt" placeholder="Race name">
-              <input type="color" id="scrt" value="#323232">
-              <button class="mb mb-pri" onclick="addRaceType()">Add</button>
-            </div>
-          </div>
+          ${settingsPanelHtml('rider', 'Riders', 'Rider name')}
+          ${settingsPanelHtml('race',  'Races', 'Race name')}
         </div>
         <div class="modal-acts">
           <button class="mb mb-sec" onclick="closeModal()">Close</button>
@@ -803,56 +786,45 @@ function settingsModalHtml(){
 }
 function openSettings(){ $('mc').innerHTML = settingsModalHtml(); }
 
+function replaceSettingRow(type, id){
+  const item = findSetting(type, id);
+  const el = $('si-' + id);
+  if(item && el) el.outerHTML = setItemHtml(item, type);
+}
 function editSetting(type, id){
-  const item = (type === 'rider' ? riders : raceTypes).find(r => r.id === id);
-  if(!item) return;
+  const item = findSetting(type, id); if(!item) return;
   const el = $('si-' + id); if(!el) return;
   el.outerHTML = `<div class="set-item set-item-edit" id="si-${id}">
     <input type="color" id="ec-${id}" value="${item.color}">
     <input type="text"  id="en-${id}" value="${esc(item.name)}">
     <button class="mb mb-pri set-save-btn" onclick="saveSetting('${type}','${id}')">Save</button>
-    <button class="set-del" onclick="cancelSettingEdit('${type}','${id}')">&#x2715;</button>
+    <button class="set-del" onclick="replaceSettingRow('${type}','${id}')">&#x2715;</button>
   </div>`;
   $('en-' + id).focus();
 }
-function cancelSettingEdit(type, id){
-  const item = (type === 'rider' ? riders : raceTypes).find(r => r.id === id);
-  if(!item) return;
-  const el = $('si-' + id); if(!el) return;
-  el.outerHTML = setItemHtml(item, type);
-}
 function saveSetting(type, id){
   const name = $('en-' + id)?.value.trim(); if(!name) return;
-  const color = $('ec-' + id).value;
-  const item = (type === 'rider' ? riders : raceTypes).find(r => r.id === id);
-  if(item){ item.name = name; item.color = color; }
+  const item = findSetting(type, id);
+  if(item){ item.name = name; item.color = $('ec-' + id).value; }
   saveSettings(); updateDynCSS();
-  const el = $('si-' + id); if(el) el.outerHTML = setItemHtml(item, type);
+  replaceSettingRow(type, id);
   render();
 }
 
 function toggleFav(type, id){
-  const item = (type === 'rider' ? riders : raceTypes).find(r => r.id === id);
-  if(item){ item.fav = !item.fav; }
+  const item = findSetting(type, id);
+  if(item) item.fav = !item.fav;
   saveSettings(); openSettings();
 }
 
-function addRider(){
-  const name = $('snr').value.trim(); if(!name) return;
-  riders.push({ id: uid(), name, color: $('scr').value, fav: false });
+function addSetting(type){
+  const name = $('sn-' + type).value.trim(); if(!name) return;
+  settingList(type).push({ id: uid(), name, color: $('sc-' + type).value, fav: false });
   saveSettings(); updateDynCSS(); openSettings();
 }
-function delRider(id){
-  riders = riders.filter(r => r.id !== id);
-  saveSettings(); updateDynCSS(); openSettings();
-}
-function addRaceType(){
-  const name = $('snrt').value.trim(); if(!name) return;
-  raceTypes.push({ id: uid(), name, color: $('scrt').value, fav: false });
-  saveSettings(); updateDynCSS(); openSettings();
-}
-function delRaceType(id){
-  raceTypes = raceTypes.filter(r => r.id !== id);
+function delSetting(type, id){
+  if(type === 'rider') riders = riders.filter(r => r.id !== id);
+  else raceTypes = raceTypes.filter(r => r.id !== id);
   saveSettings(); updateDynCSS(); openSettings();
 }
 
