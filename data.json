@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "exportedAt": "2026-04-23T11:35:19.773Z",
+  "version": 4,
+  "exportedAt": "2026-04-23T15:00:28.593Z",
   "races": [
     {
       "id": "mo8o03ugf7g9z",
@@ -8,12 +8,22 @@
       "year": 2026,
       "date": "2026-01-20",
       "category": "stage",
-      "winner": "VINE Jay",
-      "second": "SCHMID Mauro",
-      "third": "SWEENY Harry",
+      "winner": {
+        "id": "mo8crgh59ug32",
+        "name": "VINE Jay"
+      },
+      "second": {
+        "id": "mo8csd721jg1d",
+        "name": "SCHMID Mauro"
+      },
+      "third": {
+        "id": "mo8cruyztpvaz",
+        "name": "SWEENY Harry"
+      },
       "howwon": "GC",
       "moments": "Final stage: An early three-man breakaway was formed after 20 kilometres, later joined by Pavel Novák. A runaway kangaroo caused chaos in the peloton, bringing down GC leader Vine and forcing teammate Bjerg to abandon. The break was caught with one lap remaining, late attackers Buitrago, Glivar and Cepeda were neutralised in the final kilometre and Brennan won the uphill bunch sprint.",
-      "note": "Not watched"
+      "note": "Not watched",
+      "raceTypeId": "mo8aib4sya36s"
     },
     {
       "id": "mo8o859vohtdr",
@@ -21,12 +31,22 @@
       "year": 2026,
       "date": "2026-02-01",
       "category": "classic",
-      "winner": "ANDRESEN Tobias Lund",
-      "second": "BRENNAN Matthew",
-      "third": "GILMORE Brady",
+      "winner": {
+        "id": "mo8o7ntc69d2p",
+        "name": "ANDRESEN Tobias Lund"
+      },
+      "second": {
+        "id": "mo8o8fvmnzpur",
+        "name": "BRENNAN Matthew"
+      },
+      "third": {
+        "id": "mo8o8lemhlvpg",
+        "name": "GILMORE Brady"
+      },
       "howwon": "Sprint of 19 riders",
       "moments": "Three riders escaped immediately after the start to form the early break, with Jayco and Visma controlling the peloton. The break was caught on the local circuit, where repeated attacks followed. After the final ascent of Challambra Crescent, a sizeable group came together and sprinted for victory, won by Lund Andresen.",
-      "note": "Not watched"
+      "note": "Not watched",
+      "raceTypeId": "mo8aiz473dodm"
     },
     {
       "id": "mo8oc5v3rdxgd",
@@ -34,12 +54,22 @@
       "year": 2026,
       "date": "2026-02-16",
       "category": "stage",
-      "winner": "DEL TORO Isaac",
-      "second": "TIBERI Antonio",
-      "third": "PLAPP Luke",
+      "winner": {
+        "id": "mo8cqepkuox7x",
+        "name": "DEL TORO Isaac"
+      },
+      "second": {
+        "id": "mo8crrzxbvfvw",
+        "name": "TIBERI Antonio"
+      },
+      "third": {
+        "id": "mo8csjyhf5t43",
+        "name": "PLAPP Luke"
+      },
       "howwon": "GC",
       "moments": "Final Stage: A fierce fight for the break even saw attempts from Remco Evenepoel before five riders finally went clear. The break was reeled in with two kilometres remaining. Milan powered to victory in the bunch sprint, taking his third stage win of this edition. The stage was raced at the highest average speed in the history of the UAE Tour.",
-      "note": "Not Watched"
+      "note": "Not Watched",
+      "raceTypeId": "mo8ajak2aif1p"
     },
     {
       "id": "mo8od8qhxd93v",
@@ -47,12 +77,22 @@
       "year": 2026,
       "date": "2026-02-28",
       "category": "classic",
-      "winner": "VAN DER POEL Mathieu",
-      "second": "VAN DIJKE Tim",
-      "third": "VERMEERSCH Florian",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": {
+        "id": "mo8cq0g65x5fz",
+        "name": "VAN DIJKE Tim"
+      },
+      "third": {
+        "id": "mo8crlqx1pj5n",
+        "name": "VERMEERSCH Florian"
+      },
       "howwon": "15.6 km solo",
       "moments": "The break of the day formed after the first escape was caught. On the Molenberg, Florian Vermeersch attacked, while Rick Pluimers crashed behind him. Mathieu van der Poel skilfully avoided the fall and rode to Vermeersch with Tim van Dijke bridging across. With an acceleration on the muur Van der Poel dropped his rivals and powered to a solo victory.",
-      "note": "Not watched"
+      "note": "Not watched",
+      "raceTypeId": "mo8ajmfgrxlvn"
     },
     {
       "id": "mo8ok0y7y7yiu",
@@ -60,12 +100,22 @@
       "year": 2026,
       "date": "2026-03-07",
       "category": "classic",
-      "winner": "POGAČAR Tadej",
-      "second": "SEIXAS Paul",
-      "third": "DEL TORO Isaac",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": {
+        "id": "mo8csa45rwg0t",
+        "name": "SEIXAS Paul"
+      },
+      "third": {
+        "id": "mo8cqepkuox7x",
+        "name": "DEL TORO Isaac"
+      },
       "howwon": "79.2 km solo",
       "moments": "After 40 km of racing, the first meaningful breakaway formed. UAE Team Emirates controlled the peloton and stretched it on Monte Sante Marie, where everything came together and Tadej Pogačar subsequently attacked; Paul Seixas followed the longest but was dropped. Pogačar won after a 79 km solo, while Seixas dropped Isaac del Toro on the final steep kilometre to secure second.",
-      "note": "Watched at home"
+      "note": "Watched at home",
+      "raceTypeId": "mo8ak4ix2ywdk"
     },
     {
       "id": "mo8olwg5zhzeh",
@@ -73,12 +123,22 @@
       "year": 2026,
       "date": "2026-03-08",
       "category": "stage",
-      "winner": "VINGEGAARD Jonas",
-      "second": "MARTÍNEZ Daniel Felipe",
-      "third": "STEINHAUSER Georg",
+      "winner": {
+        "id": "mo8crdb63kjch",
+        "name": "VINGEGAARD Jonas"
+      },
+      "second": {
+        "id": "mo8cszyogucj6",
+        "name": "MARTÍNEZ Daniel Felipe"
+      },
+      "third": {
+        "id": "mo8cs1m2myovn",
+        "name": "STEINHAUSER Georg"
+      },
       "howwon": "GC",
       "moments": "Final Stage: Paris-Nice stage 8 was raced aggressively, with the breakaway gradually brought back before the favourites lit up the finale. Jonas Vingegaard made the decisive move on the Côte du Linguador, with only Lenny Martinez able to follow. The pair quickly opened a gap and stayed clear into the final kilometres, while the chase fought behind for the remaining places. In the sprint, Martinez edged Vingegaard to take the stage win, while the Dane sealed the overall win. Dani Martínez held on to second in the final general classification, with Georg Steinhauser completing the podium.",
-      "note": "Not watched"
+      "note": "Not watched",
+      "raceTypeId": "mo8akh7q9qrm4"
     },
     {
       "id": "mo8or5te2ufv4",
@@ -86,38 +146,68 @@
       "year": 2026,
       "date": "2026-03-09",
       "category": "stage",
-      "winner": "DEL TORO Isaac",
-      "second": "JORGENSON Matteo",
-      "third": "PELLIZZARI Giulio",
+      "winner": {
+        "id": "mo8cqepkuox7x",
+        "name": "DEL TORO Isaac"
+      },
+      "second": {
+        "id": "mo8oq7cw1cj7j",
+        "name": "JORGENSON Matteo"
+      },
+      "third": {
+        "id": "mo8csw3jb3m47",
+        "name": "PELLIZZARI Giulio"
+      },
       "howwon": "GC",
       "moments": "",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8aku6zrgouo"
     },
     {
       "id": "mo8ouespeenll",
       "name": "Milano-Sanremo",
       "year": 2026,
       "date": "2026-03-21",
-      "category": "grandtour",
-      "winner": "POGAČAR Tadej",
-      "second": "PIDCOCK Tom",
-      "third": "VAN AERT Wout",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": {
+        "id": "mo8cso1lib50v",
+        "name": "PIDCOCK Tom"
+      },
+      "third": {
+        "id": "mo8cq35atdfpw",
+        "name": "VAN AERT Wout"
+      },
       "howwon": "Sprint à deux",
       "moments": "Milano-Sanremo began with nine riders forming the day’s breakaway. Before the Cipressa, a major crash disrupted the race, involving favorites Wout van Aert and Tadej Pogačar, forcing them to chase. Mathieu van der Poel also crashed earlier and had to recover. On the Cipressa, Pogačar attacked, with only Tom Pidcock and Van der Poel able to follow. On the Poggio, Pogačar dropped Van der Poel and rode to the finish with Pidcock, ultimately winning the sprint. Van Aert finished third after chasing back.",
-      "note": "Watched at home"
+      "note": "Watched at home",
+      "raceTypeId": "mo8ald2x4v2ps"
     },
     {
       "id": "mo8owsizsvx0r",
-      "name": "Volta Catalunya",
+      "name": "Volta a Catalunya",
       "year": 2026,
       "date": "2026-03-23",
       "category": "stage",
-      "winner": "VINGEGAARD Jonas",
-      "second": "MARTÍNEZ Lenny",
-      "third": "LIPOWITZ Florian",
+      "winner": {
+        "id": "mo8crdb63kjch",
+        "name": "VINGEGAARD Jonas"
+      },
+      "second": {
+        "id": "mo8cxmq2wi83k",
+        "name": "MARTÍNEZ Lenny"
+      },
+      "third": {
+        "id": "mo8ct35bjty9i",
+        "name": "LIPOWITZ Florian"
+      },
       "howwon": "GC",
       "moments": "",
-      "note": "Not watched"
+      "note": "Not watched",
+      "raceTypeId": "mo8ambqzui2ik"
     },
     {
       "id": "mo8oy7m4izhkp",
@@ -125,12 +215,22 @@
       "year": 2026,
       "date": "2026-03-25",
       "category": "classic",
-      "winner": "GROENEWEGEN Dylan",
-      "second": "PHILIPSEN Jasper",
-      "third": "KANTER Max",
+      "winner": {
+        "id": "mo8oyr063upwv",
+        "name": "GROENEWEGEN Dylan"
+      },
+      "second": {
+        "id": "mo8csrr7gyysz",
+        "name": "PHILIPSEN Jasper"
+      },
+      "third": {
+        "id": "mo8oyxakxm3ix",
+        "name": "KANTER Max"
+      },
       "howwon": "Sprint of small group",
       "moments": "The \"Classic Brugge-De Panne\" race has been renamed the Tour of Bruges. \nIn a fast-paced race, repeated attacks failed to form a decisive breakaway. Strong echelons split and reduced the peloton but were eventually reeled back in. Jasper Philipsen launched his sprint slightly too early, allowing Dylan Groenewegen to come past and take the victory at the finish.",
-      "note": "Not watched"
+      "note": "Not watched",
+      "raceTypeId": "mo8bfcirva8qq"
     },
     {
       "id": "mo8p0qv6kevm1",
@@ -138,12 +238,22 @@
       "year": 2026,
       "date": "2026-03-27",
       "category": "classic",
-      "winner": "VAN DER POEL Mathieu",
-      "second": "HAGENES Per Strand",
-      "third": "VERMEERSCH Florian",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": {
+        "id": "mo8p14w0cjn4j",
+        "name": "HAGENES Per Strand"
+      },
+      "third": {
+        "id": "mo8crlqx1pj5n",
+        "name": "VERMEERSCH Florian"
+      },
       "howwon": "42.2 km solo",
       "moments": "A six-rider breakaway went clear after the start. On the first passage of the Karnemelkbeekstraat a strong move formed from the peloton. On the Taaienberg, Jasper Stuyven’s acceleration stretched the peloton before Tim van Dijke attacked, with Mathieu van der Poel the only rider able to follow. Van der Poel then went clear on the Boigneberg, bridged to the leaders on the Kapelberg and dropped them for good on the Paterberg with 42 km to go. He looked set for a comfortable solo win, but the chasers came back rapidly in the closing kilometres. Van der Poel just held on, ahead of Per Strand Hagenes and Florian Vermeersch.",
-      "note": "Not watched"
+      "note": "Not watched",
+      "raceTypeId": "mo8bfqx8wg4b9"
     },
     {
       "id": "mo8p6u3kvku63",
@@ -151,12 +261,22 @@
       "year": 2026,
       "date": "2026-03-29",
       "category": "classic",
-      "winner": "PHILIPSEN Jasper",
-      "second": "ANDRESEN Tobias Lund",
-      "third": "LAPORTE Christophe",
+      "winner": {
+        "id": "mo8csrr7gyysz",
+        "name": "PHILIPSEN Jasper"
+      },
+      "second": {
+        "id": "mo8o7ntc69d2p",
+        "name": "ANDRESEN Tobias Lund"
+      },
+      "third": {
+        "id": "mo8ct7crcgzon",
+        "name": "LAPORTE Christophe"
+      },
       "howwon": "Sprint of large group",
       "moments": "An early break of eight shaped the opening of the race, with the peloton splitting before the hill zone but regrouping before the first Kemmelberg ascent. Several attacks failed to stick until Van Aert, Van der Poel, and Vermeersch surged on the second climb of the Kemmelberg. Van Aert and Van der Poel broke clear on the final ascent with 35 km to go, and were ultimately joined by Alec Segaert with 5 km to go, but the peloton caught them in the closing kilometers, leaving Jasper Philipsen to claim the sprint victory.",
-      "note": "Not watched"
+      "note": "Not watched",
+      "raceTypeId": "mo8bfyo2549kr"
     },
     {
       "id": "mo8padeli6z2s",
@@ -164,12 +284,22 @@
       "year": 2026,
       "date": "2026-04-01",
       "category": "classic",
-      "winner": "GANNA Filippo",
-      "second": "VAN AERT Wout",
-      "third": "WÆRENSKJOLD Søren",
+      "winner": {
+        "id": "mo8pazx662ikp",
+        "name": "GANNA Filippo"
+      },
+      "second": {
+        "id": "mo8cq35atdfpw",
+        "name": "VAN AERT Wout"
+      },
+      "third": {
+        "id": "mo8cr7fjvxij0",
+        "name": "WÆRENSKJOLD Søren"
+      },
       "howwon": "Early sprint break",
       "moments": "From the start, many attacks were launched, but none were allowed to go clear. With just over 50 kilometres to go, three riders broke away.\nOn the Eikenberg, Wout van Aert bridged across to the two reaming leaders. The trio stayed together until the first passage of Nokereberg, where Grégoire dropped, leaving Van Aert and Larsen out front. On the final climb, Van Aert accelerated, dropping Larsen and going solo. Behind, Filippo Ganna launched a counterattack. Ganna closed in on Van Aert in sight of the finish, launched the sprint and took victory in the fastest edition ever.",
-      "note": "Watched at home"
+      "note": "Watched at home",
+      "raceTypeId": "mo8bg4sf5are9"
     },
     {
       "id": "mo8pe5izqnqm6",
@@ -177,12 +307,19 @@
       "year": 2026,
       "date": "2026-04-05",
       "category": "classic",
-      "winner": "POGAČAR Tadej",
-      "second": "VAN DER POEL Mathieu",
-      "third": "",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "third": null,
       "howwon": "18.5 km solo",
       "moments": "An early break of 13 riders built a lead of around 5:30 before being caught with 80 km remaining. Florian Vermeersch's acceleration on the Molenberg sparked the race's decisive move. Pogacar and Van der Poel dropped the field on the Oude Kwaremont, with Evenepoel unable to bridge. Pogacar attacked again with 18.5 km to go, soloing to victory in Oudenaarde ahead of Van der Poel and Evenepoel.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8bga5u1s5st"
     },
     {
       "id": "mo8pgyiu0t9yh",
@@ -190,12 +327,22 @@
       "year": 2026,
       "date": "2026-04-06",
       "category": "stage",
-      "winner": "SEIXAS Paul",
-      "second": "LIPOWITZ Florian",
-      "third": "JOHANNESSEN Tobias Halland",
+      "winner": {
+        "id": "mo8csa45rwg0t",
+        "name": "SEIXAS Paul"
+      },
+      "second": {
+        "id": "mo8ct35bjty9i",
+        "name": "LIPOWITZ Florian"
+      },
+      "third": {
+        "id": "mo8ph7poynvyv",
+        "name": "JOHANNESSEN Tobias Halland"
+      },
       "howwon": "GC",
       "moments": "",
-      "note": "Not watched"
+      "note": "Not watched",
+      "raceTypeId": "mo8pfnef326sy"
     },
     {
       "id": "mo8pk6m8a4wda",
@@ -203,12 +350,22 @@
       "year": 2026,
       "date": "2026-04-12",
       "category": "classic",
-      "winner": "VAN AERT Wout",
-      "second": "POGAČAR Tadej",
-      "third": "STUYVEN Jasper",
+      "winner": {
+        "id": "mo8cq35atdfpw",
+        "name": "VAN AERT Wout"
+      },
+      "second": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "third": {
+        "id": "mo8cryni6f8bq",
+        "name": "STUYVEN Jasper"
+      },
       "howwon": "Sprint à deux",
       "moments": "Despite numerous attacks, no early breakaway was established. Tadej Pogačar suffered a puncture and was forced to chase, but rejoined the front group before the Trouée d’Arenberg. On that section, Mathieu van der Poel punctured twice, losing around two minutes and never returning to the first group. Pogačar and Wout van Aert attacked from a select group of seven riders and rode together to the finish, where Van Aert won the two-man sprint.",
-      "note": "Watched on Torino streets from phone"
+      "note": "Watched on Torino streets from phone",
+      "raceTypeId": "mo8bgh0n2gh8k"
     },
     {
       "id": "mo8pm0fmt87ic",
@@ -216,25 +373,45 @@
       "year": 2026,
       "date": "2026-04-19",
       "category": "classic",
-      "winner": "EVENEPOEL Remco",
-      "second": "SKJELMOSE Mattias",
-      "third": "COSNEFROY Benoît",
+      "winner": {
+        "id": "mo8peukid3acf",
+        "name": "EVENEPOEL Remco"
+      },
+      "second": {
+        "id": "mo8cs58ykhqgl",
+        "name": "SKJELMOSE Mattias"
+      },
+      "third": {
+        "id": "mo8d5u253l38m",
+        "name": "COSNEFROY Benoît"
+      },
       "howwon": "Sprint à deux",
       "moments": "A nine-man breakaway animated the early race, with Frigo the last survivor. On the Kruisberg with 42 km to go, Evenepoel, Skjelmose and Grégoire went clear after a crash eliminated Vauquelin and Jorgenson. Grégoire was dropped on the second ascent of the Cauberg, and Evenepoel sealed the win in the sprint-à-deux.",
-      "note": "Watched at home"
+      "note": "Watched at home",
+      "raceTypeId": "mo8bglt6vcib9"
     },
     {
       "id": "mob5q12lbcsmn",
       "name": "Santos Tour Down Under",
       "year": 2025,
       "date": "2025-01-21",
-      "category": "grandtour",
-      "winner": "NARVAEZ Jhonatan",
-      "second": "ROMO Javier",
-      "third": "FISHER-BLACK Finn",
+      "category": "stage",
+      "winner": {
+        "id": "mob5ofe4g86w9",
+        "name": "NARVAEZ Jhonatan"
+      },
+      "second": {
+        "id": "mob5ooc09mmkd",
+        "name": "ROMO Javier"
+      },
+      "third": {
+        "id": "mob5p4vc89kxw",
+        "name": "FISHER-BLACK Finn"
+      },
       "howwon": "GC",
       "moments": "",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8aib4sya36s"
     },
     {
       "id": "mob5sgek115r7",
@@ -242,12 +419,22 @@
       "year": 2025,
       "date": "2025-02-02",
       "category": "classic",
-      "winner": "SCHMID Mauro",
-      "second": "GATE Aaron",
-      "third": "PITHIE Laurence",
+      "winner": {
+        "id": "mo8csd721jg1d",
+        "name": "SCHMID Mauro"
+      },
+      "second": {
+        "id": "mob5r1ia2bx4j",
+        "name": "GATE Aaron"
+      },
+      "third": {
+        "id": "mob5r9tqihqwl",
+        "name": "PITHIE Laurence"
+      },
       "howwon": "",
       "moments": "",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8aiz473dodm"
     },
     {
       "id": "mob5tzy16m2fm",
@@ -255,12 +442,22 @@
       "year": 2025,
       "date": "2025-02-17",
       "category": "stage",
-      "winner": "POGAČAR Tadej",
-      "second": "CICCONE Giulio",
-      "third": "BILBAO Pello",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": {
+        "id": "mob5t1v6mlp78",
+        "name": "CICCONE Giulio"
+      },
+      "third": {
+        "id": "mob5tabvmq1w0",
+        "name": "BILBAO Pello"
+      },
       "howwon": "",
       "moments": "",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8ajak2aif1p"
     },
     {
       "id": "mob5vdy2g2bkj",
@@ -268,12 +465,22 @@
       "year": 2025,
       "date": "2025-03-01",
       "category": "classic",
-      "winner": "WÆRENSKJOLD Søren",
-      "second": "MAGNIER Paul",
-      "third": "PHILIPSEN Jasper",
+      "winner": {
+        "id": "mo8cr7fjvxij0",
+        "name": "WÆRENSKJOLD Søren"
+      },
+      "second": {
+        "id": "mob5upxk3feh1",
+        "name": "MAGNIER Paul"
+      },
+      "third": {
+        "id": "mo8csrr7gyysz",
+        "name": "PHILIPSEN Jasper"
+      },
       "howwon": "Sprint of large group",
       "moments": "A seven-rider early break formed before Alpecin’s pace on the Molenberg split the peloton, leaving Wout van Aert in the second group. The front caught the break with 31 km remaining, and soon the race regrouped. On the Muur van Geraardsbergen, splits formed again but closed later. Küng attacked with 10 km to go, was caught in the final kilometer, and Søren Wærenskjold won the sprint.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8ajmfgrxlvn"
     },
     {
       "id": "mob63s8yya2z1",
@@ -281,12 +488,22 @@
       "year": 2025,
       "date": "2025-03-08",
       "category": "classic",
-      "winner": "POGAČAR Tadej",
-      "second": "PIDCOCK Tom",
-      "third": "WELLENS Tim",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": {
+        "id": "mo8cso1lib50v",
+        "name": "PIDCOCK Tom"
+      },
+      "third": {
+        "id": "mob6286qusjgh",
+        "name": "WELLENS Tim"
+      },
       "howwon": "18.6 km solo",
       "moments": "A six-man early break formed before UAE Team Emirates – XRG raised the pace on the Monte Sante Marie. Connor Swift attacked from the break to go solo. With 78.5 km remaining, Pidcock and Pogacar accelerated to join him. After Pogacar crashed, Pidcock did not go full gas, allowing the Slovenian to rejoin a few kilometers later. With 18.6 km to go, Pogacar attacked again to take victory. With his win, he equalled record holder Fabian Cancellara",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8ak4ix2ywdk"
     },
     {
       "id": "mob67daosord6",
@@ -294,25 +511,45 @@
       "year": 2025,
       "date": "2025-03-09",
       "category": "stage",
-      "winner": "JORGENSON Matteo",
-      "second": "LIPOWITZ Florian",
-      "third": "ARENSMAN Thymen",
+      "winner": {
+        "id": "mo8oq7cw1cj7j",
+        "name": "JORGENSON Matteo"
+      },
+      "second": {
+        "id": "mo8ct35bjty9i",
+        "name": "LIPOWITZ Florian"
+      },
+      "third": {
+        "id": "mob66b4m4psnd",
+        "name": "ARENSMAN Thymen"
+      },
       "howwon": "GC",
       "moments": "",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8akh7q9qrm4"
     },
     {
       "id": "mob696eign11r",
       "name": "Tirreno-Adriatico",
       "year": 2025,
       "date": "2025-03-10",
-      "category": "grandtour",
-      "winner": "AYUSO Juan",
-      "second": "GANNA Filippo",
-      "third": "TIBERI Antonio",
+      "category": "stage",
+      "winner": {
+        "id": "mob68azhjs69s",
+        "name": "AYUSO Juan"
+      },
+      "second": {
+        "id": "mo8pazx662ikp",
+        "name": "GANNA Filippo"
+      },
+      "third": {
+        "id": "mo8crrzxbvfvw",
+        "name": "TIBERI Antonio"
+      },
       "howwon": "GC",
       "moments": "",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8aku6zrgouo"
     },
     {
       "id": "mob6bilixtu9d",
@@ -320,25 +557,45 @@
       "year": 2025,
       "date": "2025-03-21",
       "category": "classic",
-      "winner": "VAN DER POEL Mathieu",
-      "second": "GANNA Filippo",
-      "third": "POGAČAR Tadej",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": {
+        "id": "mo8pazx662ikp",
+        "name": "GANNA Filippo"
+      },
+      "third": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
       "howwon": "Sprint of 3 riders",
       "moments": "Eight riders formed an early break in cold, wet conditions, with Silvan Dillier controlling the move until 50 km from the finish. The weather cleared as the race reached the coast. The last escapee was caught 26 km from the line. On the Cipressa, Pogacar attacked, joined by Van der Poel and Ganna. Ganna lost contact after Pogacar’s acceleration on the Poggio but rejoined. Van der Poel launched the sprint early and claimed victory.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8ald2x4v2ps"
     },
     {
       "id": "mob6m4qhluhaq",
-      "name": "Volta Catalunya",
+      "name": "Volta a Catalunya",
       "year": 2025,
       "date": "2025-03-24",
       "category": "stage",
-      "winner": "ROGLIČ Primož",
-      "second": "AYUSO Juan",
-      "third": "MAS Enric",
+      "winner": {
+        "id": "mob6de66owlq1",
+        "name": "ROGLIČ Primož"
+      },
+      "second": {
+        "id": "mob68azhjs69s",
+        "name": "AYUSO Juan"
+      },
+      "third": {
+        "id": "mob6mb4bbjv3u",
+        "name": "MAS Enric"
+      },
       "howwon": "GC",
       "moments": "",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8ambqzui2ik"
     },
     {
       "id": "mobagccmxkmvn",
@@ -346,25 +603,45 @@
       "year": 2025,
       "date": "2025-03-26",
       "category": "classic",
-      "winner": "MOLANO Juan Sebastián",
-      "second": "MILAN Jonathan",
-      "third": "MIHKELS Madis",
+      "winner": {
+        "id": "mobaf6mhq8hwp",
+        "name": "MOLANO Juan Sebastián"
+      },
+      "second": {
+        "id": "mobafb0fw2k3s",
+        "name": "MILAN Jonathan"
+      },
+      "third": {
+        "id": "mobafdqjlwa8s",
+        "name": "MIHKELS Madis"
+      },
       "howwon": "Sprint of small group",
       "moments": "A five-rider early break formed, controlled by Soudal Quick-Step, Lidl–Trek, and Visma | Lease a Bike in the peloton. With 15.5 km to go, De Vries attacked from the break. The final 5 km were disrupted by multiple crashes involving many favourites. With 1.7 km remaining, De Vries was caught. Molano launched with 500 m to go, opened a small gap, and held it to win.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mobac0ytniezy"
     },
     {
       "id": "mobaje8wkiv0o",
       "name": "E3 Saxo Classic",
       "year": 2025,
       "date": "2025-03-28",
-      "category": "grandtour",
-      "winner": "VAN DER POEL Mathieu",
-      "second": "PEDERSEN Mads",
-      "third": "GANNA Filippo",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": {
+        "id": "mobaieyhnfj6i",
+        "name": "PEDERSEN Mads"
+      },
+      "third": {
+        "id": "mo8pazx662ikp",
+        "name": "GANNA Filippo"
+      },
       "howwon": "39 km solo",
       "moments": "Early in the race, a crash split the peloton, leaving most favourites in the second group. Alpecin took control to close the gap, and by 111 km to go, the race was back together. Pedersen attacked on the Taaienberg, joined by Van der Poel and Ganna. With 39 km remaining, Van der Poel launched a decisive attack on the Oude Kwaremont, dropped everyone, and rode solo to victory, claiming his second consecutive E3 Saxo Classic win.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8bfqx8wg4b9"
     },
     {
       "id": "mobar0jjidy15",
@@ -372,12 +649,22 @@
       "year": 2025,
       "date": "2025-03-30",
       "category": "classic",
-      "winner": "PEDERSEN Mads",
-      "second": "MERLIER Tim",
-      "third": "MILAN Jonathan",
+      "winner": {
+        "id": "mobaieyhnfj6i",
+        "name": "PEDERSEN Mads"
+      },
+      "second": {
+        "id": "mobapr0kvbusi",
+        "name": "MERLIER Tim"
+      },
+      "third": {
+        "id": "mobafb0fw2k3s",
+        "name": "MILAN Jonathan"
+      },
       "howwon": "56 km solo",
       "moments": "A ten-rider early break formed. On the first passage of the Kemmelberg, Pedersen accelerated, thinning the group. With 72 km to go, he surged on a Plugstreet, joined by Philipsen and Kooij, but Philipsen punctured and Kooij crashed, leaving Pedersen to link with the remaining breakaway riders. On the second passage of the Kemmelberg, Pedersen attacked again, riding solo for 56 km to victory.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8bfyo2549kt"
     },
     {
       "id": "mobe97hhi07fm",
@@ -385,12 +672,22 @@
       "year": 2025,
       "date": "2025-04-02",
       "category": "classic",
-      "winner": "POWLESS Neilson",
-      "second": "VAN AERT Wout",
-      "third": "BENOOT Tiesj",
+      "winner": {
+        "id": "mobe7ostu0s1r",
+        "name": "POWLESS Neilson"
+      },
+      "second": {
+        "id": "mo8cq35atdfpw",
+        "name": "VAN AERT Wout"
+      },
+      "third": {
+        "id": "mobe7wgc50zsh",
+        "name": "BENOOT Tiesj"
+      },
       "howwon": "Sprint of small group",
       "moments": "After an hour of racing, an eight-rider breakaway formed. With 71 km remaining, Visma | Lease a Bike caused a split in the peloton, sending three of their riders across to the leaders. Over the Knokteberg, only Powless and the three Visma riders remained. Despite numerical superiority, Visma failed to drop Powless, who astonishingly won the sprint from a three-against-one situation.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8bg4sf5are9"
     },
     {
       "id": "mobea8tusy980",
@@ -398,12 +695,22 @@
       "year": 2025,
       "date": "2025-04-06",
       "category": "classic",
-      "winner": "POGAČAR Tadej",
-      "second": "PEDERSEN Mads",
-      "third": "VAN DER POEL Mathieu",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": {
+        "id": "mobaieyhnfj6i",
+        "name": "PEDERSEN Mads"
+      },
+      "third": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
       "howwon": "18 km solo",
       "moments": "At the Ronde van Vlaanderen after 40 km an eight-rider break formed. Later, Mathieu van der Poel was involved in a crash but quickly rejoined. Pogacar’s acceleration on the second Oude Kwaremont caused the first split, leaving only a group of favorites. He launched repeated accelerations on the following climbs. With 18 km to go on the final Oude Kwaremont, he attacked solo. The chasing favorites failed to cooperate, and Pogacar claimed a solo victory.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8bga5u1s5st"
     },
     {
       "id": "mobedzngs6rz5",
@@ -411,12 +718,22 @@
       "year": 2025,
       "date": "2025-04-12",
       "category": "stage",
-      "winner": "ALMEIDA João",
-      "second": "MAS Enric",
-      "third": "SCHACHMANN Maximilian",
+      "winner": {
+        "id": "mobec7p95yn2n",
+        "name": "ALMEIDA João"
+      },
+      "second": {
+        "id": "mob6mb4bbjv3u",
+        "name": "MAS Enric"
+      },
+      "third": {
+        "id": "mobecale3w9i7",
+        "name": "SCHACHMANN Maximilian"
+      },
       "howwon": "GC",
       "moments": "",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8pfnef326sy"
     },
     {
       "id": "mobejqsk8ah1p",
@@ -424,12 +741,22 @@
       "year": 2025,
       "date": "2025-04-13",
       "category": "classic",
-      "winner": "VAN DER POEL Mathieu",
-      "second": "POGAČAR Tadej",
-      "third": "PEDERSEN Mads",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "third": {
+        "id": "mobaieyhnfj6i",
+        "name": "PEDERSEN Mads"
+      },
       "howwon": "38.1 km solo",
       "moments": "An early break of eight riders formed. Just after the cobbles of the Trouée d’Arenberg, Van der Poel attacked with Pogacar responding, leaving a group of five favourites. Pedersen, Philipsen, and Bissegger one by one lost contact with the front group. With 38.1 km remaining, Pogacar missed a corner and crashed. Van der Poel rode solo to victory despite a puncture, claiming his third consecutive Paris-Roubaix.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8bgh0n2gh8k"
     },
     {
       "id": "mobekyuxbxt7i",
@@ -437,12 +764,22 @@
       "year": 2025,
       "date": "2025-04-20",
       "category": "classic",
-      "winner": "SKJELMOSE Mattias",
-      "second": "POGAČAR Tadej",
-      "third": "EVENEPOEL Remco",
+      "winner": {
+        "id": "mo8cs58ykhqgl",
+        "name": "SKJELMOSE Mattias"
+      },
+      "second": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "third": {
+        "id": "mo8peukid3acf",
+        "name": "EVENEPOEL Remco"
+      },
       "howwon": "Sprint of 3 riders",
       "moments": "The 2025 Amstel Gold Race saw an early break of eight riders caught with 70 km to go. On the Gulperberg, Julian Alaphilippe and Tadej Pogačar attacked, but Alaphilippe soon dropped, leaving Pogačar solo. Mattias Skjelmose and Remco Evenepoel chased hard and bridged in the finale. In the sprint, Skjelmose proved fastest, taking the victory.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mo8bglt6vcib9"
     },
     {
       "id": "mobem92ko9wnp",
@@ -450,12 +787,22 @@
       "year": 2025,
       "date": "2025-04-23",
       "category": "classic",
-      "winner": "POGAČAR Tadej",
-      "second": "VAUQUELIN Kévin",
-      "third": "PIDCOCK Tom",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": {
+        "id": "mobecdgzrwhtq",
+        "name": "VAUQUELIN Kévin"
+      },
+      "third": {
+        "id": "mo8cso1lib50v",
+        "name": "PIDCOCK Tom"
+      },
       "howwon": "0.5 km solo",
       "moments": "An early break of five riders formed under very poor weather conditions. Several counter-attacks from the peloton attempted to bridge to the escapees, but with 10 km to go, the last attackers were caught. On the Mur de Huy, Pogacar proved the strongest and powered to victory.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mobebq7eenw8f"
     },
     {
       "id": "moben88qq1pun",
@@ -463,12 +810,22 @@
       "year": 2026,
       "date": "2026-04-22",
       "category": "classic",
-      "winner": "SEIXAS Paul",
-      "second": "SCHMID Mauro",
-      "third": "TULETT Ben",
+      "winner": {
+        "id": "mo8csa45rwg0t",
+        "name": "SEIXAS Paul"
+      },
+      "second": {
+        "id": "mo8csd721jg1d",
+        "name": "SCHMID Mauro"
+      },
+      "third": {
+        "id": "mobecj3xy1buq",
+        "name": "TULETT Ben"
+      },
       "howwon": "Sprint of small group",
       "moments": "A six-rider early breakaway gained just over three minutes, but was kept under control by the favorites' teams. Former winners Alaphilippe and Hirschi both abandoned. Tobias Hallen Johannesen crashed, but could resume the race. On the final ascent of Mur de Huy, Seixas attacked decisively with only four riders able to respond, ultimately taking the win ahead of Schmid and Tullett.",
-      "note": ""
+      "note": "",
+      "raceTypeId": "mobebq7eenw8f"
     }
   ],
   "years": [
@@ -939,111 +1296,131 @@
     {
       "id": "mo8aib4sya36s",
       "name": "Santos Tour Down Under",
-      "color": "#323232"
+      "color": "#323232",
+      "category": "stage"
     },
     {
       "id": "mo8aiz473dodm",
       "name": "Cadel Evans Great Ocean Road Race",
-      "color": "#323232"
+      "color": "#323232",
+      "category": "classic"
     },
     {
       "id": "mo8ajak2aif1p",
       "name": "UAE Tour",
-      "color": "#323232"
+      "color": "#323232",
+      "category": "stage"
     },
     {
       "id": "mo8ajmfgrxlvn",
       "name": "Omloop Nieuwsblad",
-      "color": "#b59c56"
+      "color": "#b59c56",
+      "category": "classic"
     },
     {
       "id": "mo8ak4ix2ywdk",
       "name": "Strade Bianche",
       "color": "#009246",
-      "fav": true
+      "fav": true,
+      "category": "classic"
     },
     {
       "id": "mo8akh7q9qrm4",
       "name": "Paris-Nice",
       "color": "#002395",
-      "fav": false
+      "fav": false,
+      "category": "stage"
     },
     {
       "id": "mo8aku6zrgouo",
       "name": "Tirreno-Adriatico",
-      "color": "#009246"
+      "color": "#009246",
+      "category": "stage"
     },
     {
       "id": "mo8ald2x4v2ps",
       "name": "Milano-Sanremo",
       "color": "#009246",
-      "fav": true
+      "fav": true,
+      "category": "classic"
     },
     {
       "id": "mo8ambqzui2ik",
-      "name": "Volta Catalunya",
-      "color": "#AA151B"
+      "name": "Volta a Catalunya",
+      "color": "#aa151b",
+      "category": "stage"
     },
     {
       "id": "mo8bfcirva8qq",
       "name": "Ronde Van Brugge",
-      "color": "#B59C56"
+      "color": "#b59c56",
+      "category": "classic"
     },
     {
       "id": "mo8bfqx8wg4b9",
       "name": "E3 Saxo Classic",
-      "color": "#B59C56"
+      "color": "#b59c56",
+      "category": "classic"
     },
     {
       "id": "mo8bfyo2549kr",
       "name": "In Flanders Fields - Middelkerke-Wevelgem",
-      "color": "#B59C56"
+      "color": "#b59c56",
+      "category": "classic"
     },
     {
       "id": "mo8bfyo2549kt",
       "name": "In Flanders Fields - Gent-Wevelgem",
-      "color": "#B59C56"
+      "color": "#b59c56",
+      "category": "classic"
     },
     {
       "id": "mo8bg4sf5are9",
       "name": "Dwars door Vlaanderen",
-      "color": "#B59C56"
+      "color": "#b59c56",
+      "category": "classic"
     },
     {
       "id": "mo8bga5u1s5st",
       "name": "Ronde van Vlaanderen",
       "color": "#b59c56",
-      "fav": true
+      "fav": true,
+      "category": "classic"
     },
     {
       "id": "mo8bgh0n2gh8k",
       "name": "Paris-Roubaix",
       "color": "#002395",
-      "fav": true
+      "fav": true,
+      "category": "classic"
     },
     {
       "id": "mo8bglt6vcib9",
       "name": "Amstel Gold Race",
       "color": "#f36c21",
-      "fav": true
+      "fav": true,
+      "category": "classic"
     },
     {
       "id": "mo8pfnef326sy",
       "name": "Itzulia Basque Country",
       "color": "#323232",
-      "fav": false
+      "fav": false,
+      "category": "stage"
     },
     {
       "id": "mobac0ytniezy",
       "name": "Classic Brugge-De Panne",
       "color": "#b59c56",
-      "fav": false
+      "fav": false,
+      "category": "classic"
     },
     {
       "id": "mobebq7eenw8f",
       "name": "La Flèche Wallonne",
       "color": "#b59c56",
-      "fav": false
+      "fav": false,
+      "category": "classic"
     }
   ]
 }

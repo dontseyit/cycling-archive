@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Peloton Race Archive</title>
+<title>UCI WorldTour Archive</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
@@ -215,7 +215,10 @@
   .set-item-edit input[type=text] { padding: 5px 8px; }
   .set-add input[type=text]:focus, .set-item-edit input[type=text]:focus { border-color: var(--rule3); }
   .set-add input[type=color], .set-item-edit input[type=color] { width: 34px; height: 32px; border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 2px; cursor: pointer; background: none; flex-shrink: 0; }
+  .set-add select, .set-item-edit select { font-family: 'Source Serif 4', serif; font-size: 12px; background: var(--bg); color: var(--ink); border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 6px 8px; outline: none; cursor: pointer; -webkit-appearance: none; appearance: none; flex-shrink: 0; }
   .set-empty  { padding: 14px 10px; font-size: 12px; color: var(--ink3); text-align: center; font-style: italic; }
+  .set-search { width: 100%; font-family: 'Source Serif 4', serif; font-size: 13px; background: var(--bg); color: var(--ink); border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 6px 10px; outline: none; transition: border-color .12s; -webkit-appearance: none; appearance: none; margin-bottom: 6px; }
+  .set-search:focus { border-color: var(--rule3); }
 
   /* RESPONSIVE — medium (2 cols) */
   @media (max-width: 860px) {
@@ -250,7 +253,7 @@
 <body>
 
 <div class="hd">
-  <div class="hd-title">Peloton Race Archive</div>
+  <div class="hd-title">UCI WorldTour Archive</div>
   <div class="hd-right">
     <button class="btn edit-only" onclick="openAddModal()">+ Add race</button>
     <button class="btn edit-only" onclick="addYear()">+ Year</button>
@@ -278,7 +281,7 @@
 <div id="tl"></div>
 
 <div class="footer-bar">
-  <span class="view-disclaimer" style="display:none;font-size:11px;color:var(--ink3);font-style:italic;">Personal race archive. It's a vibe coded, curated memory aid, not a complete database. Results are manually recorded and not updated automatically.</span>
+  <span class="view-disclaimer" style="display:none;font-size:11px;color:var(--ink3);font-style:italic;">UCI WorldTour archive for personal use. It's a vibe coded, curated memory aid, not a complete database. Results are manually recorded and not updated automatically.</span>
 </div>
 <div id="mc"></div>
 
@@ -320,8 +323,30 @@ function updateDynCSS(){
     ...raceTypes.map(r => `.rtp-${r.id} { color:${r.color}; }`)
   ].join('\n');
 }
-const riderCls    = name => { const r = riders.find(r => r.name === name);    return r ? `rid-${r.id}` : ''; };
-const raceTypeCls = name => { const r = raceTypes.find(r => r.name === name); return r ? `rtp-${r.id}` : ''; };
+const riderById    = id  => riders.find(r => r.id === id) || null;
+const raceTypeById = id  => raceTypes.find(r => r.id === id) || null;
+// Resolves a podium field ({ id, name } or legacy plain string) → { id, name }
+function resolveRider(field){
+  if(!field) return null;
+  if(typeof field === 'object') {
+    const r = riderById(field.id);
+    return { id: field.id, name: r ? r.name : (field.name || '') };
+  }
+  // legacy plain string — match by name
+  const r = riders.find(r => r.name === field);
+  return { id: r ? r.id : null, name: field };
+}
+const riderCls     = riderId => riderId ? `rid-${riderId}` : '';
+// Returns { name, category, color } for a race — prefers linked raceType, falls back to stored fields (old data)
+function resolveRace(race){
+  const rt = race.raceTypeId ? raceTypeById(race.raceTypeId) : null;
+  return {
+    name:     rt ? rt.name     : (race.name     || ''),
+    category: rt ? rt.category : (race.category || ''),
+    color:    rt ? rt.color    : null,
+  };
+}
+const raceTypeCls = raceTypeId => raceTypeId ? `rtp-${raceTypeId}` : '';
 
 /* ---- persistence ---- */
 async function load(){
@@ -402,12 +427,13 @@ function render(){
   while(visible.length < colCount) visible.push(null);
 
   // Build fav sets once for filter checks
-  const favRiderNames   = new Set(riders.filter(r => r.fav).map(r => r.name));
-  const favRaceNames    = new Set(raceTypes.filter(r => r.fav).map(r => r.name));
-  const matchesFilter   = r => {
+  const favRiderIds = new Set(riders.filter(r => r.fav).map(r => r.id));
+  const favRaceIds  = new Set(raceTypes.filter(r => r.fav).map(r => r.id));
+  const podiumRiderIds = r => [r.winner, r.second, r.third].map(f => resolveRider(f)?.id).filter(Boolean);
+  const matchesFilter = r => {
     if(!activeFilter) return true;
-    if(activeFilter === 'riders') return favRiderNames.has(r.winner) || favRiderNames.has(r.second) || favRiderNames.has(r.third);
-    if(activeFilter === 'races')  return favRaceNames.has(r.name);
+    if(activeFilter === 'riders') return podiumRiderIds(r).some(id => favRiderIds.has(id));
+    if(activeFilter === 'races')  return r.raceTypeId ? favRaceIds.has(r.raceTypeId) : false;
     return true;
   };
 
@@ -474,14 +500,15 @@ function monthCellHtml(year, entries, isLast){
 }
 
 function entryHtml(race){
-  const color     = CAT_COLOR[race.category] || '#888';
-  const firstImg  = loadImgs(race.id).find(i => i && i.data);
-  const thumb     = firstImg
+  const rt          = resolveRace(race);
+  const color       = CAT_COLOR[rt.category] || '#888';
+  const firstImg    = loadImgs(race.id).find(i => i && i.data);
+  const thumb       = firstImg
     ? `<div class="e-thumb"><img src="${firstImg.data}" alt="" onerror="this.closest('.e-thumb').replaceWith(Object.assign(document.createElement('div'),{className:'e-thumb-ph'}))"></div>`
     : `<div class="e-thumb-ph"></div>`;
-  const snippet   = race.howwon || (race.moments ? race.moments.split('\n')[0] : '');
+  const snippet     = race.howwon || (race.moments ? race.moments.split('\n')[0] : '');
   const snippetHtml = snippet ? `<div class="e-how">${esc(snippet)}</div>` : '';
-  const riderSpan = name => `<span class="${riderCls(name)}">${esc(name)}</span>`;
+  const riderSpan   = field => { const r = resolveRider(field); return r ? `<span class="${riderCls(r.id)}">${esc(r.name)}</span>` : ''; };
   const podiumHtml  = race.winner
     ? `<div class="e-win"><strong>${riderSpan(race.winner)}</strong>${race.second ? ` · <span class="e-2nd">${riderSpan(race.second)}</span>` : ''}${race.third ? ` · <span class="e-3rd">${riderSpan(race.third)}</span>` : ''}</div>`
     : '';
@@ -489,7 +516,7 @@ function entryHtml(race){
     <div class="e-bar" style="background:${color}"></div>
     ${thumb}
     <div class="e-body">
-      <div class="e-name ${raceTypeCls(race.name)}">${esc(race.name)}</div>
+      <div class="e-name ${raceTypeCls(race.raceTypeId)}">${esc(rt.name)}</div>
       ${podiumHtml}
       ${snippetHtml}
     </div>
@@ -531,39 +558,37 @@ function openAddModal(prefillId, prefillYear){
 
   const today   = new Date().toISOString().split('T')[0];
   const defDate = race ? race.date : (prefillYear ? prefillYear + '-04-01' : today);
-  const val     = (field, fallback = '') => race ? esc(race[field] || '') : fallback;
-  const selected = cat => race && race.category === cat ? 'selected' : '';
+  const val = (field, fallback = '') => race ? esc(race[field] || '') : fallback;
 
   const raceNameOpts = () => {
-    const cur = race ? race.name : '';
-    let opts = raceTypes.length === 0
-      ? `<option value="" disabled selected>— add races in Settings first —</option>`
-      : `<option value="" disabled ${!cur ? 'selected' : ''}>— select a race —</option>`;
-    if(cur && !raceTypes.find(r => r.name === cur))
-      opts += `<option value="${esc(cur)}" selected>${esc(cur)}</option>`;
-    opts += raceTypes.map(r => `<option value="${esc(r.name)}" ${cur === r.name ? 'selected' : ''}>${esc(r.name)}</option>`).join('');
+    const curId = race ? race.raceTypeId : null;
+    if(raceTypes.length === 0)
+      return `<option value="" disabled selected>— add races in Settings first —</option>`;
+    let opts = `<option value="" disabled ${!curId ? 'selected' : ''}>— select a race —</option>`;
+    opts += raceTypes.map(r => `<option value="${esc(r.id)}" ${curId === r.id ? 'selected' : ''}>${esc(r.name)}</option>`).join('');
     return opts;
   };
-  const riderOpts = (cur = '') =>
-    `<option value="">${riders.length ? '—' : '— add riders in Settings first —'}</option>` +
-    riders.map(r => `<option value="${esc(r.name)}" ${cur === r.name ? 'selected' : ''}>${esc(r.name)}</option>`).join('');
+  const riderOpts = (field = null) => {
+    const curId = resolveRider(field)?.id || null;
+    return `<option value="">${riders.length ? '—' : '— add riders in Settings first —'}</option>` +
+      riders.map(r => `<option value="${esc(r.id)}" ${curId === r.id ? 'selected' : ''}>${esc(r.name)}</option>`).join('');
+  };
+
+  const initRt  = race?.raceTypeId ? raceTypeById(race.raceTypeId) : null;
+  const initCat = initRt?.category || '';
+  const catLabelInit  = initCat ? (CAT_LABEL[initCat]  || initCat) : '—';
+  const catColorInit  = initCat ? (CAT_COLOR[initCat]  || 'var(--ink3)') : 'var(--ink3)';
 
   $('mc').innerHTML = `
     <div class="overlay" id="ov" onclick="closeIfOverlay(event)">
       <div class="modal" onclick="event.stopPropagation()">
         <div class="modal-title">${race ? 'Edit race' : 'Add race'}</div>
-        <div class="field"><label>Race name</label><select id="fn">${raceNameOpts()}</select></div>
+        <div class="field"><label>Race name</label><select id="fn" onchange="onRaceNameChange()">${raceNameOpts()}</select></div>
         <div class="field"><label>Date</label><input type="date" id="fd" value="${defDate}"></div>
-        <div class="field"><label>Category</label>
-          <select id="fc">
-            <option value="grandtour" ${selected('grandtour')}>Grand Tour</option>
-            <option value="stage"     ${selected('stage')}>Stage race</option>
-            <option value="classic"   ${selected('classic')}>Classic</option>
-          </select>
-        </div>
-        <div class="field"><label>Winner</label><select id="fw">${riderOpts(val('winner'))}</select></div>
-        <div class="field"><label>2nd place</label><select id="f2">${riderOpts(val('second'))}</select></div>
-        <div class="field"><label>3rd place</label><select id="f3">${riderOpts(val('third'))}</select></div>
+        <div class="field"><label>Category</label><span id="fc-label" style="font-size:14px;font-style:italic;color:${catColorInit};">${catLabelInit}</span></div>
+        <div class="field"><label>Winner</label><select id="fw">${riderOpts(race?.winner)}</select></div>
+        <div class="field"><label>2nd place</label><select id="f2">${riderOpts(race?.second)}</select></div>
+        <div class="field"><label>3rd place</label><select id="f3">${riderOpts(race?.third)}</select></div>
         <div class="field"><label>How it was won</label><textarea id="fh" placeholder="Describe the decisive moment...">${val('howwon')}</textarea></div>
         <div class="field"><label>Key moments (one per line)</label><textarea id="fm" placeholder="Stage 17 solo attack&#10;Crash on the descent...">${val('moments')}</textarea></div>
         <div class="field"><label>Personal note</label><input id="fp" value="${val('note')}" placeholder="Watched with..."></div>
@@ -581,20 +606,44 @@ function openAddModal(prefillId, prefillYear){
     </div>`;
 }
 
+function onRaceNameChange(){
+  const rtId = $('fn')?.value;
+  const rt = raceTypeById(rtId);
+  const el = $('fc-label');
+  if(!el) return;
+  if(rt && rt.category){
+    el.textContent = CAT_LABEL[rt.category] || rt.category;
+    el.style.color = CAT_COLOR[rt.category] || 'var(--ink3)';
+  } else {
+    el.textContent = '—';
+    el.style.color = 'var(--ink3)';
+  }
+}
+
 function saveRace(id){
-  const name = $('fn').value.trim();
-  if(!name){ alert('Please enter a race name.'); return; }
+  const raceTypeId = $('fn').value;
+  if(!raceTypeId){ alert('Please select a race.'); return; }
+  const rt = raceTypeById(raceTypeId);
+  if(!rt){ alert('Unknown race — please re-select.'); return; }
 
   const dateVal = $('fd').value;
   const year    = dateVal ? parseDateNoon(dateVal).getFullYear() : new Date().getFullYear();
   const raceId  = id || uid();
 
+  const pickRider = elId => {
+    const rid = $(elId).value;
+    if(!rid) return null;
+    const r = riderById(rid);
+    return r ? { id: r.id, name: r.name } : null;
+  };
+
   const obj = {
-    id: raceId, name, year, date: dateVal,
-    category: $('fc').value,
-    winner:  $('fw').value.trim(),
-    second:  $('f2').value.trim(),
-    third:   $('f3').value.trim(),
+    id: raceId, raceTypeId, year, date: dateVal,
+    // name/category kept for readability in data.json export
+    name: rt.name, category: rt.category || 'classic',
+    winner:  pickRider('fw'),
+    second:  pickRider('f2'),
+    third:   pickRider('f3'),
     howwon:  $('fh').value.trim(),
     moments: $('fm').value.trim(),
     note:    $('fp').value.trim()
@@ -638,7 +687,8 @@ function delRace(id){
 /* ---- detail modal ---- */
 function openDetail(id){
   const race = races.find(r => r.id === id); if(!race) return;
-  const color     = CAT_COLOR[race.category] || '#888';
+  const rt        = resolveRace(race);
+  const color     = CAT_COLOR[rt.category] || '#888';
   const dateStr   = race.date ? parseDateNoon(race.date).toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'}) : '';
   const moments   = race.moments ? race.moments.split('\n').filter(Boolean) : [];
   const momentsHtml = moments.map(m => `<li>${esc(m)}</li>`).join('');
@@ -651,7 +701,7 @@ function openDetail(id){
   }</div>`;
 
   const section = (label, bodyHtml) => `<div class="d-sec"><div class="d-lbl">${label}</div>${bodyHtml}</div>`;
-  const podiumItem = (rank, name) => name ? `<div class="pod-p"><div class="pp">${rank}</div><div class="pr"><span class="${riderCls(name)}">${esc(name)}</span></div></div>` : '';
+  const podiumItem = (rank, field) => { const r = resolveRider(field); return r ? `<div class="pod-p"><div class="pp">${rank}</div><div class="pr"><span class="${riderCls(r.id)}">${esc(r.name)}</span></div></div>` : ''; };
   const podiumHtml = (race.winner || race.second || race.third)
     ? section('Podium', `<div class="pod-row">${podiumItem('1st', race.winner)}${podiumItem('2nd', race.second)}${podiumItem('3rd', race.third)}</div>`)
     : '';
@@ -661,8 +711,8 @@ function openDetail(id){
       <div class="modal det-modal" onclick="event.stopPropagation()">
         ${imgsHtml}
         <div class="d-bar" style="background:${color}"></div>
-        <div class="d-cat">${esc(CAT_LABEL[race.category] || '')}</div>
-        <div class="d-name ${raceTypeCls(race.name)}">${esc(race.name)}</div>
+        <div class="d-cat">${esc(CAT_LABEL[rt.category] || '')}</div>
+        <div class="d-name ${raceTypeCls(race.raceTypeId)}">${esc(rt.name)}</div>
         <div class="d-date">${dateStr}</div>
         ${podiumHtml}
         ${race.howwon ? section('How it was won',  `<div class="hwon">${esc(race.howwon)}</div>`) : ''}
@@ -739,10 +789,14 @@ const settingList  = type => type === 'rider' ? riders : raceTypes;
 const findSetting  = (type, id) => settingList(type).find(r => r.id === id);
 
 function setItemHtml(r, type){
+  const catBadge = type === 'race' && r.category
+    ? `<span style="font-size:10px;color:var(--ink3);flex-shrink:0;">${esc(CAT_LABEL[r.category] || r.category)}</span>`
+    : '';
   return `<div class="set-item" id="si-${r.id}">
     <button class="set-fav-btn${r.fav ? ' is-fav' : ''}" onclick="toggleFav('${type}','${r.id}')" title="${r.fav ? 'Unfavourite' : 'Favourite'}">${r.fav ? '&#9733;' : '&#9734;'}</button>
     <div class="set-swatch" style="background:${r.color}"></div>
     <span class="set-name">${esc(r.name)}</span>
+    ${catBadge}
     <button class="set-edit-btn" onclick="editSetting('${type}','${r.id}')">Edit</button>
     <button class="set-del" onclick="delSetting('${type}','${r.id}')">&#x2715;</button>
   </div>`;
@@ -758,12 +812,24 @@ function settingsListHtml(list, type){
   ).join('');
 }
 
+function catSelectHtml(id, sel){
+  return `<select id="${id}">
+    <option value="grandtour" ${sel==='grandtour'?'selected':''}>Grand Tour</option>
+    <option value="stage"     ${sel==='stage'    ?'selected':''}>Stage race</option>
+    <option value="classic"   ${sel==='classic'  ?'selected':''}>Classic</option>
+  </select>`;
+}
 function settingsPanelHtml(type, title, placeholder){
+  const catRow = type === 'race'
+    ? catSelectHtml('sc-cat-' + type, 'grandtour')
+    : '';
   return `<div class="set-panel">
             <h3>${title}</h3>
-            <div class="set-list">${settingsListHtml(settingList(type), type)}</div>
+            <input class="set-search" id="sq-${type}" type="search" placeholder="Search ${title.toLowerCase()}…" oninput="filterSettingsList('${type}',this.value)">
+            <div class="set-list" id="sl-${type}">${settingsListHtml(settingList(type), type)}</div>
             <div class="set-add">
               <input type="text" id="sn-${type}" placeholder="${placeholder}">
+              ${catRow}
               <input type="color" id="sc-${type}" value="#323232">
               <button class="mb mb-pri" onclick="addSetting('${type}')">Add</button>
             </div>
@@ -784,7 +850,36 @@ function settingsModalHtml(){
       </div>
     </div>`;
 }
-function openSettings(){ $('mc').innerHTML = settingsModalHtml(); }
+function openSettings(){
+  const prevQ = { rider: $('sq-rider')?.value || '', race: $('sq-race')?.value || '' };
+  $('mc').innerHTML = settingsModalHtml();
+  ['rider','race'].forEach(type => {
+    if(prevQ[type]){
+      const inp = $('sq-' + type);
+      if(inp){ inp.value = prevQ[type]; filterSettingsList(type, prevQ[type]); }
+    }
+  });
+}
+
+function filterSettingsList(type, query){
+  const q = query.trim().toLowerCase();
+  const list = settingList(type);
+  const container = $('sl-' + type);
+  if(!container) return;
+  container.querySelectorAll('.set-item[id^="si-"]').forEach(el => {
+    const id = el.id.slice(3);
+    const item = list.find(r => r.id === id);
+    el.style.display = (!q || (item && item.name.toLowerCase().includes(q))) ? '' : 'none';
+  });
+  // hide divider if it ends up between hidden rows or at the top
+  const divider = container.querySelector('.set-divider');
+  if(divider){
+    const visibleItems = [...container.querySelectorAll('.set-item[id^="si-"]')].filter(el => el.style.display !== 'none');
+    const favVisible   = visibleItems.some(el => { const id = el.id.slice(3); const item = list.find(r => r.id === id); return item?.fav; });
+    const nonFavVisible = visibleItems.some(el => { const id = el.id.slice(3); const item = list.find(r => r.id === id); return !item?.fav; });
+    divider.style.display = (favVisible && nonFavVisible) ? '' : 'none';
+  }
+}
 
 function replaceSettingRow(type, id){
   const item = findSetting(type, id);
@@ -794,9 +889,11 @@ function replaceSettingRow(type, id){
 function editSetting(type, id){
   const item = findSetting(type, id); if(!item) return;
   const el = $('si-' + id); if(!el) return;
+  const catSel = type === 'race' ? catSelectHtml('ecat-' + id, item.category || 'grandtour') : '';
   el.outerHTML = `<div class="set-item set-item-edit" id="si-${id}">
     <input type="color" id="ec-${id}" value="${item.color}">
     <input type="text"  id="en-${id}" value="${esc(item.name)}">
+    ${catSel}
     <button class="mb mb-pri set-save-btn" onclick="saveSetting('${type}','${id}')">Save</button>
     <button class="set-del" onclick="replaceSettingRow('${type}','${id}')">&#x2715;</button>
   </div>`;
@@ -805,7 +902,11 @@ function editSetting(type, id){
 function saveSetting(type, id){
   const name = $('en-' + id)?.value.trim(); if(!name) return;
   const item = findSetting(type, id);
-  if(item){ item.name = name; item.color = $('ec-' + id).value; }
+  if(item){
+    item.name  = name;
+    item.color = $('ec-' + id).value;
+    if(type === 'race') item.category = $('ecat-' + id)?.value || item.category || 'grandtour';
+  }
   saveSettings(); updateDynCSS();
   replaceSettingRow(type, id);
   render();
@@ -819,7 +920,9 @@ function toggleFav(type, id){
 
 function addSetting(type){
   const name = $('sn-' + type).value.trim(); if(!name) return;
-  settingList(type).push({ id: uid(), name, color: $('sc-' + type).value, fav: false });
+  const entry = { id: uid(), name, color: $('sc-' + type).value, fav: false };
+  if(type === 'race') entry.category = $('sc-cat-race')?.value || 'grandtour';
+  settingList(type).push(entry);
   saveSettings(); updateDynCSS(); openSettings();
 }
 function delSetting(type, id){
