@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "exportedAt": "2026-04-23T08:45:36.015Z",
+  "exportedAt": "2026-04-23T11:35:19.773Z",
   "races": [
     {
       "id": "mo8o03ugf7g9z",
@@ -129,7 +129,7 @@
       "second": "PHILIPSEN Jasper",
       "third": "KANTER Max",
       "howwon": "Sprint of small group",
-      "moments": "In a fast-paced race, repeated attacks failed to form a decisive breakaway. Strong echelons split and reduced the peloton but were eventually reeled back in. Jasper Philipsen launched his sprint slightly too early, allowing Dylan Groenewegen to come past and take the victory at the finish.",
+      "moments": "The \"Classic Brugge-De Panne\" race has been renamed the Tour of Bruges. \nIn a fast-paced race, repeated attacks failed to form a decisive breakaway. Strong echelons split and reduced the peloton but were eventually reeled back in. Jasper Philipsen launched his sprint slightly too early, allowing Dylan Groenewegen to come past and take the victory at the finish.",
       "note": "Not watched"
     },
     {
@@ -147,7 +147,7 @@
     },
     {
       "id": "mo8p6u3kvku63",
-      "name": "In Flanders Fields",
+      "name": "In Flanders Fields - Middelkerke-Wevelgem",
       "year": 2026,
       "date": "2026-03-29",
       "category": "classic",
@@ -339,6 +339,136 @@
       "howwon": "GC",
       "moments": "",
       "note": ""
+    },
+    {
+      "id": "mobagccmxkmvn",
+      "name": "Classic Brugge-De Panne",
+      "year": 2025,
+      "date": "2025-03-26",
+      "category": "classic",
+      "winner": "MOLANO Juan Sebastián",
+      "second": "MILAN Jonathan",
+      "third": "MIHKELS Madis",
+      "howwon": "Sprint of small group",
+      "moments": "A five-rider early break formed, controlled by Soudal Quick-Step, Lidl–Trek, and Visma | Lease a Bike in the peloton. With 15.5 km to go, De Vries attacked from the break. The final 5 km were disrupted by multiple crashes involving many favourites. With 1.7 km remaining, De Vries was caught. Molano launched with 500 m to go, opened a small gap, and held it to win.",
+      "note": ""
+    },
+    {
+      "id": "mobaje8wkiv0o",
+      "name": "E3 Saxo Classic",
+      "year": 2025,
+      "date": "2025-03-28",
+      "category": "grandtour",
+      "winner": "VAN DER POEL Mathieu",
+      "second": "PEDERSEN Mads",
+      "third": "GANNA Filippo",
+      "howwon": "39 km solo",
+      "moments": "Early in the race, a crash split the peloton, leaving most favourites in the second group. Alpecin took control to close the gap, and by 111 km to go, the race was back together. Pedersen attacked on the Taaienberg, joined by Van der Poel and Ganna. With 39 km remaining, Van der Poel launched a decisive attack on the Oude Kwaremont, dropped everyone, and rode solo to victory, claiming his second consecutive E3 Saxo Classic win.",
+      "note": ""
+    },
+    {
+      "id": "mobar0jjidy15",
+      "name": "In Flanders Fields - Gent-Wevelgem",
+      "year": 2025,
+      "date": "2025-03-30",
+      "category": "classic",
+      "winner": "PEDERSEN Mads",
+      "second": "MERLIER Tim",
+      "third": "MILAN Jonathan",
+      "howwon": "56 km solo",
+      "moments": "A ten-rider early break formed. On the first passage of the Kemmelberg, Pedersen accelerated, thinning the group. With 72 km to go, he surged on a Plugstreet, joined by Philipsen and Kooij, but Philipsen punctured and Kooij crashed, leaving Pedersen to link with the remaining breakaway riders. On the second passage of the Kemmelberg, Pedersen attacked again, riding solo for 56 km to victory.",
+      "note": ""
+    },
+    {
+      "id": "mobe97hhi07fm",
+      "name": "Dwars door Vlaanderen",
+      "year": 2025,
+      "date": "2025-04-02",
+      "category": "classic",
+      "winner": "POWLESS Neilson",
+      "second": "VAN AERT Wout",
+      "third": "BENOOT Tiesj",
+      "howwon": "Sprint of small group",
+      "moments": "After an hour of racing, an eight-rider breakaway formed. With 71 km remaining, Visma | Lease a Bike caused a split in the peloton, sending three of their riders across to the leaders. Over the Knokteberg, only Powless and the three Visma riders remained. Despite numerical superiority, Visma failed to drop Powless, who astonishingly won the sprint from a three-against-one situation.",
+      "note": ""
+    },
+    {
+      "id": "mobea8tusy980",
+      "name": "Ronde van Vlaanderen",
+      "year": 2025,
+      "date": "2025-04-06",
+      "category": "classic",
+      "winner": "POGAČAR Tadej",
+      "second": "PEDERSEN Mads",
+      "third": "VAN DER POEL Mathieu",
+      "howwon": "18 km solo",
+      "moments": "At the Ronde van Vlaanderen after 40 km an eight-rider break formed. Later, Mathieu van der Poel was involved in a crash but quickly rejoined. Pogacar’s acceleration on the second Oude Kwaremont caused the first split, leaving only a group of favorites. He launched repeated accelerations on the following climbs. With 18 km to go on the final Oude Kwaremont, he attacked solo. The chasing favorites failed to cooperate, and Pogacar claimed a solo victory.",
+      "note": ""
+    },
+    {
+      "id": "mobedzngs6rz5",
+      "name": "Itzulia Basque Country",
+      "year": 2025,
+      "date": "2025-04-12",
+      "category": "stage",
+      "winner": "ALMEIDA João",
+      "second": "MAS Enric",
+      "third": "SCHACHMANN Maximilian",
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "mobejqsk8ah1p",
+      "name": "Paris-Roubaix",
+      "year": 2025,
+      "date": "2025-04-13",
+      "category": "classic",
+      "winner": "VAN DER POEL Mathieu",
+      "second": "POGAČAR Tadej",
+      "third": "PEDERSEN Mads",
+      "howwon": "38.1 km solo",
+      "moments": "An early break of eight riders formed. Just after the cobbles of the Trouée d’Arenberg, Van der Poel attacked with Pogacar responding, leaving a group of five favourites. Pedersen, Philipsen, and Bissegger one by one lost contact with the front group. With 38.1 km remaining, Pogacar missed a corner and crashed. Van der Poel rode solo to victory despite a puncture, claiming his third consecutive Paris-Roubaix.",
+      "note": ""
+    },
+    {
+      "id": "mobekyuxbxt7i",
+      "name": "Amstel Gold Race",
+      "year": 2025,
+      "date": "2025-04-20",
+      "category": "classic",
+      "winner": "SKJELMOSE Mattias",
+      "second": "POGAČAR Tadej",
+      "third": "EVENEPOEL Remco",
+      "howwon": "Sprint of 3 riders",
+      "moments": "The 2025 Amstel Gold Race saw an early break of eight riders caught with 70 km to go. On the Gulperberg, Julian Alaphilippe and Tadej Pogačar attacked, but Alaphilippe soon dropped, leaving Pogačar solo. Mattias Skjelmose and Remco Evenepoel chased hard and bridged in the finale. In the sprint, Skjelmose proved fastest, taking the victory.",
+      "note": ""
+    },
+    {
+      "id": "mobem92ko9wnp",
+      "name": "La Flèche Wallonne",
+      "year": 2025,
+      "date": "2025-04-23",
+      "category": "classic",
+      "winner": "POGAČAR Tadej",
+      "second": "VAUQUELIN Kévin",
+      "third": "PIDCOCK Tom",
+      "howwon": "0.5 km solo",
+      "moments": "An early break of five riders formed under very poor weather conditions. Several counter-attacks from the peloton attempted to bridge to the escapees, but with 10 km to go, the last attackers were caught. On the Mur de Huy, Pogacar proved the strongest and powered to victory.",
+      "note": ""
+    },
+    {
+      "id": "moben88qq1pun",
+      "name": "La Flèche Wallonne",
+      "year": 2026,
+      "date": "2026-04-22",
+      "category": "classic",
+      "winner": "SEIXAS Paul",
+      "second": "SCHMID Mauro",
+      "third": "TULETT Ben",
+      "howwon": "Sprint of small group",
+      "moments": "A six-rider early breakaway gained just over three minutes, but was kept under control by the favorites' teams. Former winners Alaphilippe and Hirschi both abandoned. Tobias Hallen Johannesen crashed, but could resume the race. On the final ascent of Mur de Huy, Seixas attacked decisively with only four riders able to respond, ultimately taking the win ahead of Schmid and Tullett.",
+      "note": ""
     }
   ],
   "years": [
@@ -437,14 +567,6 @@
       null,
       null
     ],
-    "mob6bilixtu9d": [
-      {
-        "file": "mob6bilixtu9d-0.jpg",
-        "cap": ""
-      },
-      null,
-      null
-    ],
     "mob63s8yya2z1": [
       {
         "file": "mob63s8yya2z1-0.jpg",
@@ -453,6 +575,25 @@
       null,
       {
         "file": "mob63s8yya2z1-2.jpg",
+        "cap": ""
+      }
+    ],
+    "mob6bilixtu9d": [
+      {
+        "file": "mob6bilixtu9d-0.jpg",
+        "cap": ""
+      },
+      null,
+      null
+    ],
+    "mobejqsk8ah1p": [
+      {
+        "file": "paris-roubaix-2025-mvdp-finish.png",
+        "cap": ""
+      },
+      null,
+      {
+        "file": "paris-roubaix-2025-pogacar-crash.png",
         "cap": ""
       }
     ]
@@ -726,6 +867,72 @@
       "name": "MAS Enric",
       "color": "#323232",
       "fav": false
+    },
+    {
+      "id": "mobaf6mhq8hwp",
+      "name": "MOLANO Juan Sebastián",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobafb0fw2k3s",
+      "name": "MILAN Jonathan",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobafdqjlwa8s",
+      "name": "MIHKELS Madis",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobaieyhnfj6i",
+      "name": "PEDERSEN Mads",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobapr0kvbusi",
+      "name": "MERLIER Tim",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobe7ostu0s1r",
+      "name": "POWLESS Neilson",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobe7wgc50zsh",
+      "name": "BENOOT Tiesj",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobec7p95yn2n",
+      "name": "ALMEIDA João",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobecale3w9i7",
+      "name": "SCHACHMANN Maximilian",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobecdgzrwhtq",
+      "name": "VAUQUELIN Kévin",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobecj3xy1buq",
+      "name": "TULETT Ben",
+      "color": "#323232",
+      "fav": false
     }
   ],
   "raceTypes": [
@@ -789,7 +996,12 @@
     },
     {
       "id": "mo8bfyo2549kr",
-      "name": "In Flanders Fields",
+      "name": "In Flanders Fields - Middelkerke-Wevelgem",
+      "color": "#B59C56"
+    },
+    {
+      "id": "mo8bfyo2549kt",
+      "name": "In Flanders Fields - Gent-Wevelgem",
       "color": "#B59C56"
     },
     {
@@ -819,6 +1031,18 @@
       "id": "mo8pfnef326sy",
       "name": "Itzulia Basque Country",
       "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mobac0ytniezy",
+      "name": "Classic Brugge-De Panne",
+      "color": "#b59c56",
+      "fav": false
+    },
+    {
+      "id": "mobebq7eenw8f",
+      "name": "La Flèche Wallonne",
+      "color": "#b59c56",
       "fav": false
     }
   ]
