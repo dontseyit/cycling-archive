@@ -368,7 +368,7 @@ function saveImgs(id, imgs){
 }
 function loadImgs(id){
   const stored = viewMode ? (viewImgs[id] || EMPTY_IMGS()) : parseJSON(localStorage.getItem(IMG_KEY(id)), EMPTY_IMGS());
-  return stored.map(i => i && i.file ? { data: `./images/${i.file}`, cap: i.cap || '' } : i);
+  return stored.map(i => i && i.file ? { data: `./images/${i.file}`, cap: i.cap || '' } : null);
 }
 function deleteImgs(id){ try { localStorage.removeItem(IMG_KEY(id)); } catch(e){} }
 
