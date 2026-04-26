@@ -225,6 +225,26 @@
   .set-page-hdr { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--rule2); }
   .set-page-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
 
+  /* Rider profile page */
+  .rp-page { padding: 2rem; }
+  .rp-hdr { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:0.5px solid var(--rule2); }
+  .rp-name { font-family:'Playfair Display',serif; font-size:28px; font-weight:700; letter-spacing:-0.5px; }
+  .rp-subtitle { font-size:12px; color:var(--ink3); font-style:italic; margin-top:3px; }
+  .rp-year-sep { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; letter-spacing:-0.3px; color:var(--ink2); margin:1.5rem 0 0.75rem; padding-bottom:0.4rem; border-bottom:0.5px solid var(--rule); }
+  .rp-card { display:flex; align-items:flex-start; gap:8px; padding:10px 8px; border-radius:var(--r); border:0.5px solid var(--rule); margin-bottom:6px; background:var(--bg); transition:background .12s; cursor:pointer; }
+  .rp-card:hover { background:var(--bg2); }
+  .rp-pos { flex-shrink:0; font-size:11px; font-weight:600; letter-spacing:.3px; width:28px; text-align:center; padding-top:2px; }
+  .rp-pos.pos-1st { color:#B8860B; }
+  .rp-pos.pos-2nd { color:var(--ink3); }
+  .rp-pos.pos-3rd { color:#A0816A; }
+  .rp-body { flex:1; min-width:0; }
+  .rp-race-name { font-family:'Playfair Display',serif; font-size:13px; font-weight:600; line-height:1.25; margin-bottom:2px; }
+  .rp-date { font-size:11px; color:var(--ink3); margin-bottom:3px; }
+  .rp-how { font-size:11px; color:var(--ink3); font-style:italic; line-height:1.4; }
+  .rp-empty { padding:2.5rem 0; text-align:center; font-size:13px; color:var(--ink3); font-style:italic; }
+  .rider-link { text-decoration:none; cursor:pointer; color:inherit; }
+  .rider-link:hover { text-decoration:underline; }
+
   /* RESPONSIVE — medium (2 cols) */
   @media (max-width: 860px) {
     .hd  { padding: 12px 20px; }
@@ -290,6 +310,7 @@
 </div>
 <div id="mc"></div>
 <div id="settings-page" style="display:none;"></div>
+<div id="rider-page" style="display:none;"></div>
 
 <script>
 const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -514,7 +535,7 @@ function entryHtml(race){
     : `<div class="e-thumb-ph"></div>`;
   const snippet     = race.howwon || (race.moments ? race.moments.split('\n')[0] : '');
   const snippetHtml = snippet ? `<div class="e-how">${esc(snippet)}</div>` : '';
-  const riderSpan   = field => { const r = resolveRider(field); return r ? `<span class="${riderCls(r.id)}">${esc(r.name)}</span>` : ''; };
+  const riderSpan   = field => { const r = resolveRider(field); if(!r) return ''; if(r.id) return `<a class="${riderCls(r.id)} rider-link" onclick="event.stopPropagation();openRiderPage('${r.id}')">${esc(r.name)}</a>`; return `<span>${esc(r.name)}</span>`; };
   const podiumHtml  = race.winner
     ? `<div class="e-win"><strong>${riderSpan(race.winner)}</strong>${race.second ? ` · <span class="e-2nd">${riderSpan(race.second)}</span>` : ''}${race.third ? ` · <span class="e-3rd">${riderSpan(race.third)}</span>` : ''}</div>`
     : '';
@@ -709,7 +730,7 @@ function openDetail(id){
   }</div>`;
 
   const section = (label, bodyHtml) => `<div class="d-sec"><div class="d-lbl">${label}</div>${bodyHtml}</div>`;
-  const podiumItem = (rank, field) => { const r = resolveRider(field); return r ? `<div class="pod-p"><div class="pp">${rank}</div><div class="pr"><span class="${riderCls(r.id)}">${esc(r.name)}</span></div></div>` : ''; };
+  const podiumItem = (rank, field) => { const r = resolveRider(field); if(!r) return ''; const nameHtml = r.id ? `<a class="${riderCls(r.id)} rider-link" onclick="closeModal();openRiderPage('${r.id}')">${esc(r.name)}</a>` : `<span class="${riderCls(r.id)}">${esc(r.name)}</span>`; return `<div class="pod-p"><div class="pp">${rank}</div><div class="pr">${nameHtml}</div></div>`; };
   const podiumHtml = (race.winner || race.second || race.third)
     ? section('Podium', `<div class="pod-row">${podiumItem('1st', race.winner)}${podiumItem('2nd', race.second)}${podiumItem('3rd', race.third)}</div>`)
     : '';
@@ -875,6 +896,74 @@ function closeSettings(){
   $('tl').style.display = '';
   document.querySelector('.nav').style.display = '';
   document.querySelector('.footer-bar').style.display = '';
+}
+
+/* ---- rider profile page ---- */
+function openRiderPage(riderId){
+  $('rider-page').innerHTML = riderPageHtml(riderId);
+  $('rider-page').style.display = '';
+  $('tl').style.display = 'none';
+  document.querySelector('.nav').style.display = 'none';
+  document.querySelector('.footer-bar').style.display = 'none';
+}
+function closeRiderPage(){
+  $('rider-page').style.display = 'none';
+  $('tl').style.display = '';
+  document.querySelector('.nav').style.display = '';
+  document.querySelector('.footer-bar').style.display = '';
+}
+function riderPageHtml(riderId){
+  const rider = riderById(riderId);
+  const backBtn = `<button class="btn" onclick="closeRiderPage()">&#8592; Back</button>`;
+  if(!rider){
+    return `<div class="rp-page"><div class="rp-hdr">${backBtn}</div><div class="rp-empty">Rider not found.</div></div>`;
+  }
+  // find all appearances
+  const appearances = [];
+  races.forEach(race => {
+    ['winner','second','third'].forEach((field, idx) => {
+      const r = resolveRider(race[field]);
+      if(r && r.id === riderId) appearances.push({ race, position: ['1st','2nd','3rd'][idx] });
+    });
+  });
+  const hdr = `<div class="rp-hdr">${backBtn}<div><div class="rp-name" style="color:${esc(rider.color)}">${esc(rider.name)}</div><div class="rp-subtitle">In your archive</div></div></div>`;
+  if(!appearances.length){
+    return `<div class="rp-page">${hdr}<div class="rp-empty">No appearances logged in your archive yet.</div></div>`;
+  }
+  // sort descending by year then date
+  appearances.sort((a, b) => b.race.year - a.race.year || (b.race.date || '').localeCompare(a.race.date || ''));
+  // group by year
+  const byYear = new Map();
+  appearances.forEach(ap => {
+    const y = ap.race.year;
+    if(!byYear.has(y)) byYear.set(y, []);
+    byYear.get(y).push(ap);
+  });
+  let body = '';
+  byYear.forEach((aps, year) => {
+    body += `<div class="rp-year-sep">${year}</div>`;
+    aps.forEach(({ race, position }) => {
+      const rt       = resolveRace(race);
+      const color    = CAT_COLOR[rt.category] || '#888';
+      const dateStr  = race.date ? parseDateNoon(race.date).toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'}) : '';
+      const firstImg = loadImgs(race.id).find(i => i && i.data);
+      const thumb    = firstImg
+        ? `<div class="e-thumb"><img src="${firstImg.data}" alt="" onerror="this.closest('.e-thumb').replaceWith(Object.assign(document.createElement('div'),{className:'e-thumb-ph'}))"></div>`
+        : `<div class="e-thumb-ph"></div>`;
+      const snippet  = race.howwon ? race.howwon.slice(0, 150) : '';
+      body += `<div class="rp-card" onclick="openDetail('${race.id}')">
+        <div class="e-bar" style="background:${color}"></div>
+        <div class="rp-pos pos-${position}">${position}</div>
+        ${thumb}
+        <div class="rp-body">
+          <div class="rp-race-name ${raceTypeCls(race.raceTypeId)}">${esc(rt.name)}</div>
+          ${dateStr ? `<div class="rp-date">${dateStr}</div>` : ''}
+          ${snippet ? `<div class="rp-how">${esc(snippet)}</div>` : ''}
+        </div>
+      </div>`;
+    });
+  });
+  return `<div class="rp-page">${hdr}${body}</div>`;
 }
 
 function filterSettingsList(type, query){
