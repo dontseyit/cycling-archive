@@ -1,6 +1,6 @@
 {
-  "version": 4,
-  "exportedAt": "2026-04-23T15:00:28.593Z",
+  "version": 2,
+  "exportedAt": "2026-04-26T20:49:06.888Z",
   "races": [
     {
       "id": "mo8o03ugf7g9z",
@@ -826,9 +826,385 @@
       "moments": "A six-rider early breakaway gained just over three minutes, but was kept under control by the favorites' teams. Former winners Alaphilippe and Hirschi both abandoned. Tobias Hallen Johannesen crashed, but could resume the race. On the final ascent of Mur de Huy, Seixas attacked decisively with only four riders able to respond, ultimately taking the win ahead of Schmid and Tullett.",
       "note": "",
       "raceTypeId": "mobebq7eenw8f"
+    },
+    {
+      "id": "mog5p221axlz5",
+      "raceTypeId": "mog5k61br6iyp",
+      "year": 2026,
+      "date": "2026-04-26",
+      "name": "Liège-Bastogne-Liège",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": {
+        "id": "mo8csa45rwg0t",
+        "name": "SEIXAS Paul"
+      },
+      "third": {
+        "id": "mo8peukid3acf",
+        "name": "EVENEPOEL Remco"
+      },
+      "howwon": "13.9 km solo",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "mog5siioq0e5a",
+      "raceTypeId": "mog5k61br6iyp",
+      "year": 2025,
+      "date": "2025-04-27",
+      "name": "Liège-Bastogne-Liège",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": {
+        "id": "mob5t1v6mlp78",
+        "name": "CICCONE Giulio"
+      },
+      "third": {
+        "id": "mog5pv3e80mb1",
+        "name": "HEALY Ben"
+      },
+      "howwon": "35 km solo",
+      "moments": "An early break of twelve riders formed, with UAE and Soudal Quick-Step controlling the peloton. The last escapees were caught on the Côte de la Rosier. Pogacar then attacked on the Côte de la Redoute, riding solo for the final 35 kilometers to claim victory.",
+      "note": ""
+    },
+    {
+      "id": "mog62u8ok7407",
+      "raceTypeId": "mo8ajmfgrxlvn",
+      "year": 2024,
+      "date": "2024-02-24",
+      "name": "Omloop Nieuwsblad",
+      "category": "classic",
+      "winner": {
+        "id": "mog60vpbl3cyw",
+        "name": "TRATNIK Jan"
+      },
+      "second": {
+        "id": "mog636murb575",
+        "name": "POLITT Nils"
+      },
+      "third": {
+        "id": "mo8cq35atdfpw",
+        "name": "VAN AERT Wout"
+      },
+      "howwon": "Sprint à deux",
+      "moments": "The race began with a breakaway of nine riders. With 130 km to go, an acceleration split the peloton into several groups, after which the front group reeled in the break. A Visma | Lease a Bike move created an elite group of six, including three Visma riders. Jorgenson attacked at 21 km to go, but after the Bosberg with 11 km remaining several groups regrouped at the front. Tratnik and Politt escaped late and rode clear, with Tratnik winning the sprint.",
+      "note": ""
+    },
+    {
+      "id": "m24race001",
+      "raceTypeId": "mo8aib4sya36s",
+      "year": 2024,
+      "date": "2024-01-16",
+      "name": "Santos Tour Down Under",
+      "category": "stage",
+      "winner": {
+        "id": "w24r_williams",
+        "name": "WILLIAMS Stephen"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race002",
+      "raceTypeId": "mo8aiz473dodm",
+      "year": 2024,
+      "date": "2024-01-28",
+      "name": "Cadel Evans Great Ocean Road Race",
+      "category": "classic",
+      "winner": {
+        "id": "mob5r9tqihqwl",
+        "name": "PITHIE Laurence"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race003",
+      "raceTypeId": "mo8ajak2aif1p",
+      "year": 2024,
+      "date": "2024-02-19",
+      "name": "UAE Tour",
+      "category": "stage",
+      "winner": {
+        "id": "w24r_vaneetvelt",
+        "name": "VAN EETVELT Lennert"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race004",
+      "raceTypeId": "mo8ak4ix2ywdk",
+      "year": 2024,
+      "date": "2024-03-02",
+      "name": "Strade Bianche",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race005",
+      "raceTypeId": "mo8akh7q9qrm4",
+      "year": 2024,
+      "date": "2024-03-03",
+      "name": "Paris-Nice",
+      "category": "stage",
+      "winner": {
+        "id": "mo8oq7cw1cj7j",
+        "name": "JORGENSON Matteo"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race006",
+      "raceTypeId": "mo8aku6zrgouo",
+      "year": 2024,
+      "date": "2024-03-04",
+      "name": "Tirreno-Adriatico",
+      "category": "stage",
+      "winner": {
+        "id": "mo8crdb63kjch",
+        "name": "VINGEGAARD Jonas"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race007",
+      "raceTypeId": "mo8ald2x4v2ps",
+      "year": 2024,
+      "date": "2024-03-16",
+      "name": "Milano-Sanremo",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csrr7gyysz",
+        "name": "PHILIPSEN Jasper"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race008",
+      "raceTypeId": "mo8ambqzui2ik",
+      "year": 2024,
+      "date": "2024-03-18",
+      "name": "Volta a Catalunya",
+      "category": "stage",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race009",
+      "raceTypeId": "mobac0ytniezy",
+      "year": 2024,
+      "date": "2024-03-20",
+      "name": "Classic Brugge-De Panne",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csrr7gyysz",
+        "name": "PHILIPSEN Jasper"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race010",
+      "raceTypeId": "mo8bfqx8wg4b9",
+      "year": 2024,
+      "date": "2024-03-22",
+      "name": "E3 Saxo Classic",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race011",
+      "raceTypeId": "mo8bfyo2549kt",
+      "year": 2024,
+      "date": "2024-03-24",
+      "name": "Gent-Wevelgem in Flanders Fields",
+      "category": "classic",
+      "winner": {
+        "id": "mobaieyhnfj6i",
+        "name": "PEDERSEN Mads"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race012",
+      "raceTypeId": "mo8bg4sf5are9",
+      "year": 2024,
+      "date": "2024-03-27",
+      "name": "Dwars door Vlaanderen",
+      "category": "classic",
+      "winner": {
+        "id": "mo8oq7cw1cj7j",
+        "name": "JORGENSON Matteo"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race013",
+      "raceTypeId": "mo8bga5u1s5st",
+      "year": 2024,
+      "date": "2024-03-31",
+      "name": "Ronde van Vlaanderen",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race014",
+      "raceTypeId": "mo8pfnef326sy",
+      "year": 2024,
+      "date": "2024-04-01",
+      "name": "Itzulia Basque Country",
+      "category": "stage",
+      "winner": {
+        "id": "mob68azhjs69s",
+        "name": "AYUSO Juan"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race015",
+      "raceTypeId": "mo8bgh0n2gh8k",
+      "year": 2024,
+      "date": "2024-04-07",
+      "name": "Paris-Roubaix",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race016",
+      "raceTypeId": "mo8bglt6vcib9",
+      "year": 2024,
+      "date": "2024-04-14",
+      "name": "Amstel Gold Race",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cso1lib50v",
+        "name": "PIDCOCK Tom"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race017",
+      "raceTypeId": "mobebq7eenw8f",
+      "year": 2024,
+      "date": "2024-04-17",
+      "name": "La Flèche Wallonne",
+      "category": "classic",
+      "winner": {
+        "id": "w24r_williams",
+        "name": "WILLIAMS Stephen"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m24race018",
+      "raceTypeId": "mog5k61br6iyp",
+      "year": 2024,
+      "date": "2024-04-21",
+      "name": "Liège-Bastogne-Liège",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
     }
   ],
   "years": [
+    2024,
     2025,
     2026
   ],
@@ -953,6 +1329,25 @@
         "file": "paris-roubaix-2025-pogacar-crash.png",
         "cap": ""
       }
+    ],
+    "mog5p221axlz5": [
+      {
+        "file": "liege-2026.png",
+        "cap": ""
+      },
+      null,
+      {
+        "file": "liege-2026-pogacar-seixas.png",
+        "cap": ""
+      }
+    ],
+    "mog5siioq0e5a": [
+      {
+        "file": "liege-2025.png",
+        "cap": ""
+      },
+      null,
+      null
     ]
   },
   "riders": [
@@ -1290,6 +1685,24 @@
       "name": "TULETT Ben",
       "color": "#323232",
       "fav": false
+    },
+    {
+      "id": "mog5pv3e80mb1",
+      "name": "HEALY Ben",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mog60vpbl3cyw",
+      "name": "TRATNIK Jan",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mog636murb575",
+      "name": "POLITT Nils",
+      "color": "#323232",
+      "fav": false
     }
   ],
   "raceTypes": [
@@ -1418,6 +1831,13 @@
     {
       "id": "mobebq7eenw8f",
       "name": "La Flèche Wallonne",
+      "color": "#b59c56",
+      "fav": false,
+      "category": "classic"
+    },
+    {
+      "id": "mog5k61br6iyp",
+      "name": "Liège-Bastogne-Liège",
       "color": "#b59c56",
       "fav": false,
       "category": "classic"

@@ -220,6 +220,11 @@
   .set-search { width: 100%; font-family: 'Source Serif 4', serif; font-size: 13px; background: var(--bg); color: var(--ink); border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 6px 10px; outline: none; transition: border-color .12s; -webkit-appearance: none; appearance: none; margin-bottom: 6px; }
   .set-search:focus { border-color: var(--rule3); }
 
+  /* Settings page */
+  .set-page { padding: 2rem; }
+  .set-page-hdr { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--rule2); }
+  .set-page-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+
   /* RESPONSIVE — medium (2 cols) */
   @media (max-width: 860px) {
     .hd  { padding: 12px 20px; }
@@ -284,6 +289,7 @@
   <span class="view-disclaimer" style="display:none;font-size:11px;color:var(--ink3);font-style:italic;">UCI WorldTour archive for personal use. It's a vibe coded, curated memory aid, not a complete database. Results are manually recorded and not updated automatically.</span>
 </div>
 <div id="mc"></div>
+<div id="settings-page" style="display:none;"></div>
 
 <script>
 const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -837,30 +843,38 @@ function settingsPanelHtml(type, title, placeholder){
             </div>
           </div>`;
 }
-function settingsModalHtml(){
+function settingsPageHtml(){
   return `
-    <div class="overlay" id="ov" onclick="closeIfOverlay(event)">
-      <div class="modal set-modal" onclick="event.stopPropagation()">
-        <div class="modal-title">Settings</div>
-        <div class="set-panels">
-          ${settingsPanelHtml('rider', 'Riders', 'Rider name')}
-          ${settingsPanelHtml('race',  'Races', 'Race name')}
-        </div>
-        <div class="modal-acts">
-          <button class="mb mb-sec" onclick="closeModal()">Close</button>
-        </div>
+    <div class="set-page">
+      <div class="set-page-hdr">
+        <button class="btn" onclick="closeSettings()">&#8592; Back</button>
+        <div class="set-page-title">Settings</div>
+      </div>
+      <div class="set-panels">
+        ${settingsPanelHtml('rider', 'Riders', 'Rider name')}
+        ${settingsPanelHtml('race',  'Races', 'Race name')}
       </div>
     </div>`;
 }
 function openSettings(){
   const prevQ = { rider: $('sq-rider')?.value || '', race: $('sq-race')?.value || '' };
-  $('mc').innerHTML = settingsModalHtml();
+  $('settings-page').innerHTML = settingsPageHtml();
+  $('settings-page').style.display = '';
+  $('tl').style.display = 'none';
+  document.querySelector('.nav').style.display = 'none';
+  document.querySelector('.footer-bar').style.display = 'none';
   ['rider','race'].forEach(type => {
     if(prevQ[type]){
       const inp = $('sq-' + type);
       if(inp){ inp.value = prevQ[type]; filterSettingsList(type, prevQ[type]); }
     }
   });
+}
+function closeSettings(){
+  $('settings-page').style.display = 'none';
+  $('tl').style.display = '';
+  document.querySelector('.nav').style.display = '';
+  document.querySelector('.footer-bar').style.display = '';
 }
 
 function filterSettingsList(type, query){
