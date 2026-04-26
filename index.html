@@ -552,9 +552,11 @@ function clearSlot(i){ pendingImgs[i] = null; rerenderSlot(i); }
 /* ---- add / edit modal ---- */
 function openAddModal(prefillId, prefillYear){
   const race = prefillId ? races.find(r => r.id === prefillId) : null;
-  const existing = race ? loadImgs(race.id) : EMPTY_IMGS();
+  const rawImgs = race
+    ? parseJSON(localStorage.getItem(IMG_KEY(race.id)), EMPTY_IMGS())
+    : EMPTY_IMGS();
   pendingImgs = {};
-  [0,1,2].forEach(i => { pendingImgs[i] = existing[i] ? { ...existing[i] } : null; });
+  [0,1,2].forEach(i => { pendingImgs[i] = rawImgs[i] && rawImgs[i].file ? { ...rawImgs[i] } : null; });
 
   const today   = new Date().toISOString().split('T')[0];
   const defDate = race ? race.date : (prefillYear ? prefillYear + '-04-01' : today);
