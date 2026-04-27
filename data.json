@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "exportedAt": "2026-04-26T20:49:06.888Z",
+  "version": "3.2.0",
+  "exportedAt": "2026-04-27T13:53:56.433Z",
   "races": [
     {
       "id": "mo8o03ugf7g9z",
@@ -904,11 +904,17 @@
       "name": "Santos Tour Down Under",
       "category": "stage",
       "winner": {
-        "id": "w24r_williams",
+        "id": "mogxsalotn0xu",
         "name": "WILLIAMS Stephen"
       },
-      "second": null,
-      "third": null,
+      "second": {
+        "id": "mob5ofe4g86w9",
+        "name": "NARVAEZ Jhonatan"
+      },
+      "third": {
+        "id": "mo8cqepkuox7x",
+        "name": "DEL TORO Isaac"
+      },
       "howwon": "GC",
       "moments": "",
       "note": ""
@@ -924,9 +930,15 @@
         "id": "mob5r9tqihqwl",
         "name": "PITHIE Laurence"
       },
-      "second": null,
-      "third": null,
-      "howwon": "",
+      "second": {
+        "id": "mogxtlgs4tn1a",
+        "name": "TESFATSION Natnael"
+      },
+      "third": {
+        "id": "mogxtwhp6502f",
+        "name": "ZIMMERMANN Georg"
+      },
+      "howwon": "Sprint of small group",
       "moments": "",
       "note": ""
     },
@@ -938,11 +950,17 @@
       "name": "UAE Tour",
       "category": "stage",
       "winner": {
-        "id": "w24r_vaneetvelt",
+        "id": "mogxvlltq00ej",
         "name": "VAN EETVELT Lennert"
       },
-      "second": null,
-      "third": null,
+      "second": {
+        "id": "mogxvyqyya0w4",
+        "name": "O'CONNOR Ben"
+      },
+      "third": {
+        "id": "mob5tabvmq1w0",
+        "name": "BILBAO Pello"
+      },
       "howwon": "GC",
       "moments": "",
       "note": ""
@@ -1348,6 +1366,22 @@
       },
       null,
       null
+    ],
+    "mog62u8ok7407": [
+      {
+        "file": "omloop-2024.png",
+        "cap": ""
+      },
+      null,
+      null
+    ],
+    "m24race002": [
+      {
+        "file": "santos-2024.png",
+        "cap": ""
+      },
+      null,
+      null
     ]
   },
   "riders": [
@@ -1701,6 +1735,36 @@
     {
       "id": "mog636murb575",
       "name": "POLITT Nils",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mogxsalotn0xu",
+      "name": "WILLIAMS Stephen",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mogxtlgs4tn1a",
+      "name": "TESFATSION Natnael",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mogxtwhp6502f",
+      "name": "ZIMMERMANN Georg",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mogxvlltq00ej",
+      "name": "VAN EETVELT Lennert",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "mogxvyqyya0w4",
+      "name": "O'CONNOR Ben",
       "color": "#323232",
       "fav": false
     }
