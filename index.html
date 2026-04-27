@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UCI WorldTour Archive</title>
+<title>WorldTour Journal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
@@ -32,6 +32,8 @@
   .hd-right { display: flex; align-items: center; gap: 7px; }
   .btn { font-family: 'Source Serif 4', serif; font-size: 12px; background: none; border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 4px 12px; cursor: pointer; color: var(--ink2); transition: all .12s; }
   .btn:hover { border-color: var(--rule3); color: var(--ink); }
+  .btn { font-family: 'Source Serif 4', serif; font-size: 12px; background: none; border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 4px 12px; cursor: pointer; color: var(--ink2); transition: all .12s; }
+  .btn-disclaimer { border-color: #F09595; color: #A32D2D; font-size: 10px; padding: 4px;}
 
   /* NAV */
   .nav { padding: 0 2rem; height: 38px; border-bottom: 0.5px solid var(--rule); display: flex; align-items: center; gap: 10px; }
@@ -291,7 +293,10 @@
 <body>
 
 <div class="hd">
-  <div class="hd-title">UCI WorldTour Archive</div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="hd-title">WorldTour Journal</div>
+    <button class="btn btn-disclaimer" onclick="openDisclaimer()">Disclaimer</button>
+  </div>
   <div class="hd-right">
     <button class="btn edit-only" onclick="openAddModal()">+ Add race</button>
     <button class="btn edit-only" onclick="addYear()">+ Year</button>
@@ -318,9 +323,7 @@
 
 <div id="tl"></div>
 
-<div class="footer-bar">
-  <span class="view-disclaimer" style="display:none;font-size:11px;color:var(--ink3);font-style:italic;">UCI WorldTour archive for personal use. It's a vibe coded, curated memory aid, not a complete database. Results are manually recorded and not updated automatically.</span>
-</div>
+<div class="footer-bar"></div>
 <div id="mc"></div>
 <div id="settings-page" style="display:none;"></div>
 <div id="rider-page" style="display:none;"></div>
@@ -426,7 +429,6 @@ async function load(){
 
 function applyViewMode(){
   document.querySelectorAll('.edit-only').forEach(el => el.style.display = 'none');
-  document.querySelectorAll('.view-disclaimer').forEach(el => el.style.display = '');
 }
 function save(){
   localStorage.setItem('cj_races', JSON.stringify(races));
@@ -790,6 +792,35 @@ function openLightbox(raceId, imgIdx){
   img.onerror = () => lb.remove();
   lb.appendChild(img);
   document.body.appendChild(lb);
+}
+
+/* ---- disclaimer ---- */
+function openDisclaimer(){
+  $('mc').innerHTML = `
+    <div class="overlay" id="ov" onclick="closeIfOverlay(event)">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-title">About this journal</div>
+        <div class="field">
+          <label>What this is</label>
+          <p style="font-size:13px;line-height:1.75;color:var(--ink2);">A personal, hand-curated record of UCI WorldTour races built as a memory aid. Not a database, not an official record. Vibe-coded, work-in-progress.</p>
+        </div>
+        <div class="field">
+          <label>Data &amp; completeness</label>
+          <p style="font-size:13px;line-height:1.75;color:var(--ink2);">All entries are logged manually. Seasons, races, and results may be missing or incomplete. Nothing is scraped or updated automatically. Any counts or groupings shown reflect only what has actually been recorded here, nothing more.</p>
+        </div>
+        <div class="field">
+          <label>Open source &amp; free</label>
+          <p style="font-size:13px;line-height:1.75;color:var(--ink2);">This project is open source, completely free, and non-commercial. There are no ads, no trackers, no analytics, and no external requests beyond loading fonts from Google Fonts. It runs entirely in your browser. The code and data are yours to use and adapt.</p>
+        </div>
+        <div class="field">
+          <label>Copyright</label>
+          <p style="font-size:13px;line-height:1.75;color:var(--ink2);">Race results are factual records and not subject to copyright. UCI and WorldTour are trademarks of the Union Cycliste Internationale. This project has no affiliation with the UCI or any professional cycling organisation.</p>
+        </div>
+        <div class="modal-acts">
+          <button class="mb mb-sec" onclick="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>`;
 }
 
 /* ---- backup / restore ---- */
