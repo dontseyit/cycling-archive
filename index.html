@@ -979,7 +979,7 @@ function riderPageHtml(riderId){
   if(!appearances.length){
     return `<div class="rp-page"><div class="rp-back-row">${backBtn}</div>${hero}<div class="rp-empty">No appearances logged in your archive yet.</div></div>`;
   }
-  appearances.sort((a, b) => a.race.year - b.race.year || (a.race.date || '').localeCompare(b.race.date || ''));
+  appearances.sort((a, b) => b.race.year - a.race.year || (a.race.date || '').localeCompare(b.race.date || ''));
   const byYear = new Map();
   appearances.forEach(ap => {
     const y = ap.race.year;

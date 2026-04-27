@@ -1,6 +1,6 @@
 {
   "version": "4.0.0",
-  "exportedAt": "2026-04-27T15:16:02.279Z",
+  "exportedAt": "2026-04-27T16:20:55.819Z",
   "races": [
     {
       "id": "mo8o03ugf7g9z",
@@ -1219,9 +1219,896 @@
       "howwon": "",
       "moments": "",
       "note": ""
+    },
+    {
+      "id": "m23race001",
+      "raceTypeId": "mo8aib4sya36s",
+      "year": 2023,
+      "date": "2023-01-17",
+      "name": "Santos Tour Down Under",
+      "category": "stage",
+      "winner": {
+        "id": "mo8crgh59ug32",
+        "name": "VINE Jay"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race002",
+      "raceTypeId": "mo8aiz473dodm",
+      "year": 2023,
+      "date": "2023-01-29",
+      "name": "Cadel Evans Great Ocean Road Race",
+      "category": "classic",
+      "winner": {
+        "id": "m23r_mayrhofer",
+        "name": "MAYRHOFER Marius"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race003",
+      "raceTypeId": "mo8ajak2aif1p",
+      "year": 2023,
+      "date": "2023-02-20",
+      "name": "UAE Tour",
+      "category": "stage",
+      "winner": {
+        "id": "mo8peukid3acf",
+        "name": "EVENEPOEL Remco"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race004",
+      "raceTypeId": "mo8ajmfgrxlvn",
+      "year": 2023,
+      "date": "2023-02-25",
+      "name": "Omloop Nieuwsblad",
+      "category": "classic",
+      "winner": {
+        "id": "m23r_vanbaarle",
+        "name": "VAN BAARLE Dylan"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race005",
+      "raceTypeId": "mo8ak4ix2ywdk",
+      "year": 2023,
+      "date": "2023-03-04",
+      "name": "Strade Bianche",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cso1lib50v",
+        "name": "PIDCOCK Tom"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race006",
+      "raceTypeId": "mo8akh7q9qrm4",
+      "year": 2023,
+      "date": "2023-03-05",
+      "name": "Paris-Nice",
+      "category": "stage",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race007",
+      "raceTypeId": "mo8aku6zrgouo",
+      "year": 2023,
+      "date": "2023-03-06",
+      "name": "Tirreno-Adriatico",
+      "category": "stage",
+      "winner": {
+        "id": "mob6de66owlq1",
+        "name": "ROGLIČ Primož"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race008",
+      "raceTypeId": "mo8ald2x4v2ps",
+      "year": 2023,
+      "date": "2023-03-18",
+      "name": "Milano-Sanremo",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race009",
+      "raceTypeId": "mo8ambqzui2ik",
+      "year": 2023,
+      "date": "2023-03-20",
+      "name": "Volta a Catalunya",
+      "category": "stage",
+      "winner": {
+        "id": "mob6de66owlq1",
+        "name": "ROGLIČ Primož"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race010",
+      "raceTypeId": "mobac0ytniezy",
+      "year": 2023,
+      "date": "2023-03-22",
+      "name": "Classic Brugge-De Panne",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csrr7gyysz",
+        "name": "PHILIPSEN Jasper"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race011",
+      "raceTypeId": "mo8bfqx8wg4b9",
+      "year": 2023,
+      "date": "2023-03-24",
+      "name": "E3 Saxo Classic",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cq35atdfpw",
+        "name": "VAN AERT Wout"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race012",
+      "raceTypeId": "mo8bfyo2549kt",
+      "year": 2023,
+      "date": "2023-03-26",
+      "name": "Gent-Wevelgem in Flanders Fields",
+      "category": "classic",
+      "winner": {
+        "id": "mo8ct7crcgzon",
+        "name": "LAPORTE Christophe"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race013",
+      "raceTypeId": "mo8bg4sf5are9",
+      "year": 2023,
+      "date": "2023-03-29",
+      "name": "Dwars door Vlaanderen",
+      "category": "classic",
+      "winner": {
+        "id": "mo8ct7crcgzon",
+        "name": "LAPORTE Christophe"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race014",
+      "raceTypeId": "mo8bga5u1s5st",
+      "year": 2023,
+      "date": "2023-04-02",
+      "name": "Ronde van Vlaanderen",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race015",
+      "raceTypeId": "mo8pfnef326sy",
+      "year": 2023,
+      "date": "2023-04-03",
+      "name": "Itzulia Basque Country",
+      "category": "stage",
+      "winner": {
+        "id": "mo8crdb63kjch",
+        "name": "VINGEGAARD Jonas"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race016",
+      "raceTypeId": "mo8bgh0n2gh8k",
+      "year": 2023,
+      "date": "2023-04-09",
+      "name": "Paris-Roubaix",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race017",
+      "raceTypeId": "mo8bglt6vcib9",
+      "year": 2023,
+      "date": "2023-04-16",
+      "name": "Amstel Gold Race",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race018",
+      "raceTypeId": "mobebq7eenw8f",
+      "year": 2023,
+      "date": "2023-04-19",
+      "name": "La Flèche Wallonne",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m23race019",
+      "raceTypeId": "mog5k61br6iyp",
+      "year": 2023,
+      "date": "2023-04-23",
+      "name": "Liège-Bastogne-Liège",
+      "category": "classic",
+      "winner": {
+        "id": "mo8peukid3acf",
+        "name": "EVENEPOEL Remco"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race001",
+      "raceTypeId": "mo8ajak2aif1p",
+      "year": 2022,
+      "date": "2022-02-20",
+      "name": "UAE Tour",
+      "category": "stage",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race002",
+      "raceTypeId": "mo8ajmfgrxlvn",
+      "year": 2022,
+      "date": "2022-02-26",
+      "name": "Omloop Nieuwsblad",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cq35atdfpw",
+        "name": "VAN AERT Wout"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race003",
+      "raceTypeId": "mo8ak4ix2ywdk",
+      "year": 2022,
+      "date": "2022-03-05",
+      "name": "Strade Bianche",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race004",
+      "raceTypeId": "mo8akh7q9qrm4",
+      "year": 2022,
+      "date": "2022-03-06",
+      "name": "Paris-Nice",
+      "category": "stage",
+      "winner": {
+        "id": "mob6de66owlq1",
+        "name": "ROGLIČ Primož"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race005",
+      "raceTypeId": "mo8aku6zrgouo",
+      "year": 2022,
+      "date": "2022-03-07",
+      "name": "Tirreno-Adriatico",
+      "category": "stage",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race006",
+      "raceTypeId": "mo8ald2x4v2ps",
+      "year": 2022,
+      "date": "2022-03-19",
+      "name": "Milano-Sanremo",
+      "category": "classic",
+      "winner": {
+        "id": "m22r_mohoric",
+        "name": "MOHORIČ Matej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race007",
+      "raceTypeId": "mo8ambqzui2ik",
+      "year": 2022,
+      "date": "2022-03-21",
+      "name": "Volta a Catalunya",
+      "category": "stage",
+      "winner": {
+        "id": "m22r_higuita",
+        "name": "HIGUITA Sergio"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race008",
+      "raceTypeId": "mobac0ytniezy",
+      "year": 2022,
+      "date": "2022-03-23",
+      "name": "Classic Brugge-De Panne",
+      "category": "classic",
+      "winner": {
+        "id": "mobapr0kvbusi",
+        "name": "MERLIER Tim"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race009",
+      "raceTypeId": "mo8bfqx8wg4b9",
+      "year": 2022,
+      "date": "2022-03-25",
+      "name": "E3 Saxo Classic",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cq35atdfpw",
+        "name": "VAN AERT Wout"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race010",
+      "raceTypeId": "mo8bfyo2549kt",
+      "year": 2022,
+      "date": "2022-03-27",
+      "name": "Gent-Wevelgem in Flanders Fields",
+      "category": "classic",
+      "winner": {
+        "id": "m22r_girmay",
+        "name": "GIRMAY Biniam"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race011",
+      "raceTypeId": "mo8bg4sf5are9",
+      "year": 2022,
+      "date": "2022-03-30",
+      "name": "Dwars door Vlaanderen",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race012",
+      "raceTypeId": "mo8bga5u1s5st",
+      "year": 2022,
+      "date": "2022-04-03",
+      "name": "Ronde van Vlaanderen",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race013",
+      "raceTypeId": "mo8pfnef326sy",
+      "year": 2022,
+      "date": "2022-04-04",
+      "name": "Itzulia Basque Country",
+      "category": "stage",
+      "winner": {
+        "id": "mo8cszyogucj6",
+        "name": "MARTÍNEZ Daniel Felipe"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race014",
+      "raceTypeId": "mo8bglt6vcib9",
+      "year": 2022,
+      "date": "2022-04-10",
+      "name": "Amstel Gold Race",
+      "category": "classic",
+      "winner": {
+        "id": "m22r_kwiatkowski",
+        "name": "KWIATKOWSKI Michał"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race015",
+      "raceTypeId": "mo8bgh0n2gh8k",
+      "year": 2022,
+      "date": "2022-04-17",
+      "name": "Paris-Roubaix",
+      "category": "classic",
+      "winner": {
+        "id": "m23r_vanbaarle",
+        "name": "VAN BAARLE Dylan"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race016",
+      "raceTypeId": "mobebq7eenw8f",
+      "year": 2022,
+      "date": "2022-04-20",
+      "name": "La Flèche Wallonne",
+      "category": "classic",
+      "winner": {
+        "id": "m22r_teuns",
+        "name": "TEUNS Dylan"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m22race017",
+      "raceTypeId": "mog5k61br6iyp",
+      "year": 2022,
+      "date": "2022-04-24",
+      "name": "Liège-Bastogne-Liège",
+      "category": "classic",
+      "winner": {
+        "id": "mo8peukid3acf",
+        "name": "EVENEPOEL Remco"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race001",
+      "raceTypeId": "mo8ajak2aif1p",
+      "year": 2021,
+      "date": "2021-02-21",
+      "name": "UAE Tour",
+      "category": "stage",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race002",
+      "raceTypeId": "mo8ajmfgrxlvn",
+      "year": 2021,
+      "date": "2021-02-27",
+      "name": "Omloop Nieuwsblad",
+      "category": "classic",
+      "winner": {
+        "id": "m21r_ballerini",
+        "name": "BALLERINI Davide"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race003",
+      "raceTypeId": "mo8ak4ix2ywdk",
+      "year": 2021,
+      "date": "2021-03-06",
+      "name": "Strade Bianche",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cpx4khabgy",
+        "name": "VAN DER POEL Mathieu"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race004",
+      "raceTypeId": "mo8akh7q9qrm4",
+      "year": 2021,
+      "date": "2021-03-07",
+      "name": "Paris-Nice",
+      "category": "stage",
+      "winner": {
+        "id": "mobecale3w9i7",
+        "name": "SCHACHMANN Maximilian"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race005",
+      "raceTypeId": "mo8aku6zrgouo",
+      "year": 2021,
+      "date": "2021-03-10",
+      "name": "Tirreno-Adriatico",
+      "category": "stage",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race006",
+      "raceTypeId": "mo8ald2x4v2ps",
+      "year": 2021,
+      "date": "2021-03-20",
+      "name": "Milano-Sanremo",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cryni6f8bq",
+        "name": "STUYVEN Jasper"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race007",
+      "raceTypeId": "mo8ambqzui2ik",
+      "year": 2021,
+      "date": "2021-03-22",
+      "name": "Volta a Catalunya",
+      "category": "stage",
+      "winner": {
+        "id": "m21r_yates",
+        "name": "YATES Adam"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race008",
+      "raceTypeId": "mobac0ytniezy",
+      "year": 2021,
+      "date": "2021-03-24",
+      "name": "Classic Brugge-De Panne",
+      "category": "classic",
+      "winner": {
+        "id": "m21r_bennett",
+        "name": "BENNETT Sam"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race009",
+      "raceTypeId": "mo8bfqx8wg4b9",
+      "year": 2021,
+      "date": "2021-03-26",
+      "name": "E3 Saxo Classic",
+      "category": "classic",
+      "winner": {
+        "id": "m21r_asgreen",
+        "name": "ASGREEN Kasper"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race010",
+      "raceTypeId": "mo8bfyo2549kt",
+      "year": 2021,
+      "date": "2021-03-28",
+      "name": "Gent-Wevelgem in Flanders Fields",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cq35atdfpw",
+        "name": "VAN AERT Wout"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race011",
+      "raceTypeId": "mo8bg4sf5are9",
+      "year": 2021,
+      "date": "2021-03-31",
+      "name": "Dwars door Vlaanderen",
+      "category": "classic",
+      "winner": {
+        "id": "m23r_vanbaarle",
+        "name": "VAN BAARLE Dylan"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race012",
+      "raceTypeId": "mo8bga5u1s5st",
+      "year": 2021,
+      "date": "2021-04-04",
+      "name": "Ronde van Vlaanderen",
+      "category": "classic",
+      "winner": {
+        "id": "m21r_asgreen",
+        "name": "ASGREEN Kasper"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race013",
+      "raceTypeId": "mo8pfnef326sy",
+      "year": 2021,
+      "date": "2021-04-05",
+      "name": "Itzulia Basque Country",
+      "category": "stage",
+      "winner": {
+        "id": "mob6de66owlq1",
+        "name": "ROGLIČ Primož"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "GC",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race014",
+      "raceTypeId": "mo8bglt6vcib9",
+      "year": 2021,
+      "date": "2021-04-18",
+      "name": "Amstel Gold Race",
+      "category": "classic",
+      "winner": {
+        "id": "mo8cq35atdfpw",
+        "name": "VAN AERT Wout"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race015",
+      "raceTypeId": "mobebq7eenw8f",
+      "year": 2021,
+      "date": "2021-04-21",
+      "name": "La Flèche Wallonne",
+      "category": "classic",
+      "winner": {
+        "id": "m21r_alaphilippe",
+        "name": "ALAPHILIPPE Julian"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
+    },
+    {
+      "id": "m21race016",
+      "raceTypeId": "mog5k61br6iyp",
+      "year": 2021,
+      "date": "2021-04-25",
+      "name": "Liège-Bastogne-Liège",
+      "category": "classic",
+      "winner": {
+        "id": "mo8csgtz4dvcd",
+        "name": "POGAČAR Tadej"
+      },
+      "second": null,
+      "third": null,
+      "howwon": "",
+      "moments": "",
+      "note": ""
     }
   ],
   "years": [
+    2021,
+    2022,
+    2023,
     2024,
     2025,
     2026
@@ -1773,6 +2660,78 @@
     {
       "id": "mogxvyqyya0w4",
       "name": "O'CONNOR Ben",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m23r_mayrhofer",
+      "name": "MAYRHOFER Marius",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m23r_vanbaarle",
+      "name": "VAN BAARLE Dylan",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m22r_mohoric",
+      "name": "MOHORIČ Matej",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m22r_higuita",
+      "name": "HIGUITA Sergio",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m22r_girmay",
+      "name": "GIRMAY Biniam",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m22r_kwiatkowski",
+      "name": "KWIATKOWSKI Michał",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m22r_teuns",
+      "name": "TEUNS Dylan",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m21r_ballerini",
+      "name": "BALLERINI Davide",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m21r_yates",
+      "name": "YATES Adam",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m21r_bennett",
+      "name": "BENNETT Sam",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m21r_asgreen",
+      "name": "ASGREEN Kasper",
+      "color": "#323232",
+      "fav": false
+    },
+    {
+      "id": "m21r_alaphilippe",
+      "name": "ALAPHILIPPE Julian",
       "color": "#323232",
       "fav": false
     }
