@@ -33,7 +33,7 @@
   .btn { font-family: 'Source Serif 4', serif; font-size: 12px; background: none; border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 4px 12px; cursor: pointer; color: var(--ink2); transition: all .12s; }
   .btn:hover { border-color: var(--rule3); color: var(--ink); }
   .btn { font-family: 'Source Serif 4', serif; font-size: 12px; background: none; border: 0.5px solid var(--rule2); border-radius: var(--r); padding: 4px 12px; cursor: pointer; color: var(--ink2); transition: all .12s; }
-  .btn-disclaimer { border-color: #F09595; color: #A32D2D; font-size: 10px; padding: 4px;}
+  .btn-disclaimer { border-color: #F09595; color: #A32D2D; font-size: 10px; padding: 2px 8px; margin-top: 4px;}
 
   /* NAV */
   .nav { padding: 0 2rem; height: 38px; border-bottom: 0.5px solid var(--rule); display: flex; align-items: center; gap: 10px; }
@@ -351,6 +351,27 @@ function uid(){ return Date.now().toString(36) + Math.random().toString(36).slic
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function clampPage(targetIdx){ return Math.max(0, Math.min(Math.max(0, years.length - getColCount()), targetIdx)); }
 
+/* ---- image error handlers ---- */
+function _imgErrThumb(img){
+  console.warn('[Journal] Missing image:', img.src.split('/').pop());
+  const thumb = img.closest('.e-thumb');
+  if(thumb) thumb.replaceWith(Object.assign(document.createElement('div'),{className:'e-thumb-ph'}));
+}
+function _imgErrHide(img){
+  console.warn('[Journal] Missing image:', img.src.split('/').pop());
+  img.style.display = 'none';
+}
+function _imgErrWrap(img, cls){
+  console.warn('[Journal] Missing image:', img.src.split('/').pop());
+  const el = img.closest(cls);
+  if(el) el.style.display = 'none';
+}
+function _imgErrSlot(img){
+  console.warn('[Journal] Missing image:', img.src.split('/').pop());
+  const preview = img.closest('.img-slot-preview');
+  if(preview) preview.innerHTML = '<div class="img-slot-label">Not found</div>';
+}
+
 /* ---- settings persistence ---- */
 function loadSettings(){
   riders    = parseJSON(localStorage.getItem('cj_riders'),     []);
@@ -554,9 +575,9 @@ function entryHtml(race){
   const winnerObj   = winnerRider?.id ? riderById(winnerRider.id) : null;
   const headFile    = winnerObj?.head || null;
   const thumb       = firstImg
-    ? `<div class="e-thumb"><img src="${firstImg.data}" alt="" onerror="this.closest('.e-thumb').replaceWith(Object.assign(document.createElement('div'),{className:'e-thumb-ph'}))"></div>`
+    ? `<div class="e-thumb"><img src="${firstImg.data}" alt="" onerror="_imgErrThumb(this)"></div>`
     : `<div class="e-thumb-ph"></div>`;
-  const headHtml    = headFile ? `<img class="e-head" src="./images/heads/${esc(headFile)}" alt="" onerror="this.style.display='none'">` : '';
+  const headHtml    = headFile ? `<img class="e-head" src="./images/heads/${esc(headFile)}" alt="" onerror="_imgErrHide(this)">` : '';
   const snippet     = race.howwon || (race.moments ? race.moments.split('\n')[0] : '');
   const snippetHtml = snippet ? `<div class="e-how">${esc(snippet)}</div>` : '';
   const riderSpan   = field => { const r = resolveRider(field); if(!r) return ''; if(r.id) return `<a class="${riderCls(r.id)} rider-link" onclick="event.stopPropagation();openRiderPage('${r.id}')">${esc(r.name)}</a>`; return `<span>${esc(r.name)}</span>`; };
@@ -582,7 +603,7 @@ function imgSlotHtml(i){
   const p = pendingImgs[i];
   const file = p && p.file ? p.file : '';
   const preview = file
-    ? `<div class="img-slot-preview"><img src="./images/${esc(file)}" alt="" onerror="this.closest('.img-slot-preview').innerHTML='<div class=\\'img-slot-label\\'>Not found</div>'"></div>`
+    ? `<div class="img-slot-preview"><img src="./images/${esc(file)}" alt="" onerror="_imgErrSlot(this)"></div>`
     : `<div class="img-slot-preview"><div class="img-slot-label">${SLOT_LABELS[i]}</div></div>`;
   return `<div class="img-slot" id="slot${i}">
     ${preview}
@@ -750,7 +771,7 @@ function openDetail(id){
   const layoutCls = ['', 'one', 'two', 'three'][imgs.length] || 'three';
   const imgsHtml  = imgs.length === 0 ? '' : `<div class="det-imgs ${layoutCls}">${
     imgs.map((img, ix) =>
-      `<div class="det-img-wrap"><img src="${img.data}" alt="${esc(img.cap || '')}" onerror="this.closest('.det-img-wrap').style.display='none'" onclick="openLightbox('${id}',${ix})">${img.cap ? `<div class="det-img-cap">${esc(img.cap)}</div>` : ''}</div>`
+      `<div class="det-img-wrap"><img src="${img.data}" alt="${esc(img.cap || '')}" onerror="_imgErrWrap(this,'.det-img-wrap')" onclick="openLightbox('${id}',${ix})">${img.cap ? `<div class="det-img-cap">${esc(img.cap)}</div>` : ''}</div>`
     ).join('')
   }</div>`;
 
@@ -876,7 +897,7 @@ function setItemHtml(r, type){
     ? `<span style="font-size:10px;color:var(--ink3);flex-shrink:0;">${esc(CAT_LABEL[r.category] || r.category)}</span>`
     : '';
   const headThumb = type === 'rider' && r.head
-    ? `<img src="./images/heads/${esc(r.head)}" style="height:24px;width:auto;display:block;flex-shrink:0;" onerror="this.style.display='none'">`
+    ? `<img src="./images/heads/${esc(r.head)}" style="height:24px;width:auto;display:block;flex-shrink:0;" onerror="_imgErrHide(this)">`
     : '';
   return `<div class="set-item" id="si-${r.id}">
     <button class="set-fav-btn${r.fav ? ' is-fav' : ''}" onclick="toggleFav('${type}','${r.id}')" title="${r.fav ? 'Unfavourite' : 'Favourite'}">${r.fav ? '&#9733;' : '&#9734;'}</button>
@@ -992,7 +1013,7 @@ function riderPageHtml(riderId){
   if(!rider){
     return `<div class="rp-page"><div class="rp-back-row">${backBtn}</div><div class="rp-empty">Rider not found.</div></div>`;
   }
-  const headHtml = rider.head ? `<img class="rp-hero-head" src="./images/heads/${esc(rider.head)}" alt="" onerror="this.style.display='none'">` : '';
+  const headHtml = rider.head ? `<img class="rp-hero-head" src="./images/heads/${esc(rider.head)}" alt="" onerror="_imgErrHide(this)">` : '';
   const hero = `<div class="rp-hero">
     <div class="rp-hero-text">
       <div class="rp-hero-name" style="color:${esc(rider.color)}">${esc(rider.name)}</div>
@@ -1027,7 +1048,7 @@ function riderPageHtml(riderId){
       if(!imgCache.has(race.id)) imgCache.set(race.id, loadImgs(race.id));
       const firstImg = imgCache.get(race.id).find(i => i && i.data);
       const thumb   = firstImg
-        ? `<div class="e-thumb"><img src="${firstImg.data}" alt="" onerror="this.closest('.e-thumb').replaceWith(Object.assign(document.createElement('div'),{className:'e-thumb-ph'}))"></div>`
+        ? `<div class="e-thumb"><img src="${firstImg.data}" alt="" onerror="_imgErrThumb(this)"></div>`
         : `<div class="e-thumb-ph"></div>`;
       const snippet = race.howwon ? race.howwon.slice(0, 120) : '';
       entries += `<div class="rp-col-entry" onclick="openDetail('${race.id}')">
