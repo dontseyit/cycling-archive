@@ -1,6 +1,6 @@
 {
-  "version": "3.2.0",
-  "exportedAt": "2026-04-27T13:53:56.433Z",
+  "version": "4.0.0",
+  "exportedAt": "2026-04-27T15:07:17.756Z",
   "races": [
     {
       "id": "mo8o03ugf7g9z",
@@ -1386,12 +1386,6 @@
   },
   "riders": [
     {
-      "id": "mo8cpx4khabgy",
-      "name": "VAN DER POEL Mathieu",
-      "color": "#323232",
-      "fav": true
-    },
-    {
       "id": "mo8cq0g65x5fz",
       "name": "VAN DIJKE Tim",
       "color": "#323232"
@@ -1400,7 +1394,8 @@
       "id": "mo8cq35atdfpw",
       "name": "VAN AERT Wout",
       "color": "#323232",
-      "fav": true
+      "fav": true,
+      "head": "van-aert-1.png"
     },
     {
       "id": "mo8cqepkuox7x",
@@ -1416,7 +1411,8 @@
       "id": "mo8crdb63kjch",
       "name": "VINGEGAARD Jonas",
       "color": "#323232",
-      "fav": true
+      "fav": true,
+      "head": "vingegaard-1.png"
     },
     {
       "id": "mo8crgh59ug32",
@@ -1464,10 +1460,18 @@
       "color": "#323232"
     },
     {
+      "id": "mo8cpx4khabgy",
+      "name": "VAN DER POEL Mathieu",
+      "color": "#323232",
+      "fav": true,
+      "head": "van-der-poel-1.png"
+    },
+    {
       "id": "mo8csgtz4dvcd",
       "name": "POGAČAR Tadej",
       "color": "#323232",
-      "fav": true
+      "fav": true,
+      "head": "pogacar-1.png"
     },
     {
       "id": "mo8csjyhf5t43",
@@ -1478,7 +1482,8 @@
       "id": "mo8cso1lib50v",
       "name": "PIDCOCK Tom",
       "color": "#323232",
-      "fav": true
+      "fav": true,
+      "head": "pidcock-1.png"
     },
     {
       "id": "mo8csrr7gyysz",
@@ -1562,13 +1567,15 @@
       "id": "mo8pazx662ikp",
       "name": "GANNA Filippo",
       "color": "#323232",
-      "fav": true
+      "fav": true,
+      "head": "ganna-1.png"
     },
     {
       "id": "mo8peukid3acf",
       "name": "EVENEPOEL Remco",
       "color": "#323232",
-      "fav": true
+      "fav": true,
+      "head": "remco-1.png"
     },
     {
       "id": "mo8ph7poynvyv",
@@ -1646,7 +1653,8 @@
       "id": "mob6de66owlq1",
       "name": "ROGLIČ Primož",
       "color": "#323232",
-      "fav": true
+      "fav": true,
+      "head": "roglic-1.png"
     },
     {
       "id": "mob6mb4bbjv3u",

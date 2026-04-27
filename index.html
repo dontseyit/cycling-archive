@@ -102,9 +102,11 @@
   .e-bar { width: 4px; flex-shrink: 0; align-self: stretch; border-radius: 2px; min-height: 18px; margin-top: 2px; }
 
   /* 3:2 thumbnail */
+  /* 3:2 thumbnail */
   .e-thumb { width: 58px; height: 38px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: var(--bg2); }
   .e-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .e-thumb-ph { width: 0; flex-shrink: 0; } /* collapsed — no wasted space when no image */
+  .e-thumb-ph { width: 0; flex-shrink: 0; }
+  .e-head { flex-shrink: 0; height: 48px; width: auto; display: block; pointer-events: none; }
 
   .e-body { flex: 1; min-width: 0; }
   .e-name { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; line-height: 1.25; color: var(--ink); margin-bottom: 3px; }
@@ -195,7 +197,7 @@
   .set-modal  { max-width: 900px; }
   .set-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
   .set-panel h3 { font-family: 'Playfair Display', serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--ink2); margin-bottom: 10px; }
-  .set-list   { border: 0.5px solid var(--rule2); border-radius: var(--r); min-height: 48px; max-height: 260px; overflow-y: auto; }
+  .set-list   { border: 0.5px solid var(--rule2); border-radius: var(--r); min-height: 48px; max-height: 400px; overflow-y: auto; }
   .set-item   { display: flex; align-items: center; gap: 8px; padding: 7px 10px; }
   .set-item + .set-item { border-top: 0.5px solid var(--rule); }
   .set-swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
@@ -228,7 +230,9 @@
   /* Rider profile page */
   .rp-page { padding: 0 2rem 4rem; }
   .rp-back-row { padding-top: 2rem; margin-bottom: 1.75rem; }
-  .rp-hero { padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--rule2); margin-bottom: 0; }
+  .rp-hero { display:flex; align-items:flex-end; gap:1rem; padding-bottom:1.5rem; border-bottom:0.5px solid var(--rule2); margin-bottom:0; }
+  .rp-hero-text { min-width:0; }
+  .rp-hero-head { height:80px; width:auto; display:block; flex-shrink:0; }
   .rp-hero-name { font-family:'Playfair Display',serif; font-size:40px; font-weight:700; letter-spacing:-1.5px; line-height:1; }
   .rp-hero-sub { font-size:11px; color:var(--ink3); font-style:italic; letter-spacing:.6px; text-transform:uppercase; margin-top:8px; }
   .rp-grid { display:grid; align-items:start; border-right:0.5px solid var(--rule); }
@@ -334,6 +338,7 @@ let races = [], years = [], page = 0, pendingImgs = {};
 let riders = [], raceTypes = [];
 let activeFilter = null; // 'riders' | 'races' | null
 let viewMode = false, viewImgs = {};
+let _navEl, _footEl;
 
 /* ---- small utilities ---- */
 const $ = id => document.getElementById(id);
@@ -386,6 +391,8 @@ const raceTypeCls = raceTypeId => raceTypeId ? `rtp-${raceTypeId}` : '';
 
 /* ---- persistence ---- */
 async function load(){
+  _navEl  = document.querySelector('.nav');
+  _footEl = document.querySelector('.footer-bar');
   try {
     const res = await fetch('./data.json');
     if(!res.ok) throw new Error('not found');
@@ -403,7 +410,7 @@ async function load(){
     updateDynCSS();
     render();
     applyViewMode();
-    handleRoute();
+    if(location.hash) handleRoute();
     return;
   } catch(e) { /* no data.json — fall through to localStorage */ }
   viewMode = false;
@@ -414,7 +421,7 @@ async function load(){
   years.sort((a,b) => a - b);
   page = Math.max(0, years.length - getColCount());
   render();
-  handleRoute();
+  if(location.hash) handleRoute();
 }
 
 function applyViewMode(){
@@ -541,9 +548,13 @@ function entryHtml(race){
   const rt          = resolveRace(race);
   const color       = CAT_COLOR[rt.category] || '#888';
   const firstImg    = loadImgs(race.id).find(i => i && i.data);
+  const winnerRider = resolveRider(race.winner);
+  const winnerObj   = winnerRider?.id ? riderById(winnerRider.id) : null;
+  const headFile    = winnerObj?.head || null;
   const thumb       = firstImg
     ? `<div class="e-thumb"><img src="${firstImg.data}" alt="" onerror="this.closest('.e-thumb').replaceWith(Object.assign(document.createElement('div'),{className:'e-thumb-ph'}))"></div>`
     : `<div class="e-thumb-ph"></div>`;
+  const headHtml    = headFile ? `<img class="e-head" src="./images/heads/${esc(headFile)}" alt="" onerror="this.style.display='none'">` : '';
   const snippet     = race.howwon || (race.moments ? race.moments.split('\n')[0] : '');
   const snippetHtml = snippet ? `<div class="e-how">${esc(snippet)}</div>` : '';
   const riderSpan   = field => { const r = resolveRider(field); if(!r) return ''; if(r.id) return `<a class="${riderCls(r.id)} rider-link" onclick="event.stopPropagation();openRiderPage('${r.id}')">${esc(r.name)}</a>`; return `<span>${esc(r.name)}</span>`; };
@@ -558,6 +569,7 @@ function entryHtml(race){
       ${podiumHtml}
       ${snippetHtml}
     </div>
+    ${headHtml}
   </div>`;
 }
 
@@ -787,7 +799,7 @@ function backupData(){
     const imgs = parseJSON(localStorage.getItem(IMG_KEY(r.id)), EMPTY_IMGS());
     if(imgs.some(i => i && i.file)) images[r.id] = imgs;
   });
-  const payload = { version: 2, exportedAt: new Date().toISOString(), races, years, images, riders, raceTypes };
+  const payload = { version: "4.0.0", exportedAt: new Date().toISOString(), races, years, images, riders, raceTypes };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -832,9 +844,13 @@ function setItemHtml(r, type){
   const catBadge = type === 'race' && r.category
     ? `<span style="font-size:10px;color:var(--ink3);flex-shrink:0;">${esc(CAT_LABEL[r.category] || r.category)}</span>`
     : '';
+  const headThumb = type === 'rider' && r.head
+    ? `<img src="./images/heads/${esc(r.head)}" style="height:24px;width:auto;display:block;flex-shrink:0;" onerror="this.style.display='none'">`
+    : '';
   return `<div class="set-item" id="si-${r.id}">
     <button class="set-fav-btn${r.fav ? ' is-fav' : ''}" onclick="toggleFav('${type}','${r.id}')" title="${r.fav ? 'Unfavourite' : 'Favourite'}">${r.fav ? '&#9733;' : '&#9734;'}</button>
     <div class="set-swatch" style="background:${r.color}"></div>
+    ${headThumb}
     <span class="set-name">${esc(r.name)}</span>
     ${catBadge}
     <button class="set-edit-btn" onclick="editSetting('${type}','${r.id}')">Edit</button>
@@ -899,13 +915,13 @@ function _showHome(){
   $('settings-page').style.display = 'none';
   $('rider-page').style.display   = 'none';
   $('tl').style.display = '';
-  document.querySelector('.nav').style.display = '';
-  document.querySelector('.footer-bar').style.display = '';
+  _navEl.style.display = '';
+  _footEl.style.display = '';
 }
 window.addEventListener('hashchange', handleRoute);
 
 function openSettings(){
-  if(location.hash === '#settings') { _showSettings(); return; }
+  if(location.hash === '#settings') return;
   location.hash = 'settings';
 }
 function _showSettings(){
@@ -914,8 +930,8 @@ function _showSettings(){
   $('settings-page').style.display = '';
   $('rider-page').style.display   = 'none';
   $('tl').style.display = 'none';
-  document.querySelector('.nav').style.display = 'none';
-  document.querySelector('.footer-bar').style.display = 'none';
+  _navEl.style.display = 'none';
+  _footEl.style.display = 'none';
   ['rider','race'].forEach(type => {
     if(prevQ[type]){
       const inp = $('sq-' + type);
@@ -927,7 +943,7 @@ function closeSettings(){ location.hash = ''; }
 
 /* ---- rider profile page ---- */
 function openRiderPage(riderId){
-  if(location.hash === '#rider/' + riderId) { _showRiderPage(riderId); return; }
+  if(location.hash === '#rider/' + riderId) return;
   location.hash = 'rider/' + riderId;
 }
 function _showRiderPage(riderId){
@@ -935,20 +951,23 @@ function _showRiderPage(riderId){
   $('rider-page').style.display = '';
   $('settings-page').style.display = 'none';
   $('tl').style.display = 'none';
-  document.querySelector('.nav').style.display = 'none';
-  document.querySelector('.footer-bar').style.display = 'none';
+  _navEl.style.display = 'none';
+  _footEl.style.display = 'none';
 }
 function closeRiderPage(){ location.hash = ''; }
 function riderPageHtml(riderId){
-  const POS_LABEL = { '1st':'Winner', '2nd':'Runner-up', '3rd':'Third' };
   const rider = riderById(riderId);
   const backBtn = `<button class="btn" onclick="closeRiderPage()">&#8592; Back</button>`;
   if(!rider){
     return `<div class="rp-page"><div class="rp-back-row">${backBtn}</div><div class="rp-empty">Rider not found.</div></div>`;
   }
+  const headHtml = rider.head ? `<img class="rp-hero-head" src="./images/heads/${esc(rider.head)}" alt="" onerror="this.style.display='none'">` : '';
   const hero = `<div class="rp-hero">
-    <div class="rp-hero-name" style="color:${esc(rider.color)}">${esc(rider.name)}</div>
-    <div class="rp-hero-sub">In your archive</div>
+    <div class="rp-hero-text">
+      <div class="rp-hero-name" style="color:${esc(rider.color)}">${esc(rider.name)}</div>
+      <div class="rp-hero-sub">In your archive</div>
+    </div>
+    ${headHtml}
   </div>`;
   const appearances = [];
   races.forEach(race => {
@@ -967,13 +986,15 @@ function riderPageHtml(riderId){
     if(!byYear.has(y)) byYear.set(y, []);
     byYear.get(y).push(ap);
   });
+  const imgCache = new Map();
   let cols = '';
   byYear.forEach((aps, year) => {
     let entries = '';
     aps.forEach(({ race, position }) => {
       const rt      = resolveRace(race);
       const color   = CAT_COLOR[rt.category] || '#888';
-      const firstImg = loadImgs(race.id).find(i => i && i.data);
+      if(!imgCache.has(race.id)) imgCache.set(race.id, loadImgs(race.id));
+      const firstImg = imgCache.get(race.id).find(i => i && i.data);
       const thumb   = firstImg
         ? `<div class="e-thumb"><img src="${firstImg.data}" alt="" onerror="this.closest('.e-thumb').replaceWith(Object.assign(document.createElement('div'),{className:'e-thumb-ph'}))"></div>`
         : `<div class="e-thumb-ph"></div>`;
@@ -1025,11 +1046,15 @@ function replaceSettingRow(type, id){
 function editSetting(type, id){
   const item = findSetting(type, id); if(!item) return;
   const el = $('si-' + id); if(!el) return;
-  const catSel = type === 'race' ? catSelectHtml('ecat-' + id, item.category || 'grandtour') : '';
+  const catSel  = type === 'race' ? catSelectHtml('ecat-' + id, item.category || 'grandtour') : '';
+  const headInp = type === 'rider'
+    ? `<input type="text" id="eh-${id}" value="${esc(item.head || '')}" placeholder="head filename.png" style="font-size:11px;color:var(--ink3);">`
+    : '';
   el.outerHTML = `<div class="set-item set-item-edit" id="si-${id}">
     <input type="color" id="ec-${id}" value="${item.color}">
     <input type="text"  id="en-${id}" value="${esc(item.name)}">
     ${catSel}
+    ${headInp}
     <button class="mb mb-pri set-save-btn" onclick="saveSetting('${type}','${id}')">Save</button>
     <button class="set-del" onclick="replaceSettingRow('${type}','${id}')">&#x2715;</button>
   </div>`;
@@ -1042,6 +1067,10 @@ function saveSetting(type, id){
     item.name  = name;
     item.color = $('ec-' + id).value;
     if(type === 'race') item.category = $('ecat-' + id)?.value || item.category || 'grandtour';
+    if(type === 'rider'){
+      const h = $('eh-' + id)?.value.trim();
+      if(h) item.head = h; else delete item.head;
+    }
   }
   saveSettings(); updateDynCSS();
   replaceSettingRow(type, id);
